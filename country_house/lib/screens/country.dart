@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Country extends StatelessWidget {
   final country;
@@ -21,19 +22,32 @@ class Country extends StatelessWidget {
             FlipCard(
                 direction: FlipDirection.VERTICAL,
                 front: new CountryCard(title: "Capital"),
-                back: new CountryDetailCard(title: country["capital"])),
+                back: new CountryDetailCard(
+                    title: country["capital"], color: Colors.deepOrange)),
             FlipCard(
                 direction: FlipDirection.VERTICAL,
                 front: new CountryCard(title: "Population"),
-                back: new CountryDetailCard(title: country["population"].toString())),
+                back: new CountryDetailCard(
+                    title: country["population"].toString(),
+                    color: Colors.deepPurple)),
             FlipCard(
                 direction: FlipDirection.VERTICAL,
                 front: new CountryCard(title: "Flag"),
-                back: new CountryDetailCard(title: country["flag"])),
+                back: Card(
+                  color: Colors.white,
+                  elevation: 10.0,
+                  child: Center(
+                      child: SvgPicture.network(
+                    country["flag"],
+                    width: 200.0,
+                  )),
+                )),
             FlipCard(
                 direction: FlipDirection.VERTICAL,
                 front: new CountryCard(title: "Currency"),
-                back: new CountryDetailCard(title: country["name"])),
+                back: new CountryDetailCard(
+                    title: country["currencies"][0]["name"],
+                    color: Colors.blue)),
             FlipCard(
                 direction: FlipDirection.VERTICAL,
                 front: new CountryCard(title: "Show map"),
@@ -47,12 +61,13 @@ class Country extends StatelessWidget {
 
 class CountryDetailCard extends StatelessWidget {
   final String title;
-  const CountryDetailCard({Key key, this.title}) : super(key: key);
+  final MaterialColor color;
+  const CountryDetailCard({Key key, this.title, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.deepOrange,
+      color: color,
       elevation: 10.0,
       child: Center(
           child: Text(title,
