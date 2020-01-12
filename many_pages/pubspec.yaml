@@ -1,0 +1,32 @@
+name: many_pages
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  liquid_swipe: ^1.3.1
+  simple_animations: ^1.3.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/img/
+
+  fonts:
+    - family: Product Sans
+      fonts:
+        - asset: assets/font/Product_Sans_Bold.ttf
+        - asset: assets/font/Product_Sans_Regular.ttf
