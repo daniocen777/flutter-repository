@@ -72,35 +72,41 @@ class _HomeState extends State<Home> {
   }
 
   _onTap(int pageIndex) {
-    _pageController.jumpToPage(pageIndex);
+    _pageController.animateToPage(pageIndex,
+        duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 
   Scaffold _buildAuthScreen() {
     return Scaffold(
-        body: PageView(
-      children: <Widget>[
-        Timeline(),
-        ActivityFeed(),
-        Upload(),
-        Search(),
-        Profile()
-      ],
-      controller: _pageController,
-      onPageChanged: _onPageChanged,
-      physics: NeverScrollableScrollPhysics(),
-    ),
-    bottomNavigationBar: CupertinoTabBar(
-      currentIndex: _pageIndex,
-      onTap: _onTap,
-      activeColor: Theme.of(context).primaryColor,
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
-        BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
-        BottomNavigationBarItem(icon: Icon(Icons.photo_camera, size: 35.0,)),
-        BottomNavigationBarItem(icon: Icon(Icons.search)),
-        BottomNavigationBarItem(icon: Icon(Icons.account_circle))
-      ],
-    ),);
+      body: PageView(
+        children: <Widget>[
+          Timeline(),
+          ActivityFeed(),
+          Upload(),
+          Search(),
+          Profile()
+        ],
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        physics: NeverScrollableScrollPhysics(),
+      ),
+      bottomNavigationBar: CupertinoTabBar(
+        currentIndex: _pageIndex,
+        onTap: _onTap,
+        activeColor: Theme.of(context).primaryColor,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
+          BottomNavigationBarItem(
+              icon: Icon(
+            Icons.photo_camera,
+            size: 35.0,
+          )),
+          BottomNavigationBarItem(icon: Icon(Icons.search)),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle))
+        ],
+      ),
+    );
   }
 
   _buildUnAuthScreen() {
