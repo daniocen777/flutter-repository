@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:country_house/screens/country.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class AllCountries extends StatefulWidget {
   const AllCountries({Key key}) : super(key: key);
@@ -10,19 +10,31 @@ class AllCountries extends StatefulWidget {
 }
 
 class _AllCountriesState extends State<AllCountries> {
-  Future<List> _countries;
+  List _countries = [];
+  List _filterCountries = [];
   bool isSeraching = false;
-  int _length;
-  Future<List> getCountries() async {
+  getCountries() async {
     var response = await Dio().get("https://restcountries.eu/rest/v2/all");
-    _length = response.data.length;
     return response.data;
   }
 
   @override
   void initState() {
     super.initState();
-    _countries = getCountries();
+    getCountries().then((data) {
+      setState(() {
+        _countries = _filterCountries = data;
+      });
+    });
+  }
+
+  void _filterValue(value) {
+    setState(() {
+      _filterCountries = _countries
+          .where((country) =>
+              country["name"].toLowerCase().cotains(value.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -34,6 +46,9 @@ class _AllCountriesState extends State<AllCountries> {
         title: !isSeraching
             ? Text("All Countries")
             : TextField(
+                onChanged: (value) {
+                  _filterValue(value);
+                },
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                     hintText: "Search country",
@@ -46,6 +61,7 @@ class _AllCountriesState extends State<AllCountries> {
                   onPressed: () {
                     setState(() {
                       this.isSeraching = false;
+                      _filterCountries = _countries;
                     });
                   },
                 )
@@ -61,36 +77,34 @@ class _AllCountriesState extends State<AllCountries> {
       ),
       body: Container(
           padding: EdgeInsets.all(10.0),
-          child: FutureBuilder<List>(
-            future: _countries,
-            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: _length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    Country(country: snapshot.data[index])));
-                          },
-                          child: Card(
-                            elevation: 10.0,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 8.0),
-                              child: Text(
-                                snapshot.data[index]["name"],
-                                style: TextStyle(fontSize: 18.0),
-                              ),
-                            ),
-                          ));
-                    });
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          )),
+          child: _filterCountries.length > 0
+              ? ListView.builder(
+                  itemCount: _filterCountries.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Country(
+                                  country: _filterCountries[index],
+                                )));
+                      },
+                      child: Card(
+                        elevation: 10.0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 8.0),
+                          child: Text(
+                            _filterCountries[index]["name"],
+                            style: TextStyle(fontSize: 18.0),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : Center(
+                  child: CircularProgressIndicator(),
+                )),
     );
   }
 }
