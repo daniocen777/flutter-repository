@@ -18,6 +18,7 @@ class _TimelineState extends State<Timeline> {
     //getUsers();
   }
 
+  // Toda la data
 /*   getUsers() {
     userRef.getDocuments().then((QuerySnapshot snapshot) {
       snapshot.documents.forEach((DocumentSnapshot doc) {
@@ -28,6 +29,20 @@ class _TimelineState extends State<Timeline> {
     });
   } */
 
+  // Datos con un where
+ /*  getUsersComplex() async {
+    final QuerySnapshot snapshot = await userRef
+        .where("postsCount", isLessThan: 3)
+        .where("username", isEqualTo: "Daniel")
+        .getDocuments();
+    snapshot.documents.forEach((DocumentSnapshot doc) {
+      print(doc.data);
+      print(doc.documentID);
+      print(doc.exists); // true | false
+    });
+  } */
+
+  // Datos por id
   /*  getUserById() {
     final String id = "c3fcew";
     userRef.document(id).get().then((DocumentSnapshot doc) {
@@ -37,13 +52,13 @@ class _TimelineState extends State<Timeline> {
     });
   } */
 
-  getUserById_2() async {
+  /* getUserById_2() async {
     final String id = "c3fcew";
     final DocumentSnapshot doc = await userRef.document(id).get();
     print(doc.data);
     print(doc.documentID);
     print(doc.exists);
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
