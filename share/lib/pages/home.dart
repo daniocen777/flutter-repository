@@ -1,13 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+// Import google firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:share/pages/activity_feed.dart';
+import 'package:share/pages/create_account.dart';
+// Import páginas creadas
 import 'package:share/pages/profile.dart';
 import 'package:share/pages/search.dart';
 import 'package:share/pages/timeline.dart';
 import 'package:share/pages/upload.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final _userRef = Firestore.instance.collection("users");
+final DateTime _timestamp = DateTime.now();
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -40,13 +46,34 @@ class _HomeState extends State<Home> {
 
   _handleSignIn(GoogleSignInAccount account) {
     if (account != null) {
-      print("User signed in: $account");
+      createUserInFirestore();
       setState(() {
         _isAuth = true;
       });
     } else {
       setState(() {
         _isAuth = false;
+      });
+    }
+  }
+
+  createUserInFirestore() async {
+    // 1 chequeando si user existe en colección
+    final GoogleSignInAccount user = googleSignIn.currentUser;
+    final DocumentSnapshot doc = await _userRef.document(user.id).get();
+    if (!doc.exists) {
+      // 2 Si user NO existe, crear la colección
+      final username = await Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CreateAccount()));
+      // 3 Traer el username de la página create_account y crear el usuario
+      userRef.document(user.id).setData({
+        "id": user.id,
+        "username": username,
+        "photoUrl": user.photoUrl,
+        "email": user.email,
+        "displayName": user.displayName,
+        "bio": "",
+        "timestamp": _timestamp
       });
     }
   }
@@ -80,7 +107,11 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: PageView(
         children: <Widget>[
-          Timeline(),
+          //Timeline(),
+          RaisedButton(
+            child: Text("Logout"),
+            onPressed: logout,
+          ),
           ActivityFeed(),
           Upload(),
           Search(),
