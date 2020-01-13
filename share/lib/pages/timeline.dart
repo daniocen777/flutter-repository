@@ -95,6 +95,26 @@ class _TimelineState extends State<Timeline> {
         ));
   } */
 
+  createUser() {
+    // add => autogenera el ID
+    userRef.add({"username": "Carla", "postsCount": 0, "isAdmin": false});
+  }
+
+  updateUser(String id) async {
+    final doc = await userRef.document(id).get();
+    if (doc.exists) {
+      doc.reference.updateData(
+          {"username": "Carlassss", "postsCount": 0, "isAdmin": false});
+    }
+  }
+
+  deleteUser(String id) async {
+    final doc = await userRef.document(id).get();
+    if (doc.exists) {
+      doc.reference.delete();
+    }
+  }
+
 // ******************* USANDO StreamBuilder => tiempo real ******************* //
   @override
   Widget build(BuildContext context) {
