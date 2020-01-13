@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 // Import google firestore
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:share/models/user.dart';
 import 'package:share/pages/activity_feed.dart';
 import 'package:share/pages/create_account.dart';
 // Import páginas creadas
@@ -14,6 +15,7 @@ import 'package:share/pages/upload.dart';
 final GoogleSignIn googleSignIn = GoogleSignIn();
 final _userRef = Firestore.instance.collection("users");
 final DateTime _timestamp = DateTime.now();
+User currentUser;
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -60,7 +62,7 @@ class _HomeState extends State<Home> {
   createUserInFirestore() async {
     // 1 chequeando si user existe en colección
     final GoogleSignInAccount user = googleSignIn.currentUser;
-    final DocumentSnapshot doc = await _userRef.document(user.id).get();
+    DocumentSnapshot doc = await _userRef.document(user.id).get();
     if (!doc.exists) {
       // 2 Si user NO existe, crear la colección
       final username = await Navigator.push(
@@ -75,7 +77,12 @@ class _HomeState extends State<Home> {
         "bio": "",
         "timestamp": _timestamp
       });
+
+      doc = await _userRef.document(user.id).get(); // Traer la data actual
     }
+
+    // Seteando los datos de la colleción en el objeto
+    currentUser = User.fromDocument(doc);
   }
 
   @override
