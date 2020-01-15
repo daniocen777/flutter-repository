@@ -10,12 +10,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 // Import páginas creadas
 import 'package:share/pages/profile.dart';
 import 'package:share/pages/search.dart';
-import 'package:share/pages/timeline.dart';
+
 import 'package:share/pages/upload.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 final StorageReference storageRef = FirebaseStorage.instance.ref();
-final _userRef = Firestore.instance.collection("users");
+final userRef = Firestore.instance.collection("users");
 final postRef = Firestore.instance.collection("posts");
 final DateTime timestamp = DateTime.now();
 User currentUser;
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
   createUserInFirestore() async {
     // 1 chequeando si user existe en colección
     final GoogleSignInAccount user = googleSignIn.currentUser;
-    DocumentSnapshot doc = await _userRef.document(user.id).get();
+    DocumentSnapshot doc = await userRef.document(user.id).get();
     if (!doc.exists) {
       // 2 Si user NO existe, crear la colección
       final username = await Navigator.push(
@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
         "timestamp": timestamp
       });
 
-      doc = await _userRef.document(user.id).get(); // Traer la data actual
+      doc = await userRef.document(user.id).get(); // Traer la data actual
     }
 
     // Seteando los datos de la colleción en el objeto
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
           ActivityFeed(),
           Upload(currentUser: currentUser),
           Search(),
-          Profile()
+          Profile(profileId: currentUser?.id)
         ],
         controller: _pageController,
         onPageChanged: _onPageChanged,
