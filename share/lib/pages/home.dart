@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:share/models/user.dart';
 import 'package:share/pages/activity_feed.dart';
 import 'package:share/pages/create_account.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 // Import páginas creadas
 import 'package:share/pages/profile.dart';
 import 'package:share/pages/search.dart';
@@ -13,8 +14,10 @@ import 'package:share/pages/timeline.dart';
 import 'package:share/pages/upload.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final StorageReference storageRef = FirebaseStorage.instance.ref();
 final _userRef = Firestore.instance.collection("users");
-final DateTime _timestamp = DateTime.now();
+final postRef = Firestore.instance.collection("posts");
+final DateTime timestamp = DateTime.now();
 User currentUser;
 
 class Home extends StatefulWidget {
@@ -75,7 +78,7 @@ class _HomeState extends State<Home> {
         "email": user.email,
         "displayName": user.displayName,
         "bio": "",
-        "timestamp": _timestamp
+        "timestamp": timestamp
       });
 
       doc = await _userRef.document(user.id).get(); // Traer la data actual
@@ -120,7 +123,7 @@ class _HomeState extends State<Home> {
             onPressed: logout,
           ),
           ActivityFeed(),
-          Upload(),
+          Upload(currentUser: currentUser),
           Search(),
           Profile()
         ],
