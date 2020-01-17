@@ -15,8 +15,10 @@ import 'package:share/pages/upload.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 final StorageReference storageRef = FirebaseStorage.instance.ref();
+// Colecciones
 final userRef = Firestore.instance.collection("users");
 final postRef = Firestore.instance.collection("posts");
+final commentsRef = Firestore.instance.collection("comments");
 final DateTime timestamp = DateTime.now();
 User currentUser;
 
