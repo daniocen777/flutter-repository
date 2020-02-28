@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -110,9 +112,26 @@ class _RegisterPageState extends State<RegisterPage> {
     final form = _formKey.currentState;
     if (form.validate()) {
       form.save();
+      _registerUser();
     } else {
       print("form INvalid");
     }
+  }
+
+  void _registerUser() {
+    print("Antes del POST");
+    http.post("http://127.0.0.1:1337/auth/local/register", body: {
+      "username": _username,
+      "email": _email,
+      "password": _password
+    }).then((response) {
+      print("******** response ********");
+      print(response);
+
+      final responseData = json.decode(response.body);
+      print("Esperando respuesta");
+      print(responseData);
+    });
   }
 
   @override
