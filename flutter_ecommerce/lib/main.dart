@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
               "/products": (BuildContext context) => ProductPage(onInit: () {
                     // Despacha una acción (getUserAction) para obtener datos del usuario
                     StoreProvider.of<AppState>(context).dispatch(getUserAction);
+                    // Despacha una acción (getUserAction) para obtener datos de productos
+                    StoreProvider.of<AppState>(context).dispatch(getProductsAction);
                   })
             },
             theme: ThemeData(
