@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: <Widget>[
           RaisedButton(
-            child: Text("Submit",
+            child: Text("Ingresar",
                 style: Theme.of(context)
                     .textTheme
                     .body1
@@ -79,22 +79,23 @@ class _LoginPageState extends State<LoginPage> {
             color: Theme.of(context).accentColor,
             onPressed: _submit,
           ),
-          FlatButton(
+          /* FlatButton(
               onPressed: () =>
                   Navigator.pushReplacementNamed(context, "register"),
-              child: Text("¿Eres nuevo? Registrar"))
+              child: Text("¿Eres nuevo? Registrar")) */
         ],
       ),
     );
   }
 
   void _submit() {
-    final form = _formKey.currentState;
+    Navigator.pushReplacementNamed(context, "home");
+    /* final form = _formKey.currentState;
     if (form.validate()) {
       form.save();
     } else {
       print("form INvalid");
-    }
+    } */
   }
 
   @override

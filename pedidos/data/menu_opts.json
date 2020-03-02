@@ -1,0 +1,25 @@
+{
+  "nombreApp": "Cards",
+  "cards": [
+    {
+      "title": "Usuarios",
+      "description": "Aquí podrás ver los usuarios registrados en el sistema, además de crear y actualizarlos.",
+      "ruta": "usuarios"
+    },
+    {
+      "title": "Requerimientos",
+      "description": "Aquí podrás ver los requerimientos de productos a nuestros proveedores, estos son creados por diferentes areas y aprobadas por los reponsables.",
+      "ruta": "requerimientos"
+    },
+    {
+      "title": "Órdenes de pedido",
+      "description": "Los requerimientos aprobados se convierten en ordenes de pedido que están a la espera de entrega.",
+      "ruta": "pedido"
+    },
+    {
+      "title": "Registro de comprobantes",
+      "description": "Cada vez que se genera un pedido, este se entrega con un comprobante. Aqui puedes registrar los comprobantes.",
+      "ruta": "comprobantes"
+    }
+  ]
+}
