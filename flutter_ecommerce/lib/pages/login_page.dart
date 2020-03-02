@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -112,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
     final responseData = json.decode(response.body);
     if (response.statusCode == 200) {
       setState(() => _isSubmitting = false);
+      _storeUserData(responseData);
       _showSuccessSnack();
       _redirectUser();
       print(responseData);
@@ -120,6 +122,14 @@ class _LoginPageState extends State<LoginPage> {
       final errorMessage = responseData["message"];
       _showErrorSnack(errorMessage);
     }
+  }
+
+  void _storeUserData(responseData) async {
+    final prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> user = responseData["user"];
+    // Agrega una nueva propiedad al objeto user
+    user.putIfAbsent("jwt", () => responseData["jwt"]);
+    prefs.setString("user", json.encode(user));
   }
 
   _showSuccessSnack() {
