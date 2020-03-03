@@ -12,6 +12,9 @@ userReducer(user, action) {
   if (action is GetUserAction) {
     // retorna user de la acción
     return action.user;
+  } else if (action is LogoutUserAction) {
+    // retorna user de la acción
+    return action.user;
   }
 
   return user;
