@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gastos_app/src/widgets/graph_widget.dart';
+import 'package:gastos_app/src/widgets/month_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -12,9 +13,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PageController _pageController;
   int currentPage = 9;
+  Stream<QuerySnapshot> _query;
+
   @override
   void initState() {
     super.initState();
+
+    _query = Firestore.instance
+        .collection("expenses")
+        .where("month", isEqualTo: currentPage + 1)
+        .snapshots();
+
     _pageController =
         PageController(initialPage: currentPage, viewportFraction: 0.4);
   }
@@ -62,13 +71,16 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: <Widget>[
           _selector(),
-          _expenses(),
-          _graph(size),
-          Container(
-            color: Colors.blueAccent.withOpacity(0.15),
-            height: 8.0,
-          ),
-          _list()
+          StreamBuilder<QuerySnapshot>(
+              stream: _query,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  return MonthWidget(documents: snapshot.data.documents);
+                }
+
+                return Center(child: CircularProgressIndicator());
+              }),
         ],
       ),
     );
@@ -103,6 +115,10 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: (newPage) {
           setState(() {
             currentPage = newPage;
+            _query = Firestore.instance
+                .collection("expenses")
+                .where("month", isEqualTo: currentPage + 1)
+                .snapshots();
           });
         },
         controller: _pageController,
@@ -121,66 +137,6 @@ class _HomePageState extends State<HomePage> {
           _pageItem("Diciembre", 11),
         ],
       ),
-    );
-  }
-
-  Widget _expenses() {
-    return Column(
-      children: <Widget>[
-        Text(
-          "\$ 2399,45",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-        ),
-        Text("Total expenses",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12.0,
-                color: Colors.blueGrey))
-      ],
-    );
-  }
-
-  Widget _graph(size) {
-    return Container(height: size.height * 0.3, child: GraphWidget());
-  }
-
-  Widget _list() {
-    return Expanded(
-      child: ListView.separated(
-        itemCount: 15,
-        itemBuilder: (BuildContext context, int index) =>
-            _item(FontAwesomeIcons.shoppingCart, "Shopping", 14, 145.12),
-        separatorBuilder: (BuildContext context, int index) {
-          return Container(
-            color: Colors.blueAccent.withOpacity(0.15),
-            height: 2.0,
-          );
-        },
-      ),
-    );
-  }
-
-  _item(IconData icon, String name, int porcent, double value) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        size: 28.0,
-      ),
-      title: Text(name,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-      subtitle: Text("$porcent% of expenses",
-          style: TextStyle(fontSize: 16.0, color: Colors.blueGrey)),
-      trailing: Container(
-          decoration: BoxDecoration(
-              color: Colors.blueAccent.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(5.0)),
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("\$ $value",
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.blueAccent,
-                      fontWeight: FontWeight.w500)))),
     );
   }
 }
