@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/app_state.dart';
+import 'package:flutter_ecommerce/pages/cart_page.dart';
 import 'package:flutter_ecommerce/pages/login_page.dart';
 import 'package:flutter_ecommerce/pages/product_page.dart';
 import 'package:flutter_ecommerce/pages/register_page.dart';
@@ -26,15 +27,16 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'E-Commerce',
           routes: {
-            "/login": (BuildContext context) => LoginPage(),
-            "/register": (BuildContext context) => RegisterPage(),
             "/": (BuildContext context) => ProductPage(onInit: () {
                   // Despacha una acción (getUserAction) para obtener datos del usuario
                   StoreProvider.of<AppState>(context).dispatch(getUserAction);
                   // Despacha una acción (getUserAction) para obtener datos de productos
                   StoreProvider.of<AppState>(context)
                       .dispatch(getProductsAction);
-                })
+                }),
+            "/login": (BuildContext context) => LoginPage(),
+            "/register": (BuildContext context) => RegisterPage(),
+            "/cart": (BuildContext context) => CartPage()
           },
           theme: ThemeData(
               brightness: Brightness.dark,

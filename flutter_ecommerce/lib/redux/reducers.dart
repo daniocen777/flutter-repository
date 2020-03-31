@@ -5,7 +5,8 @@ import 'package:flutter_ecommerce/redux/actions.dart';
 AppState appReducer(state, action) {
   return AppState(
       user: userReducer(state.user, action),
-      products: productsReducer(state.products, action));
+      products: productsReducer(state.products, action),
+      cartProducts: cartProducts(state.cartProducts, action));
 }
 
 userReducer(user, action) {
@@ -27,4 +28,11 @@ List<Product> productsReducer(List<Product> products, dynamic action) {
   }
 
   return products;
+}
+
+List<Product> cartProducts(List<Product> cartProducts, dynamic action) {
+  if (action is ToggleCartProductAction) {
+    return action.cartProducts;
+  }
+  return cartProducts;
 }
