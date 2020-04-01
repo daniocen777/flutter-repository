@@ -39,32 +39,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 8.0,
-        shape: CircularNotchedRectangle(),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _bottomAction(FontAwesomeIcons.history),
-            _bottomAction(FontAwesomeIcons.chartPie),
-            SizedBox(width: 48.0),
-            _bottomAction(FontAwesomeIcons.wallet),
-            _bottomAction(Icons.settings)
-          ],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton:
-          FloatingActionButton(child: Icon(Icons.add), onPressed: () {}),
-      body: _body(size),
-    );
-  }
-
   Widget _body(size) {
     // No chocar con el notch del ios
     return SafeArea(
@@ -137,6 +111,35 @@ class _HomePageState extends State<HomePage> {
           _pageItem("Diciembre", 11),
         ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 8.0,
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _bottomAction(FontAwesomeIcons.history),
+            _bottomAction(FontAwesomeIcons.chartPie),
+            SizedBox(width: 48.0),
+            _bottomAction(FontAwesomeIcons.wallet),
+            _bottomAction(Icons.settings)
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).pushNamed("/add");
+          }),
+      body: _body(size),
     );
   }
 }
