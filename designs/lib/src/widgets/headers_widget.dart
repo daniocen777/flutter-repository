@@ -248,3 +248,81 @@ class _HeaderWavePainter extends CustomPainter {
     return true;
   }
 }
+
+/* Cabecera con ícono */
+class IconHeader extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color colorGradient1;
+  final Color colorGradient2;
+
+  const IconHeader(
+      {Key key,
+      @required this.icon,
+      @required this.title,
+      @required this.subtitle,
+      this.colorGradient1 = Colors.grey,
+      this.colorGradient2 = Colors.blueGrey})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Color colorBlanco = Colors.white.withOpacity(0.7);
+
+    return Stack(
+      children: <Widget>[
+        _IconHeaderBackground(
+            colorGradient1: this.colorGradient1,
+            colorGradient2: this.colorGradient2),
+        Positioned(
+            top: -50.0,
+            left: -70.0,
+            child: Icon(this.icon,
+                size: 250.0, color: Colors.white.withOpacity(0.2))),
+        Column(
+          children: <Widget>[
+            SizedBox(height: 80.0, width: double.infinity),
+            Text(
+              this.subtitle,
+              style: TextStyle(fontSize: 20.0, color: colorBlanco),
+            ),
+            SizedBox(height: 20.0),
+            Text(
+              this.title,
+              style: TextStyle(
+                  fontSize: 25.0,
+                  color: colorBlanco,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20.0),
+            Icon(this.icon, size: 80.0, color: Colors.white)
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class _IconHeaderBackground extends StatelessWidget {
+  final Color colorGradient1;
+  final Color colorGradient2;
+
+  const _IconHeaderBackground(
+      {Key key, @required this.colorGradient1, @required this.colorGradient2})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 257.0,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80.0)),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[this.colorGradient1, this.colorGradient2])),
+    );
+  }
+}
