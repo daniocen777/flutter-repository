@@ -205,27 +205,31 @@ class _HeaderCurvoPainter extends CustomPainter {
 
 /* ---------------------- Wave => doble curva, como una ola ---------------------- */
 class HeaderWave extends StatelessWidget {
-  const HeaderWave({Key key}) : super(key: key);
+  final Color color;
+
+  const HeaderWave({Key key, @required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: CustomPaint(
-        painter: _HeaderWavePainter(),
-      ),
+      child: CustomPaint(painter: _HeaderWavePainter(this.color)),
     );
   }
 }
 
 class _HeaderWavePainter extends CustomPainter {
+  final Color color;
+
+  _HeaderWavePainter(this.color);
+
   @override
   void paint(Canvas canvas, Size size) {
     // Coordenadas y dibujos
     final paint = Paint(); // Lápiz para dibujar
     // Propiedades
-    paint.color = Color(0xff615AAB);
+    paint.color = this.color;
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 5.0;
 
