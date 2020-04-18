@@ -20,6 +20,13 @@ class EmergencyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLarge;
+    if (MediaQuery.of(context).size.height > 500) {
+      isLarge = true;
+    } else {
+      isLarge = false;
+    }
+
     final items = <ItemBoton>[
       new ItemBoton(FontAwesomeIcons.carCrash, 'Motor Accident',
           Color(0xff6989F5), Color(0xff906EF5)),
@@ -65,14 +72,19 @@ class EmergencyPage extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top: 160.0),
-            child: ListView(
-              // BouncingScrollPhysics => Para evitar la acción de android al llegar al final de una lista
-              physics: BouncingScrollPhysics(),
-              children: <Widget>[SizedBox(height: 80.0), ...itemMap],
+            margin: EdgeInsets.only(top: (isLarge) ? 180.0 : 10.0),
+            child: SafeArea(
+              child: ListView(
+                // BouncingScrollPhysics => Para evitar la acción de android al llegar al final de una lista
+                physics: BouncingScrollPhysics(),
+                children: <Widget>[
+                  if (isLarge) SizedBox(height: 80.0),
+                  ...itemMap
+                ],
+              ),
             ),
           ),
-          _Encabezado()
+          if (isLarge) _Encabezado()
         ],
       ),
     );

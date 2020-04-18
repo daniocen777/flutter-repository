@@ -10,15 +10,24 @@ class SlideshowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLarge;
+    if (MediaQuery.of(context).size.height > 500) {
+      isLarge = true;
+    } else {
+      isLarge = false;
+    }
+    final children = [
+      Expanded(child: _MiSlideshow()),
+      Expanded(child: _MiSlideshow()),
+    ];
     // bulletPrimario => Tamaño del punto activo
     // bulletSecundario => Tamaño del punto desactivo
     return Scaffold(
-        body: Column(
-      children: <Widget>[
-        Expanded(child: _MiSlideshow()),
-        Expanded(child: _MiSlideshow()),
-      ],
-    ));
+        body: (isLarge)
+            ? Column(children: children)
+            : Row(
+                children: children,
+              ));
   }
 }
 
