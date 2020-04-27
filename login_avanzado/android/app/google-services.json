@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "863885688970",
+    "firebase_url": "https://login-avanzado-f49ba.firebaseio.com",
+    "project_id": "login-avanzado-f49ba",
+    "storage_bucket": "login-avanzado-f49ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863885688970:android:8be7fca95077a303c5ed73",
+        "android_client_info": {
+          "package_name": "com.example.login_avanzado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863885688970-9ka2itpnnis0j07ufj8dng6sik25dvo0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.login_avanzado",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "863885688970-j2ahss9naelrjass01q9v6fioa6c0v8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJPvDL8J_w3GDPvVHAzF1-xAywIs-1wOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863885688970-j2ahss9naelrjass01q9v6fioa6c0v8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
