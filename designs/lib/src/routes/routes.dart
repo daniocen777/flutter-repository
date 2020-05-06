@@ -1,3 +1,4 @@
+import 'package:designs/src/pages/dashboard_page.dart';
 import 'package:designs/src/pages/slideshow_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ final pageRoutes = <_Route>[
       FontAwesomeIcons.circleNotch, 'Barra de Progreso', GraficasCirculares()),
   _Route(FontAwesomeIcons.pinterest, 'Pinteres', PinterestPage()),
   _Route(FontAwesomeIcons.mobile, 'Slivers', SliderListPage()),
+  _Route(FontAwesomeIcons.thList, 'Slivers', DashboardPage()),
 ];
 
 class _Route {
