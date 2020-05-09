@@ -20,7 +20,7 @@ final pageRoutes = <_Route>[
       FontAwesomeIcons.circleNotch, 'Barra de Progreso', GraficasCirculares()),
   _Route(FontAwesomeIcons.pinterest, 'Pinteres', PinterestPage()),
   _Route(FontAwesomeIcons.mobile, 'Slivers', SliderListPage()),
-  _Route(FontAwesomeIcons.thList, 'Slivers', DashboardPage()),
+  _Route(FontAwesomeIcons.thList, 'Dashboard', DashboardPage()),
 ];
 
 class _Route {

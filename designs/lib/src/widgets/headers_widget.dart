@@ -10,6 +10,37 @@ class HeaderCuadrado extends StatelessWidget {
   }
 }
 
+/* Con gradiente */
+class HeaderCuadradoGradiente extends StatefulWidget {
+  HeaderCuadradoGradiente({Key key}) : super(key: key);
+
+  @override
+  _HeaderCuadradoGradienteState createState() =>
+      _HeaderCuadradoGradienteState();
+}
+
+class _HeaderCuadradoGradienteState extends State<HeaderCuadradoGradiente> {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final gradiente = Container(
+      width: double.infinity,
+      height: size.height * 0.5,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              /* begin: FractionalOffset(0.0, 0.6),
+              end: FractionalOffset(0.0, 1.0), */
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [Colors.blue, Colors.white])),
+    );
+
+    return Stack(
+      children: <Widget>[gradiente],
+    );
+  }
+}
+
 /* ---------------------- Redondeado ---------------------- */
 class HeaderBordesRedondeado extends StatelessWidget {
   const HeaderBordesRedondeado({Key key}) : super(key: key);
