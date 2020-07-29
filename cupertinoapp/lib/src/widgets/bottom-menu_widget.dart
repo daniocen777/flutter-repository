@@ -42,7 +42,7 @@ class BottomMenu extends StatelessWidget {
                       SizedBox(height: 3.0),
                       Text(item.label,
                           style: TextStyle(
-                              fontSize: 12.0,
+                              fontSize: 10.0,
                               color: isActive ? Colors.blue : Colors.black))
                     ],
                   ),

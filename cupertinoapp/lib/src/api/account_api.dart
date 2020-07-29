@@ -21,4 +21,22 @@ class AccountApi {
       return false;
     }
   }
+
+  Future<List<dynamic>> getUser(int page) async {
+    try {
+      final http.Response response =
+          await http.get('https://reqres.in/api/users?page=$page&delay=3');
+
+      if (response.statusCode == 200) {
+        final dynamic parsed = jsonDecode(response.body);
+        return parsed['data'];
+      }
+
+      print('ERROR => ${response.statusCode}');
+      return [];
+    } catch (e) {
+      print('ERROR => $e');
+      return [];
+    }
+  }
 }

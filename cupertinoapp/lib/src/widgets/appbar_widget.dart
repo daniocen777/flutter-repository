@@ -27,7 +27,7 @@ class MyAppBar extends StatelessWidget {
             padding: EdgeInsets.all(15.0),
             child: WebsafeSvg.asset(
               leftIcon,
-              width: 40.0,
+              width: 35.0,
             ),
             onPressed: onLeftClick,
           ),
@@ -41,7 +41,7 @@ class MyAppBar extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: WebsafeSvg.asset(
                     rightIcon,
-                    width: 40.0,
+                    width: 35.0,
                   ),
                 ),
                 Positioned(

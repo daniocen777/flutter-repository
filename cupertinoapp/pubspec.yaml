@@ -18,6 +18,9 @@ dependencies:
   equatable: ^1.2.2
   bloc:
   flutter_bloc:
+  cached_network_image: ^2.2.0+1
+  shimmer:
+  flutter_youtube: ^2.0.0
 
 dev_dependencies:
   flutter_test:
