@@ -1,3 +1,4 @@
+import 'package:cupertinoapp/src/blocs/master/master_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -5,19 +6,15 @@ import 'package:cupertinoapp/src/pages/login_page.dart';
 import 'package:cupertinoapp/src/utils/dialogs.dart';
 import 'package:cupertinoapp/src/widgets/avatar_widget.dart';
 import 'package:cupertinoapp/src/widgets/left-right-button-icon_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
-class MoreTabPage extends StatefulWidget {
-  MoreTabPage({Key key}) : super(key: key);
+import 'package:cupertinoapp/src/blocs/master/master_bloc.dart';
 
-  @override
-  _MoreTabPageState createState() => _MoreTabPageState();
-}
-
-class _MoreTabPageState extends State<MoreTabPage> {
-  _logout() async {
+class MoreTabPage extends StatelessWidget {
+  _logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     // Remueve todas las páginas anteriores
@@ -25,7 +22,7 @@ class _MoreTabPageState extends State<MoreTabPage> {
         context, LoginPage.routename, (_) => false);
   }
 
-  _confirm() async {
+  _confirm(BuildContext context, MasterBloc masterBloc) async {
     final bool isOk = await Dialogs.cupertinoConfirm(
       context,
       title: 'Acción Requerida',
@@ -33,11 +30,12 @@ class _MoreTabPageState extends State<MoreTabPage> {
     );
 
     if (isOk) {
-      _logout();
+      masterBloc.add(MasterLogOut());
+      _logout(context);
     }
   }
 
-  _setEmail() {
+  _setEmail(BuildContext context) {
     Dialogs.inputEmail(context,
         label: 'Ingrese su email',
         placeholder: 'example@mail.com', onOk: (String text) {
@@ -47,6 +45,7 @@ class _MoreTabPageState extends State<MoreTabPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<MasterBloc>(context);
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -93,26 +92,26 @@ class _MoreTabPageState extends State<MoreTabPage> {
               rightContent: Text('danicode@mai..com',
                   style: TextStyle(color: Color(0xffaaaaaa))),
               label: 'Email',
-              onPressed: _setEmail,
+              onPressed: () => _setEmail(context),
             ),
             LeftRifgtIconButton(
               leftIcon: 'assets/icons/shield.svg',
               rightContent:
                   WebsafeSvg.asset('assets/icons/next.svg', width: 20.0),
               label: 'Configurciones de privacidad',
-              onPressed: _confirm,
+              onPressed: () => print('Configurciones de privacidad'),
             ),
             LeftRifgtIconButton(
               leftIcon: 'assets/icons/bell.svg',
               rightContent:
                   Text('Activado', style: TextStyle(color: Color(0xffaaaaaa))),
               label: 'Notificaciones push',
-              onPressed: _confirm,
+              onPressed: () => print('Notificaciones push'),
             ),
             LeftRifgtIconButton(
               leftIcon: 'assets/icons/logout.svg',
               label: 'Cerrar Sesión ',
-              onPressed: _confirm,
+              onPressed: () => _confirm(context, bloc),
             )
           ],
         ),

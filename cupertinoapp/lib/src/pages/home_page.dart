@@ -9,7 +9,7 @@ import 'package:cupertinoapp/src/classes/bottom-menu-item_class.dart';
 import 'package:cupertinoapp/src/pages/home-tabs_pages/histoy-tab_page.dart';
 import 'package:cupertinoapp/src/pages/home-tabs_pages/home-tab_page.dart';
 import 'package:cupertinoapp/src/pages/home-tabs_pages/more-tab_page.dart';
-import 'package:cupertinoapp/src/pages/home-tabs_pages/profile-tab_page.dart';
+import 'package:cupertinoapp/src/pages/home-tabs_pages/favorites-tab_page.dart';
 import 'package:cupertinoapp/src/pages/chat_page.dart';
 import 'package:cupertinoapp/src/widgets/appbar_widget.dart';
 import 'package:cupertinoapp/src/widgets/bottom-menu_widget.dart';
@@ -37,9 +37,9 @@ class _HomePageState extends State<HomePage> {
         label: "Historial",
         content: HistoryTabPage()),
     BottomMenuIten(
-        iconPath: "assets/icons/profile.svg",
-        label: "Perfil",
-        content: ProfileTabPage()),
+        iconPath: "assets/icons/heart.svg",
+        label: "Favoritos",
+        content: FavoritesPage()),
     BottomMenuIten(
         iconPath: "assets/icons/open-menu.svg",
         label: "More",

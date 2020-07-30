@@ -21,6 +21,7 @@ dependencies:
   cached_network_image: ^2.2.0+1
   shimmer:
   flutter_youtube: ^2.0.0
+  share: ^0.6.4+3
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 
+class DialogOption {
+  final String label;
+  final dynamic value;
+
+  DialogOption({@required this.label, @required this.value});
+}
+
 class Dialogs {
   static Future<void> alert(BuildContext context,
       {String title, String body, String okText = 'Aceptar'}) async {
@@ -108,6 +115,60 @@ class Dialogs {
                 onPressed: () {
                   Navigator.pop(context);
                   completer.complete(false);
+                },
+                child: Text(cancelText,
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w300))),
+          ),
+        );
+      },
+    );
+
+    return completer.future;
+  }
+
+  static Future<dynamic> select(BuildContext context,
+      {String title,
+      String body,
+      @required List<DialogOption> options,
+      String cancelText = 'Cancelar'}) async {
+    final Completer<dynamic> completer = Completer();
+
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.transparent,
+          alignment: Alignment.bottomCenter,
+          child: CupertinoActionSheet(
+            title: (title != null)
+                ? Text(title,
+                    style: TextStyle(color: Colors.black, fontSize: 20.0))
+                : null,
+            message: (body != null)
+                ? Text(body, style: TextStyle(fontSize: 15.0))
+                : null,
+            actions: List.generate(options.length, (index) {
+              final DialogOption option = options[index];
+              return CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    completer.complete(option.value);
+                  },
+                  child: Text(option.label,
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w300)));
+            }),
+            cancelButton: CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                  completer.complete(null);
                 },
                 child: Text(cancelText,
                     style: TextStyle(

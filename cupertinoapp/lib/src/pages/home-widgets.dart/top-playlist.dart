@@ -1,3 +1,4 @@
+import 'package:cupertinoapp/src/pages/playlist-videos_page.dart';
 import 'package:cupertinoapp/src/utils/extras.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -73,42 +74,56 @@ class _TopPlayListState extends State<TopPlayList> {
                         boxShadow: <BoxShadow>[
                           BoxShadow(color: Colors.black12, blurRadius: 10.0)
                         ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                            child: CachedNetworkImage(
-                          imageUrl: item.banner,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        )),
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(item.title,
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(Extras.fromNow(item.publishedAt),
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                      )),
-                                  Text('Videos: ${item.itemCount}',
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                      )),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                    child: CupertinoButton(
+                      onPressed: () {
+                        final route = MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                PlayListVideoPage(
+                                  playListId: item.id,
+                                ));
+                        Navigator.push(context, route);
+                      },
+                      padding: EdgeInsets.zero,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                              child: CachedNetworkImage(
+                            imageUrl: item.banner,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          )),
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(item.title,
+                                    style: TextStyle(
+                                        fontSize: 15.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(Extras.fromNow(item.publishedAt),
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Colors.black54,
+                                        )),
+                                    Text('Videos: ${item.itemCount}',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Colors.black54,
+                                        )),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }),

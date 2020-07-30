@@ -1,19 +1,20 @@
+import 'package:flutter/material.dart';
+
 import 'package:cupertinoapp/src/blocs/master/master_bloc.dart';
-import 'package:cupertinoapp/src/blocs/master/master_event.dart';
 import 'package:cupertinoapp/src/blocs/master/master_state.dart';
 import 'package:cupertinoapp/src/models/youtube_model.dart';
 import 'package:cupertinoapp/src/widgets/youtube-video-item.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
-class HistoryTabPage extends StatelessWidget {
+
+class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<MasterBloc>(context);
     return BlocBuilder<MasterBloc, MasterState>(
       builder: (BuildContext context, state) {
-        if (state.history.length == 0) {
+        if (state.favorites.length == 0) {
           return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -29,20 +30,20 @@ class HistoryTabPage extends StatelessWidget {
           );
         }
         return ListView.builder(
-          itemCount: state.history.length,
+          itemCount: state.favorites.length,
           itemBuilder: (BuildContext context, int index) {
-            final YouTubeVideo item = state.history[index];
+            final YouTubeVideo item = state.favorites[index];
             return YouTubeVideoItem(
               item: item,
               onDismissed: () {
-                bloc.add(MasterRemoveFromHistory(index: index));
+                /* bloc.add(MasterRemoveFromHistory(index: index)); */
               },
             );
           },
         );
       },
       condition: (prevState, newState) =>
-          prevState.history.length != newState.history.length,
+          prevState.favorites.length != newState.favorites.length,
     );
   }
 }

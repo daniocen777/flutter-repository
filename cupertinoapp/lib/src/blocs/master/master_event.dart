@@ -15,3 +15,20 @@ class MasterAddToHistory extends MasterEvent {
 
   MasterAddToHistory({this.youTubeVideo});
 }
+
+/* Agregar video en la página favoritos */
+class MasterAddToFavorites extends MasterEvent {
+  final YouTubeVideo youTubeVideo;
+
+  MasterAddToFavorites({this.youTubeVideo});
+}
+
+/* Eliminar video del historial */
+class MasterRemoveFromHistory extends MasterEvent {
+  final int index;
+
+  MasterRemoveFromHistory({this.index});
+}
+
+/* logout */
+class MasterLogOut extends MasterEvent {}
