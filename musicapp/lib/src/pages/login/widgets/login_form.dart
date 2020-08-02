@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:musicapp/src/auths/auth.dart';
+import 'package:musicapp/src/pages/home/home_page.dart';
 
 import 'package:musicapp/src/pages/login/widgets/input_text.dart';
 import 'package:musicapp/src/utils/responsive.dart';
@@ -8,6 +11,14 @@ import 'package:musicapp/src/widgets/rounded_button.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key key}) : super(key: key);
+
+  void _gotTo(BuildContext context, FirebaseUser user) {
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, HomePage.routeName);
+    } else {
+      print('Login Failed');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +59,24 @@ class LoginForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                /* Auth facebook */
                 CircleButton(
                   backgroundColor: Color(0xff448AFF),
                   size: 55.0,
                   iconPath: 'assets/pages/login/icons/facebook.svg',
+                  onPressed: () {},
                 ),
                 SizedBox(width: 20.0),
+                /* Auth Google */
                 CircleButton(
                   size: 55.0,
                   backgroundColor: Color(0xffFF1744),
                   iconPath: 'assets/pages/login/icons/ui.svg',
+                  onPressed: () async {
+                    final FirebaseUser user =
+                        await Auth.instance.google(context);
+                    _gotTo(context, user);
+                  },
                 )
               ],
             ),

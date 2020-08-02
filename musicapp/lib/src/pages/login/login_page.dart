@@ -8,7 +8,10 @@ import 'package:musicapp/src/utils/responsive.dart';
 import 'package:after_layout/after_layout.dart';
 
 class LoginPage extends StatefulWidget {
+   static final routeName = 'login';
+   
   LoginPage({Key key}) : super(key: key);
+
 
   @override
   _LoginPageState createState() => _LoginPageState();
