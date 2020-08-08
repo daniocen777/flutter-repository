@@ -1,6 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+/* import 'package:flutter/widgets.dart'; */
+
+class Dialogs {
+  static void alert(BuildContext context, {String title, String description}) {
+    showDialog(
+        context: context,
+        child: CupertinoAlertDialog(
+          title: (title != null) ? Text(title) : null,
+          content: (description != null) ? Text(description) : null,
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: Text('Ok'),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+        ));
+  }
+}
 
 class ProgressDialog {
   final BuildContext context;

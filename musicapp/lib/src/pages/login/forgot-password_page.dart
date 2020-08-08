@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:musicapp/src/pages/login/widgets/forgot-password_form.dart';
 
-import 'package:musicapp/src/pages/login/widgets/login_form.dart';
 import 'package:musicapp/src/pages/login/widgets/welcome.dart';
 import 'package:musicapp/src/utils/responsive.dart';
 
 import 'package:after_layout/after_layout.dart';
 
-class LoginPage extends StatefulWidget {
-  static final routeName = 'login';
+class ForgotPasswordPage extends StatefulWidget {
+  static final routeName = 'forgot_password';
 
-  LoginPage({Key key}) : super(key: key);
+  ForgotPasswordPage({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with AfterLayoutMixin {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage>
+    with AfterLayoutMixin {
   @override
   void initState() {
     super.initState();
@@ -61,37 +62,14 @@ class _LoginPageState extends State<LoginPage> with AfterLayoutMixin {
                             child: Column(
                               children: <Widget>[
                                 Welcome(
-                                  isLogin: true,
+                                  isLogin: false,
                                 ),
-                                LoginForm(),
+                                ForgotPasswordForm(),
                               ],
                             ),
                           ),
                         )
                       ]);
-
-                  /*  return SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Container(
-                      height: responsive.height,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Welcome(),
-                          Expanded(
-                              child: PageView(
-                            children: <Widget>[
-                              LoginForm(),
-                              RegisterForm(),
-                              SizedBox(
-                                height: 50.0,
-                              )
-                            ],
-                          ))
-                        ],
-                      ),
-                    ),
-                  ); */
                 } else {
                   return Row(
                     children: <Widget>[
@@ -108,7 +86,7 @@ class _LoginPageState extends State<LoginPage> with AfterLayoutMixin {
                             physics: BouncingScrollPhysics(),
                             child: Container(
                                 height: responsive.height,
-                                child: Center(child: LoginForm()))),
+                                child: Center(child: ForgotPasswordForm()))),
                       )
                     ],
                   );

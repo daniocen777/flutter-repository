@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:musicapp/src/utils/responsive.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({Key key}) : super(key: key);
+  final bool isLogin;
+
+  const Welcome({Key key, this.isLogin = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,45 +22,62 @@ class Welcome extends StatelessWidget {
                   top: constraint.maxHeight * 0.7,
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        width: constraint.maxWidth,
-                        height: 3.0,
-                        color: Color(0xffeeeeee),
-                      ),
+                      isLogin
+                          ? Container(
+                              width: constraint.maxWidth,
+                              height: 3.0,
+                              color: Color(0xffeeeeee),
+                            )
+                          : Container(),
                       SizedBox(height: 20.0),
-                      Text(
-                        'Welcome!',
-                        style: TextStyle(
-                            fontSize: responsive.ip(2.5),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'raleway'),
-                      ),
+                      isLogin
+                          ? Text(
+                              'Welcome!',
+                              style: TextStyle(
+                                  fontSize: responsive.ip(2.5),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'raleway'),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
-                Positioned(
-                  top: 0.0,
-                  right: 0.0,
-                  left: 0.0,
-                  child: SvgPicture.asset('assets/pages/login/clouds.svg',
-                      width: constraint.maxWidth,
-                      height: constraint.maxHeight * 0.7),
-                ),
-                Positioned(
-                  top: constraint.maxHeight * 0.27,
-                  child: SvgPicture.asset(
-                    'assets/pages/login/woman.svg',
-                    width: constraint.maxWidth * 0.35,
-                  ),
-                ),
-                Positioned(
-                  top: constraint.maxHeight * 0.31,
-                  right: 5.0,
-                  child: SvgPicture.asset(
-                    'assets/pages/login/man.svg',
-                    width: constraint.maxWidth * 0.26,
-                  ),
-                )
+                isLogin
+                    ? Positioned(
+                        top: 0.0,
+                        right: 0.0,
+                        left: 0.0,
+                        child: SvgPicture.asset('assets/pages/login/clouds.svg',
+                            width: constraint.maxWidth,
+                            height: constraint.maxHeight * 0.7),
+                      )
+                    : Positioned(
+                        top: 0.0,
+                        right: 0.0,
+                        left: 0.0,
+                        child: SvgPicture.asset('assets/pages/login/guys.svg',
+                            width: constraint.maxWidth,
+                            height: constraint.maxHeight * 0.7),
+                      ),
+                isLogin
+                    ? Positioned(
+                        top: constraint.maxHeight * 0.27,
+                        child: SvgPicture.asset(
+                          'assets/pages/login/woman.svg',
+                          width: constraint.maxWidth * 0.35,
+                        ),
+                      )
+                    : Container(),
+                isLogin
+                    ? Positioned(
+                        top: constraint.maxHeight * 0.31,
+                        right: 5.0,
+                        child: SvgPicture.asset(
+                          'assets/pages/login/man.svg',
+                          width: constraint.maxWidth * 0.26,
+                        ),
+                      )
+                    : Container()
               ],
             ),
           );
