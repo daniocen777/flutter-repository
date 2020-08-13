@@ -1,7 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:musicapp/src/auths/auth.dart';
+import 'package:musicapp/src/blocs/home/bloc.dart';
+import 'package:musicapp/src/db/app_theme.dart';
+import 'package:musicapp/src/db/artist_store.dart';
+import 'package:musicapp/src/pages/home/widgets/artist_picker.dart';
+import 'package:musicapp/src/pages/home/widgets/home_bottom_bar.dart';
+
+import 'package:musicapp/src/pages/home/widgets/home_header.dart';
+import 'package:musicapp/src/pages/home/widgets/my_artists.dart';
+import 'package:musicapp/src/pages/home/widgets/search.dart';
 
 class HomePage extends StatefulWidget {
   static final routeName = 'home';
@@ -13,71 +25,94 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget _getAlias(String displayName) {
-    final List<String> temporal = displayName.split(' ');
-    String alias = '';
-    if (temporal.length > 0) {
-      alias = temporal[0][0];
-      if (temporal.length == 2) {
-        alias += temporal[1][0];
-      }
-    }
-    return Center(child: Text(alias, style: TextStyle(fontSize: 30.0)));
+  final HomeBloc _bloc = HomeBloc();
+  final GlobalKey<InnerDrawerState> _drawerKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
+        .copyWith(statusBarColor: Colors.transparent));
+  }
+
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
+
+  Future<void> _logOut() async {
+    await ArtistStore.instance.clear();
+    await MyAppTheme.instance.setTheme(false);
+    await Auth.instance.logOut(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.white,
-        child: SafeArea(
-          child: FutureBuilder<FirebaseUser>(
-            future: Auth.instance.user,
-            builder:
-                (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
-              if (snapshot.hasData) {
-                final FirebaseUser user = snapshot.data;
-
-                return ListView(
-                  children: <Widget>[
-                    SizedBox(height: 10.0),
-                    CircleAvatar(
-                        radius: 40.0,
-                        child: (user.photoUrl != null)
-                            ? ClipOval(
-                                child: Image.network(
-                                user.photoUrl,
-                                width: 80.0,
-                                height: 80.0,
-                                fit: BoxFit.contain,
-                              ))
-                            : _getAlias(user.displayName)),
-                    SizedBox(height: 10.0),
-                    Text(user.displayName,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold)),
-                    Text(user.email,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0, fontWeight: FontWeight.w300)),
-                    SizedBox(height: 20.0),
-                    CupertinoButton(
-                        child: Text('Log Out'),
-                        onPressed: () {
-                          Auth.instance.logOut(context);
-                        })
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error al cargar datos'));
-              }
-
-              return Center(child: CupertinoActivityIndicator());
-            },
+    return BlocProvider.value(
+      value: _bloc,
+      child: InnerDrawer(
+        key: _drawerKey,
+        onTapClose: true,
+        rightChild: Container(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FlatButton(onPressed: this._logOut, child: Text('Log out'))
+              ],
+            ),
           ),
+        ),
+        scaffold: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+              bottomNavigationBar: HomeBottomBar(),
+              body: CustomScrollView(
+                physics: BouncingScrollPhysics(),
+                slivers: <Widget>[
+                  HomeHeader(drawerKey: this._drawerKey),
+                  Search(),
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (BuildContext context, HomeState state) {
+                      if (state.status == HomeStatus.selecting) {
+                        return ArtistPicker();
+                      } else if (state.status == HomeStatus.ready) {
+                        return MyArtists();
+                      }
+                      String text = '';
+                      switch (state.status) {
+                        case HomeStatus.checking:
+                          text = 'Checking Database...';
+                          break;
+                        case HomeStatus.loading:
+                          text = 'Loading Artists...';
+                          break;
+                        case HomeStatus.downloading:
+                          text = 'Dowloading tracks...';
+                          break;
+                        default:
+                          text = '';
+                      }
+                      return SliverFillRemaining(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30.0, vertical: 10.0),
+                              child: LinearProgressIndicator(),
+                            ),
+                            Text(text)
+                          ],
+                        ),
+                      );
+                    },
+                  )
+                  /* Calcular el espacio que sobra en el dispositivo */
+                ],
+              )),
         ),
       ),
     );

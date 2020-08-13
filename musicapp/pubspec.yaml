@@ -16,6 +16,15 @@ dependencies:
   firebase_core: ^0.4.5
   firebase_auth: ^0.16.1
   google_sign_in: ^4.5.1
+  flutter_inner_drawer: ^0.5.7+2
+  equatable: ^1.2.2
+  bloc:
+  flutter_bloc:
+  dio: ^3.0.10
+  cached_network_image: ^2.2.0+1
+  sembast: ^2.4.7+6
+  path_provider: ^1.6.11
+  provider: ^4.3.2
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +37,7 @@ flutter:
   assets:
     - assets/pages/login/
     - assets/pages/login/icons/
+    - assets/pages/home/
   fonts:
     - family: sans
       fonts:

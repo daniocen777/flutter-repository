@@ -22,7 +22,8 @@ class RoundedButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0, vertical: 10.0),
         decoration: BoxDecoration(
-            color: this.backgroundColor ?? AppColors.primary,
+            color: (this.backgroundColor ?? AppColors.primary)
+                .withOpacity(this.onPressed != null ? 1.0 : 0.4),
             borderRadius: BorderRadius.circular(25.0),
             boxShadow: <BoxShadow>[
               BoxShadow(color: Colors.black26, blurRadius: 5.0)
