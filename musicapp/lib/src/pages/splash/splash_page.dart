@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:musicapp/src/auths/auth.dart';
+import 'package:musicapp/src/libs/auth.dart';
 import 'package:musicapp/src/pages/home/home_page.dart';
 import 'package:musicapp/src/pages/login/login_page.dart';
 

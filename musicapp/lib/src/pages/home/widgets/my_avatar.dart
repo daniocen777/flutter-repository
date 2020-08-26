@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:musicapp/src/auths/auth.dart';
+import 'package:musicapp/src/libs/auth.dart';
 
 class MyAvatar extends StatelessWidget {
   final VoidCallback onPressed;

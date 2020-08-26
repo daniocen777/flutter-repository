@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_inner_drawer/inner_drawer.dart';
-import 'package:musicapp/src/auths/auth.dart';
+import 'package:musicapp/src/libs/auth.dart';
 import 'package:musicapp/src/blocs/home/bloc.dart';
 import 'package:musicapp/src/db/app_theme.dart';
 import 'package:musicapp/src/db/artist_store.dart';

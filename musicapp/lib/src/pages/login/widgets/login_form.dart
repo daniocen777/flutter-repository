@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:musicapp/src/auths/auth.dart';
+import 'package:musicapp/src/libs/auth.dart';
 import 'package:musicapp/src/pages/login/forgot-password_page.dart';
 
 import 'package:musicapp/src/pages/login/widgets/input_text.dart';
