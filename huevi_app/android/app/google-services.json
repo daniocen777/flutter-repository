@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "215554942506",
+    "firebase_url": "https://hueviapp.firebaseio.com",
+    "project_id": "hueviapp",
+    "storage_bucket": "hueviapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215554942506:android:45aeff4b4000719d6c8553",
+        "android_client_info": {
+          "package_name": "com.example.huevi_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215554942506-7urioq09bvp3tdegpijno8rtimeojiur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.huevi_app",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "215554942506-pmpii67h7pl3dp20inal1l0gbp87vpgd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7dt2zDLO95Uy3t8vX6QnAcaLXXfzyRE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215554942506-pmpii67h7pl3dp20inal1l0gbp87vpgd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
