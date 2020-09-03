@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:googlemap/src/api/my_api.dart';
 import 'package:googlemap/src/utils/responsive.dart';
 import 'package:googlemap/src/widgets/input_text.dart';
 
@@ -15,9 +16,13 @@ class _RegisterFormState extends State<RegisterForm> {
   String _email = '';
   String _password = '';
 
-  _submit() {
+  _submit() async {
     final bool isOk = _formKey.currentState.validate();
-    if (isOk) {}
+    if (isOk) {
+      MyApi myApi = MyApi();
+      await myApi.register(context,
+          username: _username, email: _email, password: _password);
+    }
   }
 
   @override
@@ -119,7 +124,6 @@ class _RegisterFormState extends State<RegisterForm> {
                               fontWeight: FontWeight.w600)))
                 ],
               ),
-              
             ],
           ),
         ),

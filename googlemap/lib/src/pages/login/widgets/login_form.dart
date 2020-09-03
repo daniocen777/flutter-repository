@@ -123,9 +123,6 @@ class _LoginFormState extends State<LoginForm> {
                               fontWeight: FontWeight.w600)))
                 ],
               ),
-              SizedBox(
-                height: responsive.dp(10.0),
-              ),
             ],
           ),
         ),
