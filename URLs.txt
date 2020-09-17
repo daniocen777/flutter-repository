@@ -10,3 +10,9 @@ https://editor.method.ac/
 Temas:
 https://www.materialpalette.com
 https://material.io/resources/color/#!/?view.left=0&view.right=0
+
+colores:
+https://colorsupplyyy.com/app
+
+key-256
+keytool -list -v -alias androiddebugkey -keystore C:/Users/DANIEL/.android/debug.keystore
