@@ -1,10 +1,13 @@
-import 'package:chatapp/pages/register_page.dart';
-import 'package:chatapp/widgets/button_blue.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:chatapp/services/auth_service.dart';
 import 'package:chatapp/widgets/custom_input.dart';
 import 'package:chatapp/widgets/labels.dart';
 import 'package:chatapp/widgets/logo.dart';
+import 'package:chatapp/pages/register_page.dart';
+import 'package:chatapp/widgets/button_blue.dart';
 
 class LoginPage extends StatelessWidget {
   static final route = 'login';
@@ -54,6 +57,8 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    // listen: false => Para no redibujar el widget, ya que no lo necesito
+    final authService = Provider.of<AuthService>(context);
     return Container(
       margin: EdgeInsets.only(top: 35.0),
       padding: EdgeInsets.symmetric(horizontal: 45.0),
@@ -73,10 +78,14 @@ class __FormState extends State<_Form> {
           ),
           SizedBox(height: 25.0),
           ButtonBlue(
-            onPressed: () {
-              print('CORREO ${emailController.text}');
-              print('PASS ${passwordController.text}');
-            },
+            onPressed: (authService.autenticando)
+                ? null
+                : () {
+                    // Quitar teclado
+                    FocusScope.of(context).unfocus();
+                    authService.login(context, emailController.text.trim(),
+                        passwordController.text.trim());
+                  },
             label: 'Ingresar',
           ),
           SizedBox(height: 15.0)

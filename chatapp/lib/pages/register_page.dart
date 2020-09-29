@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:chatapp/services/auth_service.dart';
 import 'package:chatapp/pages/login_page.dart';
 import 'package:chatapp/widgets/button_blue.dart';
 import 'package:chatapp/widgets/custom_input.dart';
@@ -27,10 +30,10 @@ class RegisterPage extends StatelessWidget {
                     question: '¿Ya tienes una?',
                     action: 'Ingresa',
                     route: LoginPage.route),
-                    SizedBox(height: 25.0),
+                SizedBox(height: 25.0),
                 Text('Términos y condiciones de uso',
                     style: TextStyle(fontWeight: FontWeight.w200)),
-                    SizedBox(height: 25.0)
+                SizedBox(height: 25.0)
               ],
             ),
           ),
@@ -55,6 +58,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final _authService = Provider.of<AuthService>(context);
     return Container(
       margin: EdgeInsets.only(top: 35.0),
       padding: EdgeInsets.symmetric(horizontal: 45.0),
@@ -79,11 +83,16 @@ class __FormState extends State<_Form> {
           ),
           SizedBox(height: 25.0),
           ButtonBlue(
-            onPressed: () {
-              print('CORREO ${this.emailController.text}');
-              print('PASS ${this.passwordController.text}');
-            },
-            label: 'Registrar',
+            onPressed: _authService.autenticando
+                ? null
+                : () {
+                    _authService.register(
+                        context,
+                        nameController.text.trim(),
+                        emailController.text.trim(),
+                        passwordController.text.trim());
+                  },
+            label: 'Crear cuenta',
           ),
           SizedBox(height: 15.0)
         ],

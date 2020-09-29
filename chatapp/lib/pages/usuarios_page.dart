@@ -1,4 +1,7 @@
+import 'package:chatapp/pages/login_page.dart';
+import 'package:chatapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -16,23 +19,30 @@ class _UsuariosPageState extends State<UsuariosPage> {
       RefreshController(initialRefresh: false);
 
   final usuarios = [
-    Usuario(uid: '1', name: 'María', email: 'mari@gmail.com', online: true),
-    Usuario(uid: '2', name: 'Lalo', email: 'lalocura@mail.com', online: true),
-    Usuario(uid: '3', name: 'Ana', email: 'anita@outlook.com', online: false),
-    Usuario(uid: '4', name: 'Pedro', email: 'elperro@gmail.com', online: false),
-    Usuario(uid: '5', name: 'Keka', email: 'gorda@gmail.com', online: true)
+    Usuario(uid: '1', nombre: 'María', email: 'mari@gmail.com', online: true),
+    Usuario(uid: '2', nombre: 'Lalo', email: 'lalocura@mail.com', online: true),
+    Usuario(uid: '3', nombre: 'Ana', email: 'anita@outlook.com', online: false),
+    Usuario(
+        uid: '4', nombre: 'Pedro', email: 'elperro@gmail.com', online: false),
+    Usuario(uid: '5', nombre: 'Keka', email: 'gorda@gmail.com', online: true)
   ];
 
   @override
   Widget build(BuildContext context) {
+    final _authService = Provider.of<AuthService>(context);
+    final Usuario _usuario = _authService.usuario;
     return Scaffold(
         appBar: AppBar(
-          title: Text('User', style: TextStyle(color: Colors.black87)),
+          title: Text(_usuario.nombre, style: TextStyle(color: Colors.black87)),
           elevation: 1.0,
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.exit_to_app, color: Colors.black87),
-            onPressed: () {},
+            onPressed: () {
+              // Desconectar del socket server
+              AuthService.deleteToken();
+              Navigator.pushReplacementNamed(context, LoginPage.route);
+            },
           ),
           actions: <Widget>[
             Container(
@@ -64,11 +74,11 @@ class _UsuariosPageState extends State<UsuariosPage> {
 
   ListTile _itemUsuario(Usuario usuario) {
     return ListTile(
-      title: Text(usuario.name),
+      title: Text(usuario.nombre),
       subtitle: Text(usuario.email),
       leading: CircleAvatar(
         backgroundColor: Colors.blue[100],
-        child: Text(usuario.name.substring(0, 2)),
+        child: Text(usuario.nombre.substring(0, 2)),
       ),
       trailing: Container(
           width: 10.0,
