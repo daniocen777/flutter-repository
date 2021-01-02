@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:pages_samples/buttons/snake_button.dart';
 
-import 'buttons/shiny_button.dart';
+import 'package:flutter/services.dart';
+
+import 'package:pages_samples/buttons/snake_button.dart';
+import 'package:pages_samples/buttons/shiny_button.dart';
+import 'package:pages_samples/responsive_cards/responsive_card.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData.dark(),
       home: MyApp(),
     ));
 
@@ -46,6 +46,12 @@ class MyAppState extends State<MyApp> {
               title: "Botón serpiendte",
               actionTap: () {
                 onButtonTap(MainSnakeButtons());
+              },
+            ),
+            MyMenuButton(
+              title: "Responsive cards",
+              actionTap: () {
+                onButtonTap(ResponsiveCards());
               },
             ),
           ],
