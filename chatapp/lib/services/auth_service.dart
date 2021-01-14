@@ -8,6 +8,8 @@ import 'package:chatapp/global/environments.dart';
 import 'package:chatapp/models/response.dart';
 import 'package:chatapp/models/usuario.dart';
 import 'package:chatapp/pages/usuarios_page.dart';
+import 'package:provider/provider.dart';
+import 'package:chatapp/services/socket_service.dart';
 import 'package:chatapp/utils/alertas.dart';
 
 class AuthService with ChangeNotifier {
@@ -30,9 +32,11 @@ class AuthService with ChangeNotifier {
     return token;
   }
 
-  static Future<void> deleteToken() async {
+  static Future<void> deleteToken(BuildContext context) async {
     final _storage = new FlutterSecureStorage();
     await _storage.delete(key: 'token');
+    final socketervice = Provider.of<SocketService>(context, listen: false);
+    socketervice.disconnect();
   }
 
   Future<void> login(
@@ -50,6 +54,9 @@ class AuthService with ChangeNotifier {
             usuarioFromJson(jsonEncode(loginResponse.obj['usuario']));
         // Guardar token
         await this._saveToken(jsonEncode(loginResponse.obj['token']));
+        // Conectar con el socket
+        final socketervice = Provider.of<SocketService>(context, listen: false);
+        socketervice.connect();
         Navigator.pushReplacementNamed(context, UsuariosPage.route);
       } else {
         mostrarAlerta(context, title: 'Error', subtitle: loginResponse.msj);
@@ -74,6 +81,9 @@ class AuthService with ChangeNotifier {
             usuarioFromJson(jsonEncode(registerResponse.obj['usuario']));
         // Guardar token
         await this._saveToken(jsonEncode(registerResponse.obj['token']));
+        // Conectar con el socket
+        final socketervice = Provider.of<SocketService>(context, listen: false);
+        socketervice.connect();
         Navigator.pushReplacementNamed(context, UsuariosPage.route);
       } else {
         mostrarAlerta(context, title: 'Error', subtitle: registerResponse.msj);
@@ -86,6 +96,7 @@ class AuthService with ChangeNotifier {
   // Verificar token
   Future<bool> isLogin(BuildContext context) async {
     final token = await this._storage.read(key: 'token');
+    if (token == null) return false;
     final response = await http.get('${Environment.apiUrl}/login/renew',
         headers: {
           'Content-Type': 'application/json',
@@ -95,6 +106,7 @@ class AuthService with ChangeNotifier {
     if (response.statusCode == 200) {
       final Response registerResponse = responseFromJson(response.body);
       if (registerResponse.ok) {
+        print('ES OK');
         this.usuario =
             usuarioFromJson(jsonEncode(registerResponse.obj['usuario']));
         // Guardar token

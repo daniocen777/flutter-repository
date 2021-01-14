@@ -1,3 +1,6 @@
+Crear proyecto:
+flutter create --androidx -a java -i swift nombre_proyecto
+
 Íconos:
 https://www.flaticon.com/
 

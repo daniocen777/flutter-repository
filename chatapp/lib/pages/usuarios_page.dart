@@ -1,11 +1,12 @@
-import 'package:chatapp/pages/login_page.dart';
-import 'package:chatapp/services/auth_service.dart';
+import 'package:chatapp/services/socket_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'package:chatapp/models/usuario.dart';
+import 'package:chatapp/pages/login_page.dart';
+import 'package:chatapp/services/auth_service.dart';
 
 class UsuariosPage extends StatefulWidget {
   static final route = 'usuarios';
@@ -30,6 +31,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
   @override
   Widget build(BuildContext context) {
     final _authService = Provider.of<AuthService>(context);
+    final _socketService = Provider.of<SocketService>(context);
     final Usuario _usuario = _authService.usuario;
     return Scaffold(
         appBar: AppBar(
@@ -40,15 +42,16 @@ class _UsuariosPageState extends State<UsuariosPage> {
             icon: Icon(Icons.exit_to_app, color: Colors.black87),
             onPressed: () {
               // Desconectar del socket server
-              AuthService.deleteToken();
+              AuthService.deleteToken(context);
               Navigator.pushReplacementNamed(context, LoginPage.route);
             },
           ),
           actions: <Widget>[
             Container(
               margin: EdgeInsets.only(right: 10.0),
-              /* child: Icon(Icons.check_circle, color: Colors.blue[400]), */
-              child: Icon(Icons.offline_bolt, color: Colors.red[400]),
+              child: (_socketService.serverStatus == ServerStatus.Online)
+                  ? Icon(Icons.check_circle, color: Colors.blue[400])
+                  : Icon(Icons.offline_bolt, color: Colors.red[400]),
             )
           ],
         ),

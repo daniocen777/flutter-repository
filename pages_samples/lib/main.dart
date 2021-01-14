@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:pages_samples/buttons/snake_button.dart';
 import 'package:pages_samples/buttons/shiny_button.dart';
 import 'package:pages_samples/responsive_cards/responsive_card.dart';
+import 'package:pages_samples/shake_transition/shake_transition.dart';
+import 'package:pages_samples/nike_shoes_store/nike_shoes_store.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -52,6 +54,18 @@ class MyAppState extends State<MyApp> {
               title: "Responsive cards",
               actionTap: () {
                 onButtonTap(ResponsiveCards());
+              },
+            ),
+            MyMenuButton(
+              title: "Transición animada",
+              actionTap: () {
+                onButtonTap(MainShakeTransition());
+              },
+            ),
+            MyMenuButton(
+              title: "Página Zapatos Nike",
+              actionTap: () {
+                onButtonTap(MainNikeShoesStore());
               },
             ),
           ],
