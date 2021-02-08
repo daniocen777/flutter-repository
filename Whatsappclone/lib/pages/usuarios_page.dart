@@ -1,9 +1,16 @@
+import 'package:Whatsappclone/blocs/chat/chat_bloc.dart';
+import 'package:Whatsappclone/pages/chat_page.dart';
+import 'package:Whatsappclone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'package:Whatsappclone/models/usuario.dart';
+import 'package:Whatsappclone/blocs/socket/socket_bloc.dart';
+import 'package:Whatsappclone/blocs/auth/auth_bloc.dart';
 import 'package:Whatsappclone/utils/colors.dart';
+import 'package:Whatsappclone/models/usuario.dart';
+import 'package:Whatsappclone/pages/login_page.dart';
 
 class UsuariosPage extends StatefulWidget {
   static String route = 'usuarios';
@@ -17,29 +24,53 @@ class UsuariosPage extends StatefulWidget {
 class _UsuariosPageState extends State<UsuariosPage> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  final authService = new AuthService();
 
-  final usuarios = [
-    Usuario(uid: '1', nombre: 'Daniel', email: 'dani@gmail.com', online: true),
-    Usuario(uid: '2', nombre: 'María', email: 'mari@gmail.com', online: false),
-    Usuario(uid: '3', nombre: 'Carmela', email: 'eche@gmail.com', online: true),
-    Usuario(uid: '4', nombre: 'lena', email: 'lenita@gmail.com', online: true),
-  ];
+  List<Usuario> usuarios = [];
+
+  @override
+  void initState() {
+    super.initState();
+    this._cargarUsuarios();
+  }
+
+  @override
+  void dispose() { 
+    _refreshController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+    final socketBloc = BlocProvider.of<SocketBloc>(context);
+    final chatBloc = BlocProvider.of<ChatBloc>(context);
+
     return Scaffold(
-      backgroundColor: Color(0xffF2F2F2),
+        backgroundColor: Color(0xffF2F2F2),
         appBar: AppBar(
-          title: Text('Usuario XXX', style: TextStyle(color: PRIMARY_COLOR)),
+          title: Text(authBloc.state.usuario.nombre,
+              style: TextStyle(color: PRIMARY_COLOR)),
           elevation: 1.0,
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.exit_to_app, color: PRIMARY_COLOR),
-            onPressed: () {},
+            onPressed: () {
+              print('ERROR ANTES DE NAVEGAR');
+              Navigator.pushReplacementNamed(context, LoginPage.route);
+              print('LOGOUT');
+              authBloc.add(OnLogoutEvent());
+              print('DESCONECTAR');
+              socketBloc.add(OnDisconnectEvent());
+            },
           ),
           actions: [
             Container(
               margin: EdgeInsets.only(right: 10.0),
-              child: Icon(Icons.check_circle, color: SECOND_COLOR_DARK),
+              child: Icon(Icons.check_circle,
+                  color: (authBloc.state.online)
+                      ? PRIMARY_COLOR
+                      : SECOND_COLOR_DARK),
             )
           ],
         ),
@@ -51,22 +82,22 @@ class _UsuariosPageState extends State<UsuariosPage> {
             complete: Icon(Icons.check, color: PRIMARY_COLOR_LIGHT),
             waterDropColor: PRIMARY_COLOR_LIGHT,
           ),
-          child: _listViewUsuarios(),
+          child: _listViewUsuarios(chatBloc),
         ));
   }
 
-  ListView _listViewUsuarios() {
+  ListView _listViewUsuarios(ChatBloc chatBloc) {
     return ListView.separated(
       physics: BouncingScrollPhysics(),
       itemCount: usuarios.length,
       separatorBuilder: (BuildContext context, int index) => Divider(),
       itemBuilder: (BuildContext context, int index) {
-        return _userItem(usuarios[index]);
+        return _userItem(usuarios[index], chatBloc);
       },
     );
   }
 
-  ListTile _userItem(Usuario usuario) {
+  ListTile _userItem(Usuario usuario, ChatBloc chatBloc) {
     return ListTile(
       title: Text(usuario.nombre),
       subtitle: Text(usuario.email),
@@ -81,13 +112,16 @@ class _UsuariosPageState extends State<UsuariosPage> {
             borderRadius: BorderRadius.circular(100.0),
             color: usuario.online ? THIRD_COLOR : SECOND_COLOR_DARK),
       ),
+      onTap: () {
+        chatBloc.add(MensajeParaEvent(usuario));
+        Navigator.pushNamed(context, ChatPage.route);
+      },
     );
   }
 
   _cargarUsuarios() async {
-    // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
-    // if failed,use refreshFailed()
+    this.usuarios = await authService.getUsuarios();
     _refreshController.refreshCompleted();
+    setState(() {});
   }
 }

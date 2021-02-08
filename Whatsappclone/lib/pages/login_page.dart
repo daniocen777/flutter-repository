@@ -1,10 +1,16 @@
-import 'package:Whatsappclone/pages/register_page.dart';
-import 'package:Whatsappclone/widgets/custom_button.dart';
+import 'package:Whatsappclone/blocs/socket/socket_bloc.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:Whatsappclone/utils/colors.dart';
+import 'package:Whatsappclone/blocs/auth/auth_bloc.dart';
 import 'package:Whatsappclone/widgets/custom_textfield.dart';
+import 'package:Whatsappclone/widgets/custom_button.dart';
 import 'package:Whatsappclone/widgets/labels.dart';
 import 'package:Whatsappclone/widgets/logo.dart';
+import 'package:Whatsappclone/pages/register_page.dart';
+import 'package:Whatsappclone/pages/usuarios_page.dart';
 
 class LoginPage extends StatelessWidget {
   static String route = 'login';
@@ -13,30 +19,49 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xffF2F2F2),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Logo(titulo: 'Iniciar Sesión'),
-                  _Form(),
-                  Labels(
-                    ruta: RegisterPage.route,
-                    pregunta: '¿No tienes cuenta?',
-                    accion: 'Crea una cuenta aquí',
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ));
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (BuildContext context, state) {
+        if (!state.online) {
+          return Scaffold(
+              backgroundColor: Color(0xffF2F2F2),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Logo(titulo: 'Iniciar Sesión'),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          (state.error.length > 0)
+                              ? Center(
+                                  child: Text(state.error,
+                                      style: TextStyle(
+                                          color: SECOND_COLOR_DARK,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15.0)),
+                                )
+                              : Container(),
+                          _Form(),
+                          Labels(
+                            ruta: RegisterPage.route,
+                            pregunta: '¿No tienes cuenta?',
+                            accion: 'Crea una cuenta aquí',
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          )
+                        ],
+                      ),
+                    )),
+              ));
+        } else {
+          return UsuariosPage();
+        }
+      },
+    );
   }
 }
 
@@ -53,6 +78,9 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+    final socketBloc = BlocProvider.of<SocketBloc>(context);
+
     return Container(
       margin: EdgeInsets.only(top: 40.0),
       padding: EdgeInsets.symmetric(horizontal: 45.0),
@@ -72,11 +100,14 @@ class __FormState extends State<_Form> {
           ),
           SizedBox(height: 20.0),
           CustomButton(
-              text: 'Ingresar',
-              onPressed: () {
-                print('Correo: ${emailController.text}');
-                print('Contraseña: ${passwordController.text}');
-              })
+              text: authBloc.state.cargando ? 'Cargando...' : 'Ingresar',
+              onPressed: authBloc.state.cargando
+                  ? null
+                  : () {
+                      authBloc.add(OnLoginEvent(emailController.text.trim(),
+                          passwordController.text.trim()));
+                      socketBloc.add(OnConnectEvent());
+                    })
         ],
       ),
     );

@@ -1,5 +1,7 @@
+import 'package:Whatsappclone/blocs/auth/auth_bloc.dart';
 import 'package:Whatsappclone/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatMessage extends StatelessWidget {
   final String uid;
@@ -15,14 +17,16 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
     return FadeTransition(
       opacity: animationController,
       child: SizeTransition(
-        sizeFactor: CurvedAnimation( parent: animationController,
-        curve: Curves.easeOut
-        ),
+        sizeFactor:
+            CurvedAnimation(parent: animationController, curve: Curves.easeOut),
         child: Container(
-          child: this.uid == '123' ? _mensajePropio() : _mensaje(),
+          child: this.uid == authBloc.state.usuario.uid
+              ? _mensajePropio()
+              : _mensaje(),
         ),
       ),
     );

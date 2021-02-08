@@ -15,6 +15,10 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.18.0
   pull_to_refresh: ^1.6.3
+  http: ^0.12.2
+  flutter_bloc: ^6.1.1
+  flutter_secure_storage: ^3.3.5
+  socket_io_client: ^0.9.10
 
 dev_dependencies:
   flutter_test:
