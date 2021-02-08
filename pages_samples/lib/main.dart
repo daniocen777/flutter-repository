@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:pages_samples/buttons/snake_button.dart';
 import 'package:pages_samples/buttons/shiny_button.dart';
+import 'package:pages_samples/rappi_scroll_sync/rappi-scroll-sync_page.dart';
 import 'package:pages_samples/responsive_cards/responsive_card.dart';
 import 'package:pages_samples/shake_transition/shake_transition.dart';
 import 'package:pages_samples/nike_shoes_store/nike_shoes_store.dart';
@@ -66,6 +67,12 @@ class MyAppState extends State<MyApp> {
               title: "Página Zapatos Nike",
               actionTap: () {
                 onButtonTap(MainNikeShoesStore());
+              },
+            ),
+            MyMenuButton(
+              title: "Rappi Scroll sincronizado",
+              actionTap: () {
+                onButtonTap(RappiScrollSyncPage());
               },
             ),
           ],
