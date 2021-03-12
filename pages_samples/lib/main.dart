@@ -8,6 +8,7 @@ import 'package:pages_samples/rappi_scroll_sync/rappi-scroll-sync_page.dart';
 import 'package:pages_samples/responsive_cards/responsive_card.dart';
 import 'package:pages_samples/shake_transition/shake_transition.dart';
 import 'package:pages_samples/nike_shoes_store/nike_shoes_store.dart';
+import 'package:pages_samples/bank_finance/main_bank_finance.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -73,6 +74,12 @@ class MyAppState extends State<MyApp> {
               title: "Rappi Scroll sincronizado",
               actionTap: () {
                 onButtonTap(RappiScrollSyncPage());
+              },
+            ),
+            MyMenuButton(
+              title: "Bank and Finance",
+              actionTap: () {
+                onButtonTap(MainBankFinancePage());
               },
             ),
           ],
