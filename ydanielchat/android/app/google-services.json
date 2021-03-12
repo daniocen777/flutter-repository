@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "720751902288",
+    "project_id": "ydani-chat",
+    "storage_bucket": "ydani-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720751902288:android:5a2f358d25fef0bd631b55",
+        "android_client_info": {
+          "package_name": "com.example.ydanielchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720751902288-ncjhvnfflarjgh010n0l6tjopr4n9thq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ydanielchat",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "720751902288-69m8rqgf30d2pdc8tek97papaggd1bj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUFl2epzEQPSbrUAqwDr8Qe3LYrUT6g_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720751902288-69m8rqgf30d2pdc8tek97papaggd1bj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

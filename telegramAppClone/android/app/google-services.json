@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "192718153032",
+    "project_id": "telegram-clone-c9fbd",
+    "storage_bucket": "telegram-clone-c9fbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192718153032:android:3b8d49bb8ac3c6dc0dbf7d",
+        "android_client_info": {
+          "package_name": "com.muhammadali.telegramchatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192718153032-9l0jfq1dtbnjo9etuu851nnenbab3b5n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.muhammadali.telegramchatapp",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "192718153032-hgpm4je8l5pmveq2a9s6g3jdcllit0al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqqIyeOw803vk8qkGxqiLKIm23EY8Ix84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192718153032-hgpm4je8l5pmveq2a9s6g3jdcllit0al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

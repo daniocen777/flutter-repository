@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "114003661783",
+    "project_id": "chatprivado-b3ce8",
+    "storage_bucket": "chatprivado-b3ce8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114003661783:android:8c862d52309f7cb815f192",
+        "android_client_info": {
+          "package_name": "com.example.chatprivado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114003661783-am6r6qnfg2pfvfi5fqsmcvsqu0fuan1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatprivado",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "114003661783-v2uclpdo58ba21o4rbi818u8jtcn29t3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe85AR_VKZFbenkaHH5Uxe5SGMaI4tnPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114003661783-v2uclpdo58ba21o4rbi818u8jtcn29t3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
