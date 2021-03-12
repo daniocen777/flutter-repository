@@ -1,3 +1,4 @@
+import 'package:Whatsappclone/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() { 
+    super.initState();
+    final  notificationsService = NotificationsService();
+    notificationsService.initNotifications();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
