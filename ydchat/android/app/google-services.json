@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "196980007759",
+    "project_id": "y-d-chat",
+    "storage_bucket": "y-d-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196980007759:android:eccd82297a1318843e5b3a",
+        "android_client_info": {
+          "package_name": "com.example.ydchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196980007759-9as3nq0qaksh3up9q9eejvrebsgfrt4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ydchat",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "196980007759-eihcog0ruu9jn9q6br77n5mt6sr5mftm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcLD_m8hi_Jj4huTzUR9ggnQoP87igRF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196980007759-eihcog0ruu9jn9q6br77n5mt6sr5mftm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
