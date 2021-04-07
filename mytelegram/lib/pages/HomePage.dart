@@ -60,10 +60,10 @@ class HomeScreenState extends State<HomeScreen> {
     }
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification notification = message.notification!;
-      if (notification.body != null) {
-        Fluttertoast.showToast(msg: 'Tienes un Nuevo mensaje');
-      }
+      /* RemoteNotification notification = message.notification!; */
+      /* if (notification.body != null) {
+        Fluttertoast.showToast(msg: 'Tienes un Nuevo mensaje *********');
+      } */
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {

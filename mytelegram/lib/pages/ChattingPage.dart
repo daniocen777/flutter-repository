@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:intl/intl.dart';
+import 'package:mytelegram/utils/encrypt_decrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -215,6 +216,8 @@ class ChatScreenState extends State<ChatScreen> {
 
   Widget createItem(int index, QueryDocumentSnapshot document) {
     /* Mis mensajes => derecha */
+    MyEncripter myEncripter = MyEncripter();
+    final String messageDecrypt = myEncripter.decryptAES(document['content']);
     if (document['idFrom'] == this._id) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -229,7 +232,7 @@ class ChatScreenState extends State<ChatScreen> {
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(20.0)),
-                  child: Text(document['content']!,
+                  child: Text(messageDecrypt,
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w500)),
                 )
@@ -243,7 +246,7 @@ class ChatScreenState extends State<ChatScreen> {
                           child: Container(
                             padding: EdgeInsets.all(20.0),
                             child: ExtendedImage.network(
-                              document['content']!,
+                              messageDecrypt,
                               width: 150.0,
                               height: 150.0,
                               cache: true,
@@ -260,7 +263,7 @@ class ChatScreenState extends State<ChatScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      FullPhoto(url: document['content']!)));
+                                      FullPhoto(url: messageDecrypt)));
                         },
                       ),
                     )
@@ -269,7 +272,7 @@ class ChatScreenState extends State<ChatScreen> {
                           bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                           right: 10.0),
                       child: Image.asset(
-                        'assets/images/${document["content"]}.gif',
+                        'assets/images/$messageDecrypt.gif',
                         width: 100.0,
                         height: 100.0,
                         fit: BoxFit.cover,
@@ -290,6 +293,7 @@ class ChatScreenState extends State<ChatScreen> {
                 this.isLastMessageLeft(index)
                     ? Material(
                         child: Container(
+                          padding: EdgeInsets.only(right: 10.0),
                           child: ExtendedImage.network(
                             this.receiverAvatar!,
                             width: 35.0,
@@ -314,7 +318,7 @@ class ChatScreenState extends State<ChatScreen> {
                         decoration: BoxDecoration(
                             color: thirdColor,
                             borderRadius: BorderRadius.circular(20.0)),
-                        child: Text(document['content']!,
+                        child: Text(messageDecrypt,
                             style: TextStyle(
                                 color: Colors.black87,
                                 fontWeight: FontWeight.w500)),
@@ -326,7 +330,7 @@ class ChatScreenState extends State<ChatScreen> {
                                 child: Container(
                                   padding: EdgeInsets.all(20.0),
                                   child: ExtendedImage.network(
-                                    document['content']!,
+                                    messageDecrypt,
                                     width: 150.0,
                                     height: 150.0,
                                     cache: true,
@@ -343,8 +347,7 @@ class ChatScreenState extends State<ChatScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            FullPhoto(
-                                                url: document['content']!)));
+                                            FullPhoto(url: messageDecrypt)));
                               },
                             ),
                           )
@@ -353,7 +356,7 @@ class ChatScreenState extends State<ChatScreen> {
                                 bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                                 right: 10.0),
                             child: Image.asset(
-                              'assets/images/${document["content"]}.gif',
+                              'assets/images/$messageDecrypt.gif',
                               width: 100.0,
                               height: 100.0,
                               fit: BoxFit.cover,
@@ -582,6 +585,10 @@ class ChatScreenState extends State<ChatScreen> {
        1 => imagen
        2 => Emoji
      */
+
+    MyEncripter myEncripter = MyEncripter();
+
+    final messageEncrypt = myEncripter.encryptAES(message);
     if (message != "") {
       this._textEditingController.clear();
       DocumentReference messagesReference = FirebaseFirestore.instance
@@ -595,7 +602,7 @@ class ChatScreenState extends State<ChatScreen> {
           'idFrom': this._id,
           'idTo': this.receiverId,
           'timestamp': DateTime.now().microsecondsSinceEpoch.toString(),
-          'content': message,
+          'content': messageEncrypt,
           'type': type
         });
       });
