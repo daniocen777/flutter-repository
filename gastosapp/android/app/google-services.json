@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "760893763377",
+    "project_id": "gastosapp-d5df5",
+    "storage_bucket": "gastosapp-d5df5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760893763377:android:fd69fac1c49f4faff30a10",
+        "android_client_info": {
+          "package_name": "com.danicode.gastosapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760893763377-vfrm9ejs1hkimh80a9995a8h9qfmm0jn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.danicode.gastosapp",
+            "certificate_hash": "45e3a7213195ceac71a1e883ab3ef651443e400e"
+          }
+        },
+        {
+          "client_id": "760893763377-eo1mdf6h0q5r852jplkkb48lldi4ffj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnAEN2fm2g40yhUAO0Tpuk65TCgC6HxEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760893763377-eo1mdf6h0q5r852jplkkb48lldi4ffj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
