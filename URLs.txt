@@ -20,6 +20,14 @@ https://colorsupplyyy.com/app
 Diseños:
 https://dribbble.com/
 https://www.sketchappsources.com/
+https://www.uplabs.com/
+
+Guía de diseño:
+developer.apple.com
+https://developer.apple.com/design/human-interface-guidelines/ios/overview/themes/
+
+Generador de ícono para splash:
+https://romannurik.github.io/AndroidAssetStudio/icons-generic.html#source.type=clipart&source.clipart=ac_unit&source.space.trim=1&source.space.pad=0&size=32&padding=8&color=rgba(0%2C%200%2C%200%2C%200.54)&name=ic_ac_unit
 
 key-256
 keytool -list -v -alias androiddebugkey -keystore C:/Users/DANIEL/.android/debug.keystore
