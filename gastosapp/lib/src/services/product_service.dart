@@ -8,7 +8,7 @@ class ProductService {
       FirebaseFirestore.instance.collection('products');
 
   Future<List<Product>> getProducts() async {
-    QuerySnapshot productsSnapshot = await products.get();
+    QuerySnapshot productsSnapshot = await products.orderBy('name').get();
     List<Product> productsList = [];
 
     productsSnapshot.docs.forEach((QueryDocumentSnapshot element) {
@@ -17,5 +17,16 @@ class ProductService {
     });
 
     return productsList;
+  }
+
+  Future<bool> addProduct(Product product) async {
+    bool ok = false;
+    final productToSend = json.decode(productToJson(product));
+
+    products.add(productToSend).then((DocumentReference doc) {
+      ok = true;
+    }).catchError((onError) {});
+
+    return ok;
   }
 }

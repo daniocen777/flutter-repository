@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gastosapp/src/pages/add_product_page.dart';
 import 'package:gastosapp/src/pages/home_tabs/record_tab.dart';
-import 'package:gastosapp/src/services/product_service.dart';
 import 'package:gastosapp/src/widgets/appbar_widget.dart';
 
 import '../blocs/master/master_bloc.dart';
@@ -26,23 +26,25 @@ class _HomePageState extends State<HomePage> {
   final _menu = <BottomMenuItem>[
     BottomMenuItem(
         iconPath: "assets/icons/products.svg",
-        label: "Home",
+        label: "Productos",
         content: ProductsTab()),
     BottomMenuItem(
         iconPath: "assets/icons/money.svg",
-        label: "More",
+        label: "A Pagar",
         content: PaymentsTab()),
     BottomMenuItem(
         iconPath: "assets/icons/payday.svg",
-        label: "More",
+        label: "Acumulado",
         content: RecordTab()),
   ];
 
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<MasterBloc>(context);
-    final _productService = ProductService();
-    _productService.getProducts();
+
+    void _addProduct() {
+      Navigator.pushNamed(context, AddProductPage.routename);
+    }
 
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -67,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.black,
                 ),
                 backgroundColor: Colors.amber,
-                onPressed: () => print('NUEVO PRODUCTO'));
+                onPressed: _addProduct);
           }
 
           return Container(

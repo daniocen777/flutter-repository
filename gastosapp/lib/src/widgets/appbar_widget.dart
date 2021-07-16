@@ -31,14 +31,14 @@ class MyAppBar extends StatelessWidget {
               maxLines: 1,
               style: TextStyle(
                 fontSize: 20.0,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
           this.price != null
               ? Padding(
                   padding: const EdgeInsets.only(right: 20.0),
-                  child: Text('S/${this.price.toString()}',
+                  child: Text('S/ ${this.price.toString()}',
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.w700)),
                 )

@@ -12,7 +12,6 @@ class ProductsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /* final Responsive _responsive = Responsive.of(context); */
-    /* final _productBloc = BlocProvider.of<ProductBloc>(context); */
 
     return BlocBuilder<ProductBloc, ProductState>(
       builder: (BuildContext context, state) {
@@ -23,26 +22,21 @@ class ProductsTab extends StatelessWidget {
               children: <Widget>[
                 WebsafeSvg.asset(
                   'assets/icons/box.svg',
-                  width: 60.0,
+                  width: 40.0,
                 ),
                 SizedBox(height: 10.0),
-                Text('No hay video para mostrar')
+                Text('No hay productos para mostrar')
               ],
             ),
           );
         }
-        return ListView.separated(
+        return ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: state.products.length,
-            separatorBuilder: (BuildContext context, int index) => Container(
-                  height: 2.0,
-                  color: Colors.grey[200],
-                ),
             itemBuilder: (BuildContext context, int index) {
               final product = state.products[index];
               return ProductCard(
-                name: product.name!,
-                price: product.price,
+                product: product,
               );
             });
       },
