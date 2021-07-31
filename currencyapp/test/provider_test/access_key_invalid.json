@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": 101,
+    "info": "No API Key was specified or an invalid API Key was specified."
+  }
+}

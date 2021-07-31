@@ -1,0 +1,44 @@
+name: uiuxapp
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  provider: ^5.0.0
+  google_fonts: ^2.0.0
+  extended_image: ^4.0.0
+  flutter_svg: ^0.22.0
+  dots_indicator: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/pages/onboard/slider_1.svg
+    - assets/pages/onboard/slider_2.svg
+    - assets/pages/onboard/slider_3.svg
+    - assets/pages/welcome/mobil.svg
+    - assets/pages/welcome/google.svg
+    - assets/pages/welcome/facebook.svg
+    - assets/pages/welcome/apple.svg
+    - assets/pages/login/login.svg
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
