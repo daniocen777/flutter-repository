@@ -4,7 +4,7 @@ import 'package:pages_samples/bank_finance/utils/colors.dart';
 import 'package:pages_samples/bank_finance/utils/responsive.dart';
 
 class MainBankFinancePage extends StatelessWidget {
-  const MainBankFinancePage({Key key}) : super(key: key);
+  const MainBankFinancePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

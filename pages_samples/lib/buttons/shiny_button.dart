@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 
 class MainShinyButtons extends StatelessWidget {
-  const MainShinyButtons({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +25,7 @@ class MainShinyButtons extends StatelessWidget {
             ),
             _ShinyButton(
               child: Text('Botón azul', style: TextStyle(color: Colors.white)),
-              color: Colors.indigo[900],
+              color: Colors.indigo[900]!,
               onTap: () => print('Shiny Button RED'),
             )
           ],
@@ -39,10 +37,10 @@ class MainShinyButtons extends StatelessWidget {
 
 class _ShinyButton extends StatefulWidget {
   final Widget child;
-  final Color color;
-  final VoidCallback onTap;
+  final Color? color;
+  final VoidCallback? onTap;
 
-  _ShinyButton({Key key, @required this.child, this.color, this.onTap})
+  _ShinyButton({Key? key, required this.child, this.color, this.onTap})
       : super(key: key);
 
   @override
@@ -51,7 +49,7 @@ class _ShinyButton extends StatefulWidget {
 
 class __ShinyButtonState extends State<_ShinyButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -70,32 +68,29 @@ class __ShinyButtonState extends State<_ShinyButton>
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onTap,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (BuildContext context, Widget child) {
-          return Container(
-            padding: EdgeInsets.all(10.0),
-            alignment: Alignment.center,
-            child: widget.child,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                  widget.color,
-                  Colors.white,
-                  widget.color,
-                ],
-                    stops: [
-                  0.0,
-                  // El valor del medio es el que debe cambiar para realizar el efecto
-                  _controller.value,
-                  1.0
-                ])),
-          );
-        },
-      ),
-    );
+        onTap: widget.onTap,
+        child: AnimatedBuilder(
+            animation: _controller,
+            builder: (BuildContext context, Widget? child) {
+              return Container(
+                  padding: EdgeInsets.all(10.0),
+                  alignment: Alignment.center,
+                  child: widget.child,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                        widget.color!,
+                        Colors.white,
+                        widget.color!
+                      ],
+                          stops: [
+                        0.0,
+                        // El valor del medio es el que debe cambiar para realizar el efecto
+                        _controller.value,
+                        1.0
+                      ])));
+            }));
   }
 }

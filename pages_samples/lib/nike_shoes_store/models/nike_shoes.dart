@@ -1,10 +1,10 @@
 class NikeShoes {
-  final String model;
-  final double oldPrice;
-  final double currentPrice;
-  final List<String> images;
-  final int modelNumber;
-  final int color;
+  final String? model;
+  final double? oldPrice;
+  final double? currentPrice;
+  final List<String>? images;
+  final int? modelNumber;
+  final int? color;
 
   NikeShoes(
       {this.model,
@@ -63,5 +63,5 @@ final shoes = <NikeShoes>[
         'assets/shoes/nike1.png',
       ],
       modelNumber: 14,
-      color: 0xFFFEEFEF),
+      color: 0xFFFEEFEF)
 ];

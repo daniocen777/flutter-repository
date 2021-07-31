@@ -1,7 +1,7 @@
 import 'package:pages_samples/rappi_scroll_sync/models/rappi_category.dart';
 import 'package:pages_samples/rappi_scroll_sync/models/rappi_product.dart';
 
-const RAPPI_CATEGORIES = [
+final List<RappiCategory> RAPPI_CATEGORIES = [
   RappiCategory(name: 'Order Again', products: [
     RappiProduct(
         name: 'Burger',

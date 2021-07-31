@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:meta/meta.dart';
 import 'dart:math' as math;
 
 class Responsive {
@@ -8,7 +7,7 @@ class Responsive {
   final double inch; // Diagonal
 
   Responsive(
-      {@required this.width, @required this.height, @required this.inch});
+      {required this.width, required this.height, required this.inch});
 
   factory Responsive.fromSize(Size size) {
     final inch = math.sqrt(math.pow(size.width, 2) + math.pow(size.height, 2));

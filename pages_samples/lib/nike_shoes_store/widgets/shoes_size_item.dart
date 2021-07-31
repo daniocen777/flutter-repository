@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ShoesSizeItem extends StatelessWidget {
-  final String text;
-  const ShoesSizeItem({Key key, this.text}) : super(key: key);
+  final String? text;
+  const ShoesSizeItem({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

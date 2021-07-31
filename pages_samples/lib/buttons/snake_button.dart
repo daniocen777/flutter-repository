@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 class MainSnakeButtons extends StatelessWidget {
-  const MainSnakeButtons({Key key}) : super(key: key);
+  const MainSnakeButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +44,15 @@ class MainSnakeButtons extends StatelessWidget {
 }
 
 class _SnakeButton extends StatefulWidget {
-  final Widget child;
-  final Duration duration;
+  final Widget? child;
+  final Duration? duration;
   final Color snakeColor;
   final Color borderColor;
   final double borderWidth;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   _SnakeButton(
-      {Key key,
+      {Key? key,
       this.child,
       this.duration,
       this.snakeColor = Colors.purple,
@@ -67,7 +67,7 @@ class _SnakeButton extends StatefulWidget {
 
 class __SnakeButtonState extends State<_SnakeButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -106,12 +106,12 @@ class __SnakeButtonState extends State<_SnakeButton>
 /* Clase para custom Painter */
 class _SnakePainter extends CustomPainter {
   final Animation animation;
-  final Color snakeColor;
-  final Color borderColor;
-  final double borderWidth;
+  final Color? snakeColor;
+  final Color? borderColor;
+  final double? borderWidth;
 
   _SnakePainter({
-    @required this.animation,
+    required this.animation,
     this.snakeColor,
     this.borderColor,
     this.borderWidth,
@@ -124,22 +124,22 @@ class _SnakePainter extends CustomPainter {
 
     final paint = Paint()
       ..shader = SweepGradient(
-              colors: [snakeColor, Colors.transparent],
+              colors: [snakeColor!, Colors.transparent],
               stops: [0.6, 1.0],
               startAngle: 0.0,
               endAngle: vector.radians(80),
               transform:
-                  GradientRotation(vector.radians(360 * animation.value)))
+                  GradientRotation(vector.radians(360.0 * animation.value)))
           .createShader(rect);
 
     final path = Path.combine(PathOperation.xor, Path()..addRect(rect),
-        Path()..addRect(rect.deflate(borderWidth)));
+        Path()..addRect(rect.deflate(borderWidth!)));
     // Borde el botón
     canvas.drawRect(
-        rect.deflate(borderWidth / 2),
+        rect.deflate(borderWidth! / 2),
         Paint()
-          ..color = borderColor
-          ..strokeWidth = borderWidth
+          ..color = borderColor!
+          ..strokeWidth = borderWidth!
           ..style = PaintingStyle.stroke);
 
     canvas.drawPath(path, paint);
@@ -147,7 +147,6 @@ class _SnakePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     throw UnimplementedError();
   }
 }

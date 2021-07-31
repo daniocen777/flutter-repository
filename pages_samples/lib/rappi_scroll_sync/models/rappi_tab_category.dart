@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:pages_samples/rappi_scroll_sync/models/rappi_category.dart';
 
 class RappiTabCategory {
@@ -14,8 +13,8 @@ class RappiTabCategory {
       offsetTo: offsetTo);
 
   const RappiTabCategory(
-      {@required this.category,
-      @required this.selected,
-      @required this.offsetFrom,
-      @required this.offsetTo});
+      {required this.category,
+      required this.selected,
+      required this.offsetFrom,
+      required this.offsetTo});
 }

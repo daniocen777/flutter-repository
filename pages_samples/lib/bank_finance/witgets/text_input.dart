@@ -6,11 +6,11 @@ class TextInput extends StatelessWidget {
   final String initialValue;
   final String hintText;
   final String labelText;
-  final Function(String) onFieldSubmitted;
-  final FocusNode focusNode;
+  final Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   const TextInput(
-      {Key key,
+      {Key? key,
       this.onFieldSubmitted,
       this.initialValue = '',
       this.hintText = '',

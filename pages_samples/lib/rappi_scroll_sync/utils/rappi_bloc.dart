@@ -6,7 +6,7 @@ import 'package:pages_samples/rappi_scroll_sync/models/rappi_tab_category.dart';
 class RappiBloc with ChangeNotifier {
   List<RappiTabCategory> tabs = [];
   List<RappiItem> items = []; // categoría y productos
-  TabController tabController;
+  TabController? tabController;
   ScrollController scrollController = ScrollController();
   bool _listen = true;
 
@@ -52,7 +52,7 @@ class RappiBloc with ChangeNotifier {
             (scrollController.offset <= tab.offsetTo) &&
             (!tab.selected)) {
           onCategorySelected(i, animatedRequired: false);
-          tabController.animateTo(i);
+          tabController!.animateTo(i);
           break;
         }
       }
@@ -80,7 +80,7 @@ class RappiBloc with ChangeNotifier {
   @override
   void dispose() {
     scrollController.dispose();
-    tabController.dispose();
+    tabController?.dispose();
     scrollController.removeListener(_onScrollListener);
     super.dispose();
   }
