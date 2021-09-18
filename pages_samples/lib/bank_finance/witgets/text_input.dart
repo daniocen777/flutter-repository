@@ -7,6 +7,8 @@ class TextInput extends StatelessWidget {
   final String hintText;
   final String labelText;
   final Function(String)? onFieldSubmitted;
+  final Widget? suffix;
+  final bool filled;
   final FocusNode? focusNode;
 
   const TextInput(
@@ -16,28 +18,33 @@ class TextInput extends StatelessWidget {
       this.hintText = '',
       this.labelText = '',
       this.focusNode,
+      this.suffix,
+      this.filled = false,
       this.obscureText = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      obscureText: this.obscureText,
-      initialValue: this.initialValue,
-      cursorColor: primaryColor,
-      keyboardAppearance: Brightness.light,
-      focusNode: this.focusNode,
-      decoration: InputDecoration(
-          hoverColor: primaryColor,
-          focusColor: primaryColor,
-          fillColor: primaryColor,
+    return Container(
+      height: 65.00,
+      child: TextFormField(
+        obscureText: this.obscureText,
+        initialValue: this.initialValue,
+        cursorColor: primaryColor,
+        focusNode: this.focusNode,
+        decoration: InputDecoration(
+          fillColor: primaryColor.withOpacity(0.2),
+          filled: this.filled,
           hintText: this.hintText,
           labelText: this.labelText,
+          suffix: this.suffix,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          )),
-      textInputAction: TextInputAction.send,
-      onFieldSubmitted: this.onFieldSubmitted,
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        textInputAction: TextInputAction.send,
+        onFieldSubmitted: this.onFieldSubmitted,
+      ),
     );
   }
 }
