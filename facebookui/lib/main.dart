@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './pages/home_page.dart';
 import './config/palette.dart';
 
-/* 47 */
+import '../pages/pages.dart';
+
+/* 1:20 */
 
 void main() => runApp(MyApp());
 
@@ -17,6 +18,6 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             scaffoldBackgroundColor: Palette.scaffold),
-        home: HomePage());
+        home: NavPage());
   }
 }

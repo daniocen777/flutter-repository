@@ -1,3 +1,4 @@
+import 'package:facebookui/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -37,7 +38,12 @@ class HomePage extends StatelessWidget {
       SliverPadding(
           padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
           sliver: SliverToBoxAdapter(
-              child: Stories(currentUser: currentUser, stories: stories)))
+              child: Stories(currentUser: currentUser, stories: stories))),
+      SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        final Post post = posts[index];
+        return PostContainer(post: post);
+      }, childCount: posts.length))
     ]));
   }
 }
