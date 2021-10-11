@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:web_design/widgets/small_screen.dart';
 
-import '../helpers/responsive.dart';
-import '../widgets/largue_screen.dart';
+import '../layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,9 +22,6 @@ class MyApp extends StatelessWidget {
               TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
             }),
             primaryColor: Colors.blue),
-        home: ResponsiveWidwet(
-          largueScreen: LargueScreen(),
-          smallScreen: SmallScreen(),
-        ));
+        home: SiteLayout());
   }
 }
