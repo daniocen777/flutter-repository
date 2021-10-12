@@ -25,7 +25,7 @@ class TopBar extends StatelessWidget {
         elevation: 0.0,
         title: Row(children: [
           Visibility(
-              child: CustomerText(
+              child: CustomText(
             text: 'Dashboard',
             color: lightGrey,
             size: 20.0,
@@ -57,7 +57,7 @@ class TopBar extends StatelessWidget {
           ),
           Container(width: 1.0, height: 22.0, color: lightGrey),
           const SizedBox(width: 24.0),
-          CustomerText(text: 'Danicode', color: lightGrey),
+          CustomText(text: 'Danicode', color: lightGrey),
           const SizedBox(width: 16.0),
           Container(
             decoration: BoxDecoration(
@@ -73,6 +73,6 @@ class TopBar extends StatelessWidget {
           )
         ]),
         iconTheme: IconThemeData(color: dark),
-        backgroundColor: Colors.transparent);
+        backgroundColor: light);
   }
 }

@@ -1,0 +1,11 @@
+const OVERVIEW_PAGE_ROUTE = 'Overview';
+const DRIVERS_PAGE_ROUTE = 'Drivers';
+const CLIENTS_PAGE_ROUTE = 'Clientes';
+const AUTHENTICATION_PAGE_ROUTE = 'Authentication';
+
+List sideMenuItem = [
+  OVERVIEW_PAGE_ROUTE,
+  DRIVERS_PAGE_ROUTE,
+  CLIENTS_PAGE_ROUTE,
+  AUTHENTICATION_PAGE_ROUTE
+];

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web_design/controllers/menu_controller.dart';
 
 import '../layout.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  Get.put(MenuController());
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

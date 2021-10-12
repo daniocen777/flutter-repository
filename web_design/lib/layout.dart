@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_design/helpers/responsive.dart';
+import 'package:web_design/widgets/side_menu.dart';
 import 'package:web_design/widgets/small_screen.dart';
 import 'package:web_design/widgets/top_bar.dart';
 
@@ -17,7 +18,7 @@ class SiteLayout extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(50.0), // here the desired height
           child: TopBar(scaffoldKey: scaffoldKey)),
-      drawer: Drawer(),
+      drawer: Drawer(child: SideMenu()),
       body: ResponsiveWidwet(
         largueScreen: LargueScreen(),
         smallScreen: SmallScreen(),
