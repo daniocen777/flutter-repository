@@ -1,10 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:authapp/app/domain/repositories/authentication_repository.dart';
+import 'package:authapp/app/ui/routes/routes.dart';
 
-class SplashController {
+/* extender de SimpleNotifier para notificar los cambios */
+class SplashController extends SimpleNotifier {
   final _authRepository = Get.i.find<AuthenticationRepository>();
+
+  String? _routeName;
+  String? get routeName => _routeName;
 
   SplashController() {
     _init();
@@ -12,11 +17,14 @@ class SplashController {
 
   void _init() async {
     final User? user = await _authRepository.user;
-    if (user != null) {
-      // Se tiene sesión activa
-      print("sesión activa");
-    } else {
-      print("sesión inactiva");
-    }
+    _routeName = user != null ? Routes.home : Routes.login;
+    // Notificar el cambio de ruta
+    notify();
   }
+
+  /* Liberar recursos */
+/*   @override
+  void dispose() {
+    super.dispose();
+  } */
 }
