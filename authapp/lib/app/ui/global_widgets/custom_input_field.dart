@@ -35,6 +35,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
     return FormField<String>(
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      initialValue: '',
       builder: (FormFieldState<String> state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
