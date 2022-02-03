@@ -14,8 +14,21 @@ class SignUpData {
 }
 
 class SignUpResponse {
-  final String? error;
+  final SignUpError? error;
   final User? user;
 
   SignUpResponse(this.error, this.user);
 }
+
+SignUpError parseStringToSignUpError(String text) {
+  switch (text) {
+    case "email-already-in-use":
+      return SignUpError.emailAlreadyInUse;
+    case "weak-password":
+      return SignUpError.weakPassword;
+    default:
+      return SignUpError.unknown;
+  }
+}
+
+enum SignUpError { emailAlreadyInUse, weakPassword, unknown }
