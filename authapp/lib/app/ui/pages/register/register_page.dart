@@ -39,8 +39,7 @@ class RegisterPage extends StatelessWidget {
                     CustomInputField(
                       label: 'Nombre',
                       validator: (text) {
-                        if (text == null) return 'Nombre inválido';
-                        return isValidName(text) ? null : 'Nombre inválido';
+                        return isValidName(text!) ? null : 'Nombre inválido';
                       },
                       onChanged: controller.onNameChanged,
                     ),
@@ -48,8 +47,7 @@ class RegisterPage extends StatelessWidget {
                     CustomInputField(
                       label: 'Apellido',
                       validator: (text) {
-                        if (text == null) return 'Apellido inválido';
-                        return isValidName(text) ? null : 'Apellido inválido';
+                        return isValidName(text!) ? null : 'Apellido inválido';
                       },
                       onChanged: controller.onlastNameChanged,
                     ),
@@ -58,8 +56,7 @@ class RegisterPage extends StatelessWidget {
                       label: 'Email',
                       inputType: TextInputType.emailAddress,
                       validator: (text) {
-                        if (text == null) return 'Correo inválido';
-                        return isValidEmail(text) ? null : 'Correo inválido';
+                        return isValidEmail(text!) ? null : 'Correo inválido';
                       },
                       onChanged: controller.onEmailChanged,
                     ),
@@ -68,8 +65,7 @@ class RegisterPage extends StatelessWidget {
                       label: 'Password',
                       isPassword: true,
                       validator: (text) {
-                        if (text == null) return 'Contraseña no debe ser nulo';
-                        if (text.trim().length >= 6) {
+                        if (text!.trim().length >= 6) {
                           return null;
                         }
                         return 'Contraseña con al menos 5 caracteres';
@@ -88,10 +84,7 @@ class RegisterPage extends StatelessWidget {
                           label: 'Verification Password',
                           isPassword: true,
                           validator: (text) {
-                            if (text == null) {
-                              return 'Contraseña no debe ser nulo';
-                            }
-                            if (text.trim().length >= 6) {
+                            if (text!.trim().length >= 6) {
                               return null;
                             }
                             if (controller.state.password != text) {
