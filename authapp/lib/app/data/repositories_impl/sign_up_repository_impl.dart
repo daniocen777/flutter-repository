@@ -17,7 +17,7 @@ class SignUpRepositoryImpl implements SignUpRepository {
           .updateDisplayName('${data.name} ${data.lastname}');
       return SignUpResponse(null, userCredential.user!);
     } on FirebaseAuthException catch (e) {
-      return SignUpResponse(e.code, null);
+      return SignUpResponse(parseStringToSignUpError(e.code), null);
     }
   }
 }
