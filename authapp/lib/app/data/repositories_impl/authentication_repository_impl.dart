@@ -14,7 +14,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  // TODO: implement user
   Future<User?> get user async {
     await _completer.future;
     return _user;
@@ -27,5 +26,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       }
       _user = user;
     });
+  }
+
+  @override
+  Future<void> signOut() {
+    return _auth.signOut();
   }
 }
