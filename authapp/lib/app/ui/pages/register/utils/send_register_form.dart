@@ -1,8 +1,9 @@
-import 'package:authapp/app/domain/inputs/sign_up.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:authapp/app/domain/response/sign_up_response.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/dialogs.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
 import 'package:authapp/app/ui/routes/routes.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:flutter_meedu/router.dart' as router;
 
@@ -23,6 +24,9 @@ Future<void> sendRegisterForm(BuildContext context) async {
           break;
         case SignUpError.weakPassword:
           content = "Error de validación de contraseña";
+          break;
+        case SignUpError.networkRequestFailed:
+          content = "Error de conexión";
           break;
         default:
           content = "Error inesperado";

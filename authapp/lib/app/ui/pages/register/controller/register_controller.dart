@@ -1,3 +1,4 @@
+import 'package:authapp/app/domain/response/sign_up_response.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_meedu/meedu.dart';

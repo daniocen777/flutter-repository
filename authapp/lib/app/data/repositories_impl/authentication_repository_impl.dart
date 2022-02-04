@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:authapp/app/domain/response/sign_in_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:authapp/app/domain/repositories/authentication_repository.dart';
@@ -31,5 +32,18 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<void> signOut() {
     return _auth.signOut();
+  }
+
+  @override
+  Future<SignInResponse> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      final userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      final user = userCredential.user!;
+      return SignInResponse(null, user);
+    } on FirebaseAuthException catch (e) {
+      return SignInResponse(stringToSignInError(e.code), null);
+    }
   }
 }
