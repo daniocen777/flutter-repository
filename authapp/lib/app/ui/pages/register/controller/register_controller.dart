@@ -32,21 +32,21 @@ class RegisterController extends StateNotifier<RegisterState> {
 
   void onlastNameChanged(String text) {
     /* Creando una copia del estado original */
-    state = state.copyWith(name: text);
+    state = state.copyWith(lastname: text);
   }
 
   void onEmailChanged(String text) {
     /* Creando una copia del estado original */
-    state = state.copyWith(name: text);
+    state = state.copyWith(email: text);
   }
 
   void onPasswordChanged(String text) {
     /* Creando una copia del estado original */
-    state = state.copyWith(name: text);
+    state = state.copyWith(password: text);
   }
 
   void onVerifyPasswordChanged(String text) {
     /* Creando una copia del estado original */
-    state = state.copyWith(name: text);
+    state = state.copyWith(verifyPassword: text);
   }
 }
