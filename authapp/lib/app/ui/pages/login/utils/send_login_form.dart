@@ -35,6 +35,9 @@ Future<void> sendLoginForm(BuildContext context) async {
         case SignInError.unknown:
           errorMessage = 'Error no identificado';
           break;
+        case SignInError.tooManyRequests:
+          errorMessage = "Muchas peticiones a la vez";
+          break;
         default:
           errorMessage = 'Error desconocido';
           break;
