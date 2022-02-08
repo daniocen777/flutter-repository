@@ -15,6 +15,8 @@ SignUpError parseStringToSignUpError(String text) {
       return SignUpError.weakPassword;
     case 'network-request-failed':
       return SignUpError.networkRequestFailed;
+    case 'too-many-requesta':
+      return SignUpError.tooManyRequests;
     default:
       return SignUpError.unknown;
   }
@@ -24,5 +26,6 @@ enum SignUpError {
   emailAlreadyInUse,
   weakPassword,
   networkRequestFailed,
+  tooManyRequests,
   unknown
 }
