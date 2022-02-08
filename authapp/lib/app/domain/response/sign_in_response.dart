@@ -12,6 +12,7 @@ enum SignInError {
   userDisabled,
   userNotFound,
   wrongPassword,
+  tooManyRequests,
   unknown
 }
 
@@ -25,6 +26,8 @@ SignInError stringToSignInError(String code) {
       return SignInError.wrongPassword;
     case 'network-request-failed':
       return SignInError.networkRequestFailed;
+    case 'too-many-requesta':
+      return SignInError.tooManyRequests;
     default:
       return SignInError.unknown;
   }
