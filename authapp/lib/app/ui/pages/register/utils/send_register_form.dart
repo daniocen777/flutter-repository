@@ -28,6 +28,9 @@ Future<void> sendRegisterForm(BuildContext context) async {
         case SignUpError.networkRequestFailed:
           content = "Error de conexión";
           break;
+        case SignUpError.tooManyRequests:
+          content = "Muchas peticiones a la vez";
+          break;
         default:
           content = "Error inesperado";
       }
