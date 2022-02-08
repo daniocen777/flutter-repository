@@ -59,13 +59,24 @@ class LoginPage extends StatelessWidget {
                           return "Contraseña inválida";
                         },
                       ),
-                      ElevatedButton(
-                          onPressed: () => sendLoginForm(context),
-                          child: const Text('Acceder')),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                              onPressed: () =>
+                                  router.pushNamed(Routes.resetPassword),
+                              child: const Text('¿Olvidó su contraseña?')),
+                          ElevatedButton(
+                              onPressed: () => sendLoginForm(context),
+                              child: const Text('Acceder')),
+                          const SizedBox(width: 20.0),
+                        ],
+                      ),
                       const SizedBox(height: 20.0),
                       ElevatedButton(
                           onPressed: () => router.pushNamed(Routes.register),
-                          child: const Text('Crear Cuenta'))
+                          child: const Text('Crear Cuenta')),
+                      const SizedBox(height: 30.0)
                     ],
                   ),
                 ),
