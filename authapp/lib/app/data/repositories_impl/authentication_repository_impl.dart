@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:authapp/app/domain/response/reset_password_response.dart';
 import 'package:authapp/app/domain/response/sign_in_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -44,6 +45,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return SignInResponse(null, user);
     } on FirebaseAuthException catch (e) {
       return SignInResponse(stringToSignInError(e.code), null);
+    }
+  }
+
+  @override
+  Future<ResetPasswordResponse> sendResetPasswordLink(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return ResetPasswordResponse.ok;
+    } on FirebaseAuthException catch (e) {
+      return stringToResetPasswordResponse(e.code);
     }
   }
 }
