@@ -1,43 +1,33 @@
-import 'package:flutter/cupertino.dart';
+import 'package:authapp/app/ui/pages/home/widwets/home_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/state.dart';
-import 'package:flutter_meedu/router.dart' as router;
+import 'package:flutter_meedu/meedu.dart';
 
-import 'package:authapp/app/ui/global_controllers/session_controller.dart';
-import 'package:authapp/app/ui/routes/routes.dart';
+import 'package:authapp/app/ui/pages/home/home_controller.dart';
+import 'package:authapp/app/ui/pages/home/tabs/home/home_tab.dart';
+import 'package:authapp/app/ui/pages/home/tabs/profile/profile_tab.dart';
+
+final homeProvider = SimpleProvider(
+  (_) => HomeController(),
+);
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            /* Nombre del usuario que está en el estado global.
-            Usar Consumer (meedu state), ya que el nombre puede cambiar */
-            Consumer(
-              builder: (BuildContext context, BuilderRef ref, Widget? child) {
-                // Escuchar cambios en sessionProvider
-                final sessionController = ref.watch(sessionProvider);
-                return Text('${sessionController.user!.displayName}');
-              },
-            ),
-            const Text('Home'),
-            const SizedBox(height: 20.0),
-            CupertinoButton(
-              child: const Text('Cerrar sesión'),
-              onPressed: () async {
-                sessionProvider.read.signOut();
-                router.pushNamedAndRemoveUntil(Routes.login);
-              },
-            )
-          ],
-        ),
-      ),
+    return ProviderListener<HomeController>(
+      provider: homeProvider,
+      builder: (_, controller) {
+        return Scaffold(
+          bottomNavigationBar: HomeTabBar(),
+          body: SafeArea(
+              child: TabBarView(
+                  controller: controller.tabController,
+                  children: const [HomeTab(), ProfileTab()])),
+        );
+      },
     );
   }
 }
