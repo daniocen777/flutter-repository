@@ -1,3 +1,4 @@
+import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/flutter_meedu.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_meedu/router.dart' as router;
 import 'package:authapp/app/ui/pages/splash/splash_controller.dart';
 
 // Para escuchar algún cambio
-final splashProvider = SimpleProvider((_) => SplashController());
+final splashProvider =
+    SimpleProvider((_) => SplashController(sessionProvider.read));
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);

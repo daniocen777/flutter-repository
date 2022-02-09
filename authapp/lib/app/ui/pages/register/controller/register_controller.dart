@@ -1,4 +1,5 @@
 import 'package:authapp/app/domain/response/sign_up_response.dart';
+import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_meedu/meedu.dart';
@@ -10,19 +11,28 @@ import 'package:authapp/app/ui/pages/register/controller/register_state.dart';
 /* Usando StateNorifier (similar a Bloc) */
 // ver: https://flutter.meedu.app/docs/5.x.x/state-management/state-notifier
 class RegisterController extends StateNotifier<RegisterState> {
-  RegisterController() : super(RegisterState.initialState);
+  // Estado de la sesión
+  final SessionController _sessionController;
+  RegisterController(this._sessionController)
+      : super(RegisterState.initialState);
 
   // injectando
   final _signUpRepository = Get.i.find<SignUpRepository>();
   /* Para validar el formulario */
   final GlobalKey<FormState> formKey = GlobalKey();
 
-  Future<SignUpResponse> submit() {
-    return _signUpRepository.register(SignUpData(
+  Future<SignUpResponse> submit() async {
+    final signUpResponse = await _signUpRepository.register(SignUpData(
         name: state.name,
         lastname: state.lastname,
         email: state.email,
         password: state.password));
+
+    if (signUpResponse.error == null) {
+      _sessionController.setUser(signUpResponse.user!);
+    }
+
+    return signUpResponse;
   }
 
   void onNameChanged(String text) {

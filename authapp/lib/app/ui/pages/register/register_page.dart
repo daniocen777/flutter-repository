@@ -1,9 +1,10 @@
-import 'package:authapp/app/ui/pages/register/utils/send_register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/flutter_meedu.dart';
 
+import 'package:authapp/app/ui/global_controllers/session_controller.dart';
+import 'package:authapp/app/ui/pages/register/utils/send_register_form.dart';
 import 'package:authapp/app/ui/pages/register/controller/register_controller.dart';
 import 'package:authapp/app/ui/pages/register/controller/register_state.dart';
 import 'package:authapp/app/ui/global_widgets/custom_input_field.dart';
@@ -12,7 +13,7 @@ import 'package:authapp/app/utils/name_validator.dart';
 
 /* Para el estado */
 final registerProvider = StateProvider<RegisterController, RegisterState>(
-  (_) => RegisterController(),
+  (_) => RegisterController(sessionProvider.read),
 );
 
 class RegisterPage extends StatelessWidget {

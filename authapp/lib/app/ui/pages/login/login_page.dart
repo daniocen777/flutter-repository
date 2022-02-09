@@ -1,3 +1,4 @@
+import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:authapp/app/ui/pages/login/utils/send_login_form.dart';
 import 'package:authapp/app/utils/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ import 'package:authapp/app/ui/routes/routes.dart';
 /* Estado */
 
 final loginProvider = SimpleProvider(
-  (_) => LoginController(),
+  (_) => LoginController(sessionProvider.read),
 );
 
 class LoginPage extends StatelessWidget {
