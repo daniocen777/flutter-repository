@@ -1,5 +1,9 @@
-import 'package:authapp/app/ui/global_controllers/session_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../utils/dark_mode_extension.dart';
+import 'package:authapp/app/ui/global_controllers/session_controller.dart';
+import 'package:authapp/app/ui/global_controllers/theme_controller.dart';
 
 import 'package:flutter_meedu/state.dart';
 
@@ -9,12 +13,14 @@ class ProfileTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    // Escuchar los cambio de la sesión
+    // Escuchar los cambio de la sesión y del tema
     final sessionController = ref.watch(sessionProvider);
+    /* Usar el contexto creado para el tema (no hace falta usar Consumer) */
+    final isThemeDark = context.isThemeDarkMode;
     final user = sessionController.user!;
     final displayName = user.displayName ?? '';
     final letter = displayName.isNotEmpty ? displayName[0] : '';
-    return ListView(      
+    return ListView(
       children: [
         const SizedBox(height: 20.0),
         CircleAvatar(
@@ -41,6 +47,11 @@ class ProfileTab extends ConsumerWidget {
         _LabelButton(
             label: 'Correo verificado',
             value: user.emailVerified ? 'Sí' : 'No'),
+        CupertinoSwitch(
+            value: isThemeDark,
+            onChanged: (_) {
+              themeProvider.read.toggle();
+            })
       ],
     );
   }
@@ -57,9 +68,12 @@ class _LabelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isThemeDark = context.isThemeDarkMode;
+    final iconColor = isThemeDark ? Colors.white30 : Colors.black45;
     return ListTile(
       onTap: onPressed,
-      contentPadding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
       leading: Text(
         label,
         style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14.0),
@@ -67,12 +81,14 @@ class _LabelButton extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min, // para que no ocupe todo el espacio
         children: [
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 14.0)),
+          Text(value,
+              style:
+                  const TextStyle(fontWeight: FontWeight.w300, fontSize: 14.0)),
           const SizedBox(width: 7.0),
           Icon(
             Icons.chevron_right_rounded,
             size: 22.0,
-            color: onPressed != null ? Colors.black45 : Colors.transparent,
+            color: onPressed != null ? iconColor : Colors.transparent,
           )
         ],
       ),

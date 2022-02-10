@@ -1,5 +1,7 @@
-import 'package:authapp/app/ui/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/dark_mode_extension.dart';
+import 'package:authapp/app/ui/pages/home/home_page.dart';
 
 class HomeTabBar extends StatelessWidget {
   HomeTabBar({Key? key}) : super(key: key);
@@ -8,25 +10,27 @@ class HomeTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /* Usar el contexto creado para el tema (no hace falta usar Consumer) */
+    final isThemeDark = context.isThemeDarkMode;
     return SafeArea(
-      top: false,
-      child: TabBar(
-        controller: _homeController.tabController,
-        unselectedLabelColor: Colors.black26,
-        indicator: _CustomIndicator(),
-        labelColor: Colors.blueAccent,
-        tabs: const [
-          Tab(
-              icon: Icon(
-            Icons.home_rounded,
-          )),
-          Tab(
-              icon: Icon(
-            Icons.person_rounded,
-          ))
-        ],
-      ),
-    );
+        top: false,
+        /* Usar Consumer para escuchar el tema y cambiar de color del tabBar */
+        child: TabBar(
+          controller: _homeController.tabController,
+          unselectedLabelColor: isThemeDark ? Colors.white30 : Colors.black26,
+          indicator: _CustomIndicator(),
+          labelColor: Colors.blueAccent,
+          tabs: const [
+            Tab(
+                icon: Icon(
+              Icons.home_rounded,
+            )),
+            Tab(
+                icon: Icon(
+              Icons.person_rounded,
+            ))
+          ],
+        ));
   }
 }
 
