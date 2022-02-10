@@ -1,15 +1,32 @@
+import 'package:authapp/app/ui/global_widgets/dialogs/dialogs.dart';
+import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
+import 'package:authapp/app/ui/global_widgets/dialogs/show_input_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_meedu/state.dart';
 
 import '../../../../utils/dark_mode_extension.dart';
 import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:authapp/app/ui/global_controllers/theme_controller.dart';
 
-import 'package:flutter_meedu/state.dart';
-
 /* Widget que extienda de ConsumerWidget para que se reconstruya al actualizar los datos*/
 class ProfileTab extends ConsumerWidget {
   const ProfileTab({Key? key}) : super(key: key);
+
+  void _updateDisplayName(BuildContext context) async {
+    final sessionController = sessionProvider.read;
+    final value = await showInputDialog(context,
+        initialValue: sessionController.user!.displayName ?? '');
+    if (value != null) {
+      ProgressDialog.show(context);
+      final user = await sessionController.updateDisplayName(value);
+      Navigator.pop(context);
+      if (user == null) {
+        Dialogs.alert(context, title: 'Error', content: 'Error de conexión');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context, ref) {
@@ -42,7 +59,10 @@ class ProfileTab extends ConsumerWidget {
         Center(child: Text(user.email ?? '')),
         const SizedBox(height: 50.0),
         // const Text('Datos del usuario'),
-        _LabelButton(label: 'Nombre', value: displayName, onPressed: () {}),
+        _LabelButton(
+            label: 'Nombre',
+            value: displayName,
+            onPressed: () => _updateDisplayName(context)),
         _LabelButton(label: 'Correo', value: user.email ?? ''),
         _LabelButton(
             label: 'Correo verificado',
