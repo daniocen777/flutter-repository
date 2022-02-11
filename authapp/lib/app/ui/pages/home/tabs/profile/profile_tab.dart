@@ -1,11 +1,14 @@
-import 'package:authapp/app/ui/global_widgets/dialogs/dialogs.dart';
-import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
-import 'package:authapp/app/ui/global_widgets/dialogs/show_input_dialog.dart';
+import 'package:authapp/app/ui/pages/home/tabs/profile/widgets/label_button.dart';
+import 'package:authapp/app/ui/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/state.dart';
+import 'package:flutter_meedu/router.dart' as router;
 
+import 'package:authapp/app/ui/global_widgets/dialogs/dialogs.dart';
+import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
+import 'package:authapp/app/ui/global_widgets/dialogs/show_input_dialog.dart';
 import '../../../../utils/dark_mode_extension.dart';
 import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:authapp/app/ui/global_controllers/theme_controller.dart';
@@ -59,59 +62,39 @@ class ProfileTab extends ConsumerWidget {
         Center(child: Text(user.email ?? '')),
         const SizedBox(height: 50.0),
         // const Text('Datos del usuario'),
-        _LabelButton(
+        LabelButton(
             label: 'Nombre',
             value: displayName,
             onPressed: () => _updateDisplayName(context)),
-        _LabelButton(label: 'Correo', value: user.email ?? ''),
-        _LabelButton(
+        LabelButton(label: 'Correo', value: user.email ?? ''),
+        LabelButton(
             label: 'Correo verificado',
             value: user.emailVerified ? 'Sí' : 'No'),
-        CupertinoSwitch(
-            value: isThemeDark,
-            onChanged: (_) {
-              themeProvider.read.toggle();
-            })
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Modo oscuro'),
+              CupertinoSwitch(
+                  value: isThemeDark,
+                  onChanged: (_) {
+                    themeProvider.read.toggle();
+                  }),
+            ],
+          ),
+        ),
+        const SizedBox(height: 40),
+        LabelButton(
+          label: 'Cerrar sesión',
+          value: '',
+          onPressed: () async {
+            await sessionProvider.read.signOut();
+            router.pushNamedAndRemoveUntil(Routes.login);
+          },
+        ),
       ],
     );
   }
 }
 
-class _LabelButton extends StatelessWidget {
-  final String label;
-  final String value;
-  final VoidCallback? onPressed;
-
-  const _LabelButton(
-      {Key? key, required this.label, required this.value, this.onPressed})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final isThemeDark = context.isThemeDarkMode;
-    final iconColor = isThemeDark ? Colors.white30 : Colors.black45;
-    return ListTile(
-      onTap: onPressed,
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      leading: Text(
-        label,
-        style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14.0),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min, // para que no ocupe todo el espacio
-        children: [
-          Text(value,
-              style:
-                  const TextStyle(fontWeight: FontWeight.w300, fontSize: 14.0)),
-          const SizedBox(width: 7.0),
-          Icon(
-            Icons.chevron_right_rounded,
-            size: 22.0,
-            color: onPressed != null ? iconColor : Colors.transparent,
-          )
-        ],
-      ),
-    );
-  }
-}
