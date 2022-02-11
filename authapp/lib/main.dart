@@ -8,6 +8,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // Creando las instancias
-  injectDependencies();
+  await injectDependencies();
   runApp(const MyApp());
 }
