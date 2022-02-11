@@ -1,14 +1,13 @@
+import 'package:flutter/material.dart';
+
+import 'package:flutter_meedu/flutter_meedu.dart';
+
 import 'package:authapp/app/domain/response/reset_password_response.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/dialogs.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
 import 'package:authapp/app/ui/pages/reset_password/controller/reset_password_controller.dart';
 import 'package:authapp/app/utils/email_validator.dart';
-import 'package:flutter/material.dart';
-
 import 'package:authapp/app/ui/global_widgets/custom_input_field.dart';
-import 'package:flutter_meedu/flutter_meedu.dart';
-
-import 'package:flutter_meedu/meedu.dart';
 
 final resetPasswordProvider = SimpleProvider(
   (_) => ResetPasswordController(),
