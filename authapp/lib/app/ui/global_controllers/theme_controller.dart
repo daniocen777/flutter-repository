@@ -25,7 +25,7 @@ class ThemeController extends SimpleNotifier {
           primarySwatch: MaterialColor(primaryLightColor.value, swatch)),
       appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+              statusBarColor: primaryLightColor,
               systemNavigationBarIconBrightness: Brightness.light)),
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: UnderlineInputBorder(
@@ -41,8 +41,11 @@ class ThemeController extends SimpleNotifier {
     return ThemeData.dark().copyWith(
       scaffoldBackgroundColor: const Color(0xff29434e),
       appBarTheme: const AppBarTheme(
+        backgroundColor: accentDarkColor,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: primaryDarkColor,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.dark,
               systemNavigationBarIconBrightness: Brightness.dark)),
       primaryColorDark: primaryDarkColor,
       textSelectionTheme:

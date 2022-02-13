@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart' show Color;
 
 const primaryDarkColor = Color(0xffffab40);
+const accentDarkColor = Color(0xff412554);
 const primaryLightColor = Color(0xff0091ea);
 
 const Map<int, Color> swatch = {
