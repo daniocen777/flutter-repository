@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
                       ElevatedButton(
                           onPressed: () => router.pushNamed(Routes.register),
                           child: const Text('Crear Cuenta')),
-                      const SizedBox(height: 30.0)
+                      
                     ],
                   ),
                 ),

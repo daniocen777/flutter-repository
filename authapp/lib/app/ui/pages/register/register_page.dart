@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/flutter_meedu.dart';
@@ -96,9 +95,8 @@ class RegisterPage extends StatelessWidget {
                           onChanged: controller.onVerifyPasswordChanged);
                     }),
                     const SizedBox(height: 30.0),
-                    CupertinoButton(
+                    ElevatedButton(
                         child: const Text('Registrar'),
-                        color: Colors.blue,
                         onPressed: () => sendRegisterForm(context))
                   ],
                 ),

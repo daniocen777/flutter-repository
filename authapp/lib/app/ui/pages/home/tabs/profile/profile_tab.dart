@@ -78,6 +78,8 @@ class ProfileTab extends ConsumerWidget {
               const Text('Modo oscuro'),
               CupertinoSwitch(
                   value: isThemeDark,
+                  activeColor:
+                      isThemeDark ? const Color(0xffd81b60) : Colors.blueAccent,
                   onChanged: (_) {
                     themeProvider.read.toggle();
                   }),
@@ -97,4 +99,3 @@ class ProfileTab extends ConsumerWidget {
     );
   }
 }
-
