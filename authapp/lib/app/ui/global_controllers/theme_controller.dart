@@ -1,6 +1,10 @@
-import 'package:authapp/app/domain/repositories/preferences_repository.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_meedu/meedu.dart';
+
+import 'package:authapp/app/domain/repositories/preferences_repository.dart';
+import 'package:flutter/services.dart';
+import 'package:authapp/app/ui/utils/colors.dart';
 
 class ThemeController extends SimpleNotifier {
   late ThemeMode _themeMode;
@@ -13,6 +17,47 @@ class ThemeController extends SimpleNotifier {
 
   ThemeMode get themeMode => _themeMode;
   bool get isThemeDark => _themeMode == ThemeMode.dark;
+  ThemeData get lightTheme {
+    return ThemeData.light().copyWith(
+      primaryColorLight: primaryLightColor,
+      colorScheme: ColorScheme.fromSwatch(
+          brightness: Brightness.light,
+          primarySwatch: MaterialColor(primaryLightColor.value, swatch)),
+      appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              systemNavigationBarIconBrightness: Brightness.light)),
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: primaryLightColor.withOpacity(0.5))),
+        enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.black12)),
+      ),
+    );
+  }
+
+  // Tema personalizado
+  ThemeData get darkTheme {
+    return ThemeData.dark().copyWith(
+      scaffoldBackgroundColor: const Color(0xff29434e),
+      appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: primaryDarkColor,
+              systemNavigationBarIconBrightness: Brightness.dark)),
+      primaryColorDark: primaryDarkColor,
+      textSelectionTheme:
+          const TextSelectionThemeData(cursorColor: primaryDarkColor),
+      colorScheme: ColorScheme.fromSwatch(
+          brightness: Brightness.dark,
+          primarySwatch: MaterialColor(primaryDarkColor.value, swatch)),
+      inputDecorationTheme: const InputDecorationTheme(
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: primaryDarkColor)),
+        enabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white54)),
+      ),
+    );
+  }
 
   void toggle() {
     if (_themeMode == ThemeMode.light) {
