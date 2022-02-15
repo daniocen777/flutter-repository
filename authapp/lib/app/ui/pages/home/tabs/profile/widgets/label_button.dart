@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/dark_mode_extension.dart';
+import 'package:flutter_meedu/screen_utils.dart';
 
 class LabelButton extends StatelessWidget {
   final String label;
@@ -13,7 +13,7 @@ class LabelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isThemeDark = context.isThemeDarkMode;
+    final isThemeDark = context.isDarkMode;
     final iconColor = isThemeDark ? Colors.white30 : Colors.black45;
 
     return MaterialButton(

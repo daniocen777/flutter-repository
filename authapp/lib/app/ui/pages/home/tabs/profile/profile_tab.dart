@@ -1,15 +1,15 @@
-import 'package:authapp/app/ui/pages/home/tabs/profile/widgets/label_button.dart';
-import 'package:authapp/app/ui/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_meedu/state.dart';
 import 'package:flutter_meedu/router.dart' as router;
+import 'package:flutter_meedu/screen_utils.dart';
+import 'package:flutter_meedu/state.dart';
 
+import 'package:authapp/app/ui/pages/home/tabs/profile/widgets/label_button.dart';
+import 'package:authapp/app/ui/routes/routes.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/dialogs.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
 import 'package:authapp/app/ui/global_widgets/dialogs/show_input_dialog.dart';
-import '../../../../utils/dark_mode_extension.dart';
 import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:authapp/app/ui/global_controllers/theme_controller.dart';
 
@@ -36,7 +36,7 @@ class ProfileTab extends ConsumerWidget {
     // Escuchar los cambio de la sesión y del tema
     final sessionController = ref.watch(sessionProvider);
     /* Usar el contexto creado para el tema (no hace falta usar Consumer) */
-    final isThemeDark = context.isThemeDarkMode;
+    final isThemeDark = context.isDarkMode;
     final user = sessionController.user!;
     final displayName = user.displayName ?? '';
     final letter = displayName.isNotEmpty ? displayName[0] : '';

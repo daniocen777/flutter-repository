@@ -17,6 +17,7 @@ class ThemeController extends SimpleNotifier {
 
   ThemeMode get themeMode => _themeMode;
   bool get isThemeDark => _themeMode == ThemeMode.dark;
+
   ThemeData get lightTheme {
     return ThemeData.light().copyWith(
       primaryColorLight: primaryLightColor,
@@ -40,8 +41,9 @@ class ThemeController extends SimpleNotifier {
   ThemeData get darkTheme {
     return ThemeData.dark().copyWith(
       scaffoldBackgroundColor: const Color(0xff29434e),
+      // Usar merge para que tome el tema asignado
       appBarTheme: const AppBarTheme(
-        backgroundColor: accentDarkColor,
+          backgroundColor: accentDarkColor,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: primaryDarkColor,
               statusBarBrightness: Brightness.dark,

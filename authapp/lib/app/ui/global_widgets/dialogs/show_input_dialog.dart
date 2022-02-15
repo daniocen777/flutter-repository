@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/dark_mode_extension.dart';
+import 'package:flutter_meedu/screen_utils.dart';
 
 Future<String?> showInputDialog(BuildContext context,
     {String? title, String? initialValue}) async {
   String value = initialValue ?? '';
-  final isDarkMode = context.isThemeDarkMode;
+  final isDarkMode = context.isDarkMode;
   final result = await showCupertinoDialog<String>(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(

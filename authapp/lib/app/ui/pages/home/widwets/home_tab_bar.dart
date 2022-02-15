@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/dark_mode_extension.dart';
+import 'package:flutter_meedu/screen_utils.dart';
 import 'package:authapp/app/ui/pages/home/home_page.dart';
 
 class HomeTabBar extends StatelessWidget {
@@ -11,7 +11,7 @@ class HomeTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /* Usar el contexto creado para el tema (no hace falta usar Consumer) */
-    final isThemeDark = context.isThemeDarkMode;
+    final isThemeDark = context.isDarkMode;
     final color = isThemeDark ? const Color(0xffd81b60) : Colors.blueAccent;
     return SafeArea(
         top: false,
