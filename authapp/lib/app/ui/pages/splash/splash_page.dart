@@ -1,5 +1,6 @@
 import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_meedu/flutter_meedu.dart';
 import 'package:flutter_meedu/router.dart' as router;
@@ -17,6 +18,16 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderListener<SplashController>(
       provider: splashProvider,
+      // Para que la pantalla sea portrait en smartphones
+      onAfterFirstLayout: (_, __) {
+        if (!context.isTablet) {
+          // Bloquear landscape
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown,
+          ]);
+        }
+      },
       onChange: (_, controller) {
         final routeName = controller.routeName;
         if (routeName != null) {
