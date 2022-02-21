@@ -1,9 +1,10 @@
-import 'package:authapp/app/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-import 'package:authapp/app/ui/pages/login/widgets/login_form.dart';
-
 import 'package:flutter_meedu/flutter_meedu.dart';
+
+import 'package:authapp/app/ui/utils/colors.dart';
+import 'package:authapp/app/utils/responsive.dart';
+import 'package:authapp/app/ui/pages/login/widgets/login_form.dart';
 import 'package:authapp/app/ui/global_controllers/session_controller.dart';
 import 'package:authapp/app/ui/pages/login/controller/login_controller.dart';
 
@@ -16,15 +17,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    print('WIDTH => ${size.width}');
-    print('HEIGHT => ${size.height}');
+    final Responsive _responsive = Responsive.of(context);
     return ProviderListener<LoginController>(
       provider: loginProvider,
       builder: (_, controller) {
         return Scaffold(body: OrientationBuilder(
             builder: (BuildContext context, Orientation orientation) {
-          if (size.width <= 460) {
+          if (_responsive.width <= 450) {
             return LoginForm();
           }
 

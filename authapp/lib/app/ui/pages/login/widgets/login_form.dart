@@ -1,10 +1,10 @@
-import 'package:authapp/app/ui/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/flutter_meedu.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:authapp/app/ui/pages/login/login_page.dart';
 import 'package:authapp/app/ui/pages/login/utils/send_login_form.dart';
 import 'package:authapp/app/utils/email_validator.dart';
 import 'package:authapp/app/ui/global_widgets/custom_input_field.dart';

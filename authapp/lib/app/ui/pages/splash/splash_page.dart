@@ -1,4 +1,5 @@
 import 'package:authapp/app/ui/global_controllers/session_controller.dart';
+import 'package:authapp/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,11 +17,12 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive _responsive = Responsive.of(context);
     return ProviderListener<SplashController>(
       provider: splashProvider,
       // Para que la pantalla sea portrait en smartphones
       onAfterFirstLayout: (_, __) {
-        if (!context.isTablet) {
+        if (_responsive.width < 450) {
           // Bloquear landscape
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
