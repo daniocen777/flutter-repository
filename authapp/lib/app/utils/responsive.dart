@@ -5,8 +5,13 @@ class Responsive {
   final double width;
   final double height;
   final double inch; // Diagonal
+  final double? padding;
 
-  Responsive({required this.width, required this.height, required this.inch});
+  Responsive(
+      {required this.width,
+      required this.height,
+      required this.inch,
+      this.padding});
 
   factory Responsive.fromSize(Size size) {
     final inch = math.sqrt(math.pow(size.width, 2) + math.pow(size.height, 2));
@@ -17,7 +22,11 @@ class Responsive {
     final MediaQueryData data = MediaQuery.of(context);
     final Size size = data.size;
     final inch = math.sqrt(math.pow(size.width, 2) + math.pow(size.height, 2));
-    return Responsive(width: size.width, height: size.height, inch: inch);
+    return Responsive(
+        width: size.width,
+        height: size.height,
+        inch: inch,
+        padding: data.padding.top + data.padding.bottom);
   }
 
   /*  Function(double) => double:

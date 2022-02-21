@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, BuilderRef ref, Widget? child) {
         final themeController = ref.watch(themeProvider); // esuchar los cambios
         return MaterialApp(
+          key: router.appKey,
           debugShowCheckedModeBanner: false,
           navigatorKey: router.navigatorKey,
           title: 'Flutter Auth',
