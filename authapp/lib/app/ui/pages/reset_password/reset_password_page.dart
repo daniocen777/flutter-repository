@@ -1,3 +1,4 @@
+import 'package:authapp/app/ui/global_widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_meedu/flutter_meedu.dart';
@@ -8,6 +9,7 @@ import 'package:authapp/app/ui/global_widgets/dialogs/progress_dialog.dart';
 import 'package:authapp/app/ui/pages/reset_password/controller/reset_password_controller.dart';
 import 'package:authapp/app/utils/email_validator.dart';
 import 'package:authapp/app/ui/global_widgets/custom_input_field.dart';
+import 'package:flutter_svg/svg.dart';
 
 final resetPasswordProvider = SimpleProvider(
   (_) => ResetPasswordController(),
@@ -18,35 +20,58 @@ class ResetPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isThemeDark = context.isDarkMode;
+    final padding = context.mediaQueryPadding;
+    final height = context.height - padding.top - padding.bottom;
+
     return ProviderListener<ResetPasswordController>(
       provider: resetPasswordProvider,
       builder: (_, controller) {
         return Scaffold(
           appBar: AppBar(),
-          body: SafeArea(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: Colors.transparent,
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomInputField(
-                      label: 'Correo',
-                      onChanged: controller.onEmailChanged,
-                      inputType: TextInputType.emailAddress,
+          body: ListView(
+            children: [
+              SizedBox(
+                height: height,
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.transparent,
+                    padding: const EdgeInsets.all(15.0),
+                    child: Align(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 360.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: SvgPicture.asset(
+                                  'assets/images/${isThemeDark ? "dark" : "light"}/password.svg'),
+                            ),
+                            const Text('Ingrese un correo electrónico'),
+                            CustomInputField(
+                              label: 'Correo',
+                              onChanged: controller.onEmailChanged,
+                              inputType: TextInputType.emailAddress,
+                            ),
+                            const SizedBox(height: 20.0),
+                            SizedBox(
+                              width: double.infinity,
+                              child: RoundedButton(
+                                  onPressed: () => _submit(context),
+                                  text: 'Enviar'),
+                            ),
+                            const SizedBox(height: 30.0)
+                          ],
+                        ),
+                      ),
                     ),
-                    ElevatedButton(
-                        onPressed: () => _submit(context),
-                        child: const Text('Enviar')),
-                    const SizedBox(height: 30.0)
-                  ],
+                  ),
                 ),
-              ),
-            ),
+              )
+            ],
           ),
         );
       },

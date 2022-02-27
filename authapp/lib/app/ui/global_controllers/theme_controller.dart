@@ -25,6 +25,7 @@ class ThemeController extends SimpleNotifier {
           brightness: Brightness.light,
           primarySwatch: MaterialColor(primaryLightColor.value, swatch)),
       appBarTheme: const AppBarTheme(
+          elevation: 0.0,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: primaryLightColor,
               systemNavigationBarIconBrightness: Brightness.light)),
@@ -43,6 +44,7 @@ class ThemeController extends SimpleNotifier {
       scaffoldBackgroundColor: const Color(0xff29434e),
       // Usar merge para que tome el tema asignado
       appBarTheme: const AppBarTheme(
+          elevation: 0.0,
           backgroundColor: accentDarkColor,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: primaryDarkColor,
