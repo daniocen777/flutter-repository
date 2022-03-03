@@ -1,33 +1,38 @@
-Crear proyecto:
+## Crear proyecto:
 flutter create --androidx -a java -i swift nombre_proyecto
 
-Íconos:
+## Íconos:
 https://www.flaticon.com/
 
-Imágenes svg:
+## Imágenes svg:
 https://undraw.co/
+https://www.svgrepo.com/
 
-Editar SVGs:
+## Convertir svg a formato IconData
+https://www.fluttericon.com/
+
+## Editar SVGs:
 https://editor.method.ac/
 
-Temas:
+## Temas:
 https://www.materialpalette.com
 https://material.io/resources/color/#!/?view.left=0&view.right=0
 
-colores:
+## colores:
 https://colorsupplyyy.com/app
 
-Diseños:
+## Diseños:
 https://dribbble.com/
 https://www.sketchappsources.com/
 https://www.uplabs.com/
 
-Guía de diseño:
+## Guía de diseño:
 developer.apple.com
 https://developer.apple.com/design/human-interface-guidelines/ios/overview/themes/
 
-Generador de ícono para splash:
+## Generador de ícono para splash:
 https://romannurik.github.io/AndroidAssetStudio/icons-generic.html#source.type=clipart&source.clipart=ac_unit&source.space.trim=1&source.space.pad=0&size=32&padding=8&color=rgba(0%2C%200%2C%200%2C%200.54)&name=ic_ac_unit
 
+## SHA-256 windows
 key-256
 keytool -list -v -alias androiddebugkey -keystore C:/Users/DANIEL/.android/debug.keystore
