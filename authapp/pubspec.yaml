@@ -35,9 +35,7 @@ flutter:
     - assets/images/light/
     - assets/images/dark/
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: SocialMedia
+      fonts:
+        - asset: assets/fonts/socialMedia.ttf
