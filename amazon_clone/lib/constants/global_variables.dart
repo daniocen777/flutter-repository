@@ -1,3 +1,5 @@
+import 'package:amazon_clone/features/auth/screens/login_screen.dart';
+import 'package:amazon_clone/features/auth/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 String uri = 'http://<yourip>:3000';
@@ -14,9 +16,13 @@ class GlobalVariables {
 
   static const secondaryColor = Color.fromRGBO(255, 153, 0, 1);
   static const backgroundColor = Colors.white;
-  static const Color greyBackgroundCOlor = Color(0xffebecee);
+  static const Color greyBackgroundColor = Color(0xffebecee);
   static var selectedNavBarColor = Colors.cyan[800]!;
   static const unselectedNavBarColor = Colors.black87;
+
+  // Routes
+  static const login = LoginScreen.route;
+  static const register = RegisterScreen.route;
 
   // STATIC IMAGES
   static const List<String> carouselImages = [
