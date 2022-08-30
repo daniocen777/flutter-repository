@@ -1,6 +1,9 @@
 ## Crear proyecto:
 flutter create --androidx -a java -i swift nombre_proyecto
 
+QuickType:
+https://app.quicktype.io/
+
 ## Íconos:
 https://www.flaticon.com/
 
