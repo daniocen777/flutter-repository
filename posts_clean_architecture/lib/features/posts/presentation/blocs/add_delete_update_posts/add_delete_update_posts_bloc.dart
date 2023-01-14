@@ -8,7 +8,6 @@ import 'package:posts_clean_architecture/features/posts/domain/entities/post.dar
 import 'package:posts_clean_architecture/features/posts/domain/usecases/add_post.dart';
 import 'package:posts_clean_architecture/features/posts/domain/usecases/delete_post.dart';
 import 'package:posts_clean_architecture/features/posts/domain/usecases/update_post.dart';
-import 'package:posts_clean_architecture/features/posts/presentation/blocs/posts/posts_bloc.dart';
 
 part 'add_delete_update_posts_event.dart';
 part 'add_delete_update_posts_state.dart';
