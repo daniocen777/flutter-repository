@@ -39,3 +39,11 @@ https://romannurik.github.io/AndroidAssetStudio/icons-generic.html#source.type=c
 ## SHA-256 windows
 key-256
 keytool -list -v -alias androiddebugkey -keystore C:/Users/DANIEL/.android/debug.keystore
+
+## API movies
+==> https://developers.themoviedb.org/3/movies/get-popular-movies
+{
+  "API_KEY": "41dbef11a24e94c01add05a23078ab28",
+  "BASE_API_URL": "https://api.themoviedb.org/",
+  "BASE_IMAGE_API_URL": "https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg"
+}
