@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => di.getIt<MoviesBloc>()..add(GetAllMoviesEvent()))
+              create: (_) => di.getIt<MoviesBloc>()
+                ..add(const GetPopularMoviesEvent(page: 2)))
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -4,4 +4,5 @@ import 'package:movies_clean_architecture/features/movies/domain/entities/movie.
 
 abstract class MoviesRepository {
   Future<Either<Failure, List<Movie>>> getMovies();
+  Future<Either<Failure, List<Movie>>> getPopularMovies(int page);
 }

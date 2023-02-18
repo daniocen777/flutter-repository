@@ -8,6 +8,7 @@ import 'package:movies_clean_architecture/features/movies/data/models/movie_mode
 
 abstract class MovieRemoteDatasource {
   Future<List<MovieModel>> getAllMovies();
+  Future<List<MovieModel>> getPopularMovies(int page);
 }
 
 String baseUrl = ApiCredential.baseApiUrl.value;
@@ -20,8 +21,10 @@ class MovieRemoteDatasourceImpl implements MovieRemoteDatasource {
   @override
   Future<List<MovieModel>> getAllMovies() async {
     final response = await client.get(
-      Uri.parse('$baseUrl/movie/popular')
-          .replace(queryParameters: {"api_key": ApiCredential.apiKey.value}),
+      Uri.parse('$baseUrl/movie/popular').replace(queryParameters: {
+        "api_key": ApiCredential.apiKey.value,
+        "language": "es-ES"
+      }),
       headers: {"Content-Type": "application/json"},
     );
 
@@ -33,7 +36,29 @@ class MovieRemoteDatasourceImpl implements MovieRemoteDatasource {
           .toList();
       return movies;
     } else {
-      print("ERROR getAllMovies");
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> getPopularMovies(int page) async {
+    final response = await client.get(
+      Uri.parse('$baseUrl/movie/popular').replace(queryParameters: {
+        "api_key": ApiCredential.apiKey.value,
+        "language": "es-ES",
+        "page": page.toString()
+      }),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> decodedJson =
+          json.decode(response.body) as Map<String, dynamic>;
+      final List<MovieModel> movies = decodedJson["results"]
+          .map<MovieModel>((e) => MovieModel.fromJson(e))
+          .toList();
+      return movies;
+    } else {
       throw ServerException();
     }
   }

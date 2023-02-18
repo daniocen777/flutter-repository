@@ -20,6 +20,15 @@ class LoadedMoviesState extends MoviesState {
   List<Object> get props => [movies];
 }
 
+class LoadedPopularMoviesState extends MoviesState {
+  final List<Movie> movies;
+
+  const LoadedPopularMoviesState({required this.movies});
+
+  @override
+  List<Object> get props => [movies];
+}
+
 class ErrorMoviesState extends MoviesState {
   final String message;
 

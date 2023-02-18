@@ -6,15 +6,18 @@ import 'package:movies_clean_architecture/features/movies/data/datasources/movie
 import 'package:movies_clean_architecture/features/movies/data/repositories/movie_repository_impl.dart';
 import 'package:movies_clean_architecture/features/movies/domain/repositories/movies_repository.dart';
 import 'package:movies_clean_architecture/features/movies/domain/usercases/get_movies.dart';
+import 'package:movies_clean_architecture/features/movies/domain/usercases/get_popular_movies.dart';
 import 'package:movies_clean_architecture/features/movies/presentation/blocs/movies/movies_bloc.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> init() async {
   // Blocs
-  getIt.registerFactory(() => MoviesBloc(getMovies: getIt()));
+  getIt.registerFactory(
+      () => MoviesBloc(getMovies: getIt(), getPopularMovies: getIt()));
   // usecases
-  getIt.registerLazySingleton(() => GetMoviesUserCase(getIt()));
+  getIt.registerLazySingleton(() => GetMoviesUseCase(getIt()));
+  getIt.registerLazySingleton(() => GetPopularMoviesUseCase(getIt()));
   // Repositories, por demanda
   getIt.registerLazySingleton<MoviesRepository>(() =>
       MovieRepositoryImpl(remoteDatasource: getIt(), networkInfo: getIt()));

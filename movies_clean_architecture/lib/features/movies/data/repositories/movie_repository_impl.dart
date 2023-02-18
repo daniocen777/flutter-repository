@@ -24,7 +24,20 @@ class MovieRepositoryImpl implements MoviesRepository {
         return Left(ServerFailure());
       }
     } else {
-      print("ERROR getMovies");
+      return Left(EmptyCacheFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getPopularMovies(int page) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteMovies = await remoteDatasource.getPopularMovies(page);
+        return Right(remoteMovies);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
       return Left(EmptyCacheFailure());
     }
   }

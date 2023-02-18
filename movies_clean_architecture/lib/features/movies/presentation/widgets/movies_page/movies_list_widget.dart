@@ -13,7 +13,6 @@ class MoviesListWidget extends StatelessWidget {
       separatorBuilder: (BuildContext context, int index) =>
           const Divider(thickness: 1.0),
       itemBuilder: (BuildContext context, int index) {
-        print("MOVIES => $movies");
         return ListTile(
           leading: Text(movies[index].id.toString()),
           title: Text(movies[index].title),
