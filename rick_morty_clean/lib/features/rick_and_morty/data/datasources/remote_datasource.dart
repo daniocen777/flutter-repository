@@ -29,9 +29,6 @@ class RemoteDatasourceImpl implements RemoteDatasource {
     if (response.statusCode == 200) {
       final decodedJson = json.decode(response.body);
       final characterCharacters = Character.fromJson(decodedJson);
-      /* final Character characterCharacters = decodedJson
-          .map<Character>((jsonCharacter) => Character.fromJson(jsonCharacter)); */
-      print("LENGT ***** => ${characterCharacters.results.length}");
       return characterCharacters;
     } else {
       throw ServerException();

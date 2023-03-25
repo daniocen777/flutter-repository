@@ -15,7 +15,6 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   CharacterBloc({required this.getAllCharacters})
       : super(CharacterInitialState()) {
     on<CharacterEvent>((event, emit) async {
-      print("**** EVENTO **** $event");
       if (event is GetAllCharactersEvent) {
         emit(LoadingCharactersState()); 
         final characters = await getAllCharacters();
