@@ -12,12 +12,33 @@ class CharacterListWidget extends StatelessWidget {
         itemCount: characters.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            leading: Text(characters[index].species),
+            leading: Text(characters[index].id.toString()),
             title: Text(characters[index].name,
                 style: const TextStyle(
                     fontSize: 15.0, fontWeight: FontWeight.bold)),
-            subtitle: Text(characters[index].location.name,
-                style: const TextStyle(fontSize: 12.0)),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    const Text('Status:',
+                        style: TextStyle(
+                            fontSize: 12.0, fontWeight: FontWeight.bold)),
+                    Text(characters[index].status,
+                        style: const TextStyle(fontSize: 12.0))
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('Species:',
+                        style: TextStyle(
+                            fontSize: 12.0, fontWeight: FontWeight.bold)),
+                    Text(characters[index].species,
+                        style: const TextStyle(fontSize: 12.0))
+                  ],
+                ),
+              ],
+            ),
           );
         },
         separatorBuilder: (BuildContext context, int index) =>

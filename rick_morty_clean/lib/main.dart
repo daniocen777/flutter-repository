@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
                   di.getIt<CharacterBloc>()..add(GetAllCharactersEvent()))
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
             title: 'Rick and Morty',
             theme: appTheme,
             initialRoute: Routes.characters,
