@@ -20,7 +20,6 @@ class CharactersPage extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: BlocBuilder<CharacterBloc, CharacterState>(
             builder: (BuildContext context, state) {
-              print("***** ESTADO ***** => $state");
           if (state is LoadingCharactersState) {
             return const LoadingWidget();
           } else if (state is LoadedCharactersState) {

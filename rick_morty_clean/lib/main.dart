@@ -34,11 +34,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) =>
-                  di.getIt<CharacterBloc>()..add(GetAllCharactersEvent()))
+              create: (_) => di.getIt<CharacterBloc>()
+                ..add(const GetAllCharactersPaginatedEvent(page: 2)))
         ],
         child: MaterialApp(
-          debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false,
             title: 'Rick and Morty',
             theme: appTheme,
             initialRoute: Routes.characters,

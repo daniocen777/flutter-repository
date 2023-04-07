@@ -6,6 +6,7 @@ import 'package:rick_morty_clean/features/rick_and_morty/data/datasources/remote
 import 'package:rick_morty_clean/features/rick_and_morty/data/repositories/characters_repocitory_impl.dart';
 import 'package:rick_morty_clean/features/rick_and_morty/domain/repositories/characters_repository.dart';
 import 'package:rick_morty_clean/features/rick_and_morty/domain/usecases/rick_and_morty_usecase/get_all_characters.dart';
+import 'package:rick_morty_clean/features/rick_and_morty/domain/usecases/rick_and_morty_usecase/get_all_characters_paginated.dart';
 import 'package:rick_morty_clean/features/rick_and_morty/presentation/blocs/character_bloc/character_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -13,9 +14,11 @@ final getIt = GetIt.instance;
 Future<void> init() async {
   // Features: posts
   // Blocs
-  getIt.registerFactory(() => CharacterBloc(getAllCharacters: getIt()));
+  getIt.registerFactory(() => CharacterBloc(
+      getAllCharacters: getIt(), getAllCharactersPaginated: getIt()));
   // Usescases, por demanda
   getIt.registerLazySingleton(() => GetAllCharactersUseCase(getIt()));
+  getIt.registerLazySingleton(() => GetAllCharactersPaginatedUseCase(getIt()));
   // Repositories, por demanda
   getIt.registerLazySingleton<CharactersRepository>(() =>
       CharactersRepositoryImpl(

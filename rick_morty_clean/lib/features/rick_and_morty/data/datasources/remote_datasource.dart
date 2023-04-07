@@ -9,6 +9,8 @@ import 'package:rick_morty_clean/features/rick_and_morty/domain/entities/result.
 abstract class RemoteDatasource {
   Future<Character> getAllCharacters();
 
+  Future<Character> getAllCharactersPaginated(int page);
+
   Future<List<Result>> getSingleCharacter(int id);
 }
 
@@ -21,6 +23,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
   @override
   Future<Character> getAllCharacters() async {
+    print('------ ¿ESTE? -------');
     final response = await client.get(
       Uri.parse('$baseUrl/character/'),
       headers: {"Content-Type": "application/json"},
@@ -38,5 +41,27 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   @override
   Future<List<Result>> getSingleCharacter(int id) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Character> getAllCharactersPaginated(int? page) async {
+    print('***** ENTRANDO *****');
+    String sendPage = page != null ? page.toString() : '1';
+    print('**** Page **** => $sendPage');
+    print(Uri.parse('$baseUrl/character/')
+        .replace(queryParameters: {"page": sendPage}));
+    final response = await client.get(
+      Uri.parse('$baseUrl/character/')
+          .replace(queryParameters: {"page": sendPage}),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      final decodedJson = json.decode(response.body);
+      final characterCharacters = Character.fromJson(decodedJson);
+      return characterCharacters;
+    } else {
+      throw ServerException();
+    }
   }
 }

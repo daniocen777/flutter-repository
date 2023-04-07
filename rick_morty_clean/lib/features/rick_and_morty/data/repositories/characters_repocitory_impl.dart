@@ -35,4 +35,20 @@ class CharactersRepositoryImpl implements CharactersRepository {
     // TODO: implement getSingleCharacter
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, Character>> getAllCharactersPaginated(int page) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteCharacters =
+            await remoteDatasource.getAllCharactersPaginated(page);
+        return Right(remoteCharacters);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      print('No está conectado');
+    }
+    throw UnimplementedError();
+  }
 }
