@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
               create: (_) => di.getIt<CharacterBloc>()
-                ..add(const GetAllCharactersPaginatedEvent(page: 2)))
+                ..add(const GetAllCharactersPaginatedEvent(page: 1)))
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

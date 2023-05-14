@@ -17,3 +17,12 @@ class GetAllCharactersPaginatedEvent extends CharacterEvent {
   @override
   List<Object> get props => [page];
 }
+
+class NextPageEvent extends CharacterEvent {
+  final int currentPage;
+
+  const NextPageEvent({required this.currentPage});
+
+  @override
+  List<Object> get props => [currentPage];
+}

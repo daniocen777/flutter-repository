@@ -28,3 +28,15 @@ class ErrorCharactersState extends CharacterState {
   @override
   List<Object> get props => [message];
 }
+
+class CurrentPageState extends CharacterState {
+  final int currentPage;
+
+  const CurrentPageState({required this.currentPage});
+
+  /* CurrentPageState copyWith({int? currentPage}) =>
+      CurrentPageState(currentPage: currentPage ?? 0); */
+
+  @override
+  List<Object> get props => [currentPage];
+}

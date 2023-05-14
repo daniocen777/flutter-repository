@@ -23,7 +23,6 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
   @override
   Future<Character> getAllCharacters() async {
-    print('------ ¿ESTE? -------');
     final response = await client.get(
       Uri.parse('$baseUrl/character/'),
       headers: {"Content-Type": "application/json"},
@@ -45,11 +44,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
   @override
   Future<Character> getAllCharactersPaginated(int? page) async {
-    print('***** ENTRANDO *****');
     String sendPage = page != null ? page.toString() : '1';
-    print('**** Page **** => $sendPage');
-    print(Uri.parse('$baseUrl/character/')
-        .replace(queryParameters: {"page": sendPage}));
     final response = await client.get(
       Uri.parse('$baseUrl/character/')
           .replace(queryParameters: {"page": sendPage}),

@@ -22,8 +22,9 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         emit(LoadingCharactersState());
         final characters = await getAllCharactersPaginated(event.page);
         emit(_mapFailureOrChraractersToState(characters));
-      } else {
-        print('****** NO EVENTO ******');
+      }
+      if (event is NextPageEvent) {
+        emit(CurrentPageState(currentPage: event.currentPage));
       }
     });
   }

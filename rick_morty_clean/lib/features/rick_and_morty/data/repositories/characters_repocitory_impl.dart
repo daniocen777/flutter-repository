@@ -32,7 +32,6 @@ class CharactersRepositoryImpl implements CharactersRepository {
 
   @override
   Future<Either<Failure, Result>> getSingleCharacter(int id) async {
-    // TODO: implement getSingleCharacter
     throw UnimplementedError();
   }
 

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:rick_morty_clean/features/rick_and_morty/domain/entities/result.dart';
+/* import 'package:rick_morty_clean/features/rick_and_morty/presentation/blocs/character_bloc/character_bloc.dart';
+import 'package:rick_morty_clean/features/rick_and_morty/presentation/routes/routes.dart'; */
+import 'package:rick_morty_clean/features/rick_and_morty/presentation/widgets/character_detail_widget.dart';
 
 class CharacterListWidget extends StatelessWidget {
   final List<Result> characters;
@@ -8,9 +14,13 @@ class CharacterListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        itemCount: characters.length,
-        itemBuilder: (BuildContext context, int index) {
+    // final characterBloc = BlocProvider.of<CharacterBloc>(context);
+
+    return CustomScrollView(
+      slivers: [
+        SliverList(
+            delegate: SliverChildBuilderDelegate(childCount: characters.length,
+                (context, index) {
           return ListTile(
             leading: Text(characters[index].id.toString()),
             title: Text(characters[index].name,
@@ -39,9 +49,14 @@ class CharacterListWidget extends StatelessWidget {
                 ),
               ],
             ),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => ChracterDetailWidget(
+                        imageUrl: characters[index].image))),
           );
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            const Divider(thickness: 1.0));
+        }))
+      ],
+    );
   }
 }
