@@ -1,0 +1,60 @@
+name: my_widgets
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0-411.0.dev <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/goku.png
+    - assets/images/dbz.png
+    - assets/emojis/angry.svg
+    - assets/emojis/heart.svg
+    - assets/emojis/laughing.svg
+    - assets/emojis/like.svg
+    - assets/emojis/sad.svg
+    - assets/emojis/shocked.svg
+    - assets/wallpapers/1.jpeg
+    - assets/wallpapers/2.jpeg
+    - assets/wallpapers/3.jpeg
+    - assets/wallpapers/4.jpeg
+    - assets/wallpapers/5.jpeg
+    - assets/wallpapers/6.jpeg
+    - assets/users/1.jpg
+    - assets/users/2.jpg
+    - assets/users/3.jpg
+    - assets/users/4.jpg
+    - assets/users/5.jpg
+    - assets/users/6.jpg
+    - assets/users/7.jpg
+    - assets/users/8.jpg
+    - assets/publications/ferrari.jpeg
+    - assets/publications/flutter.jpeg
+    - assets/logos/facebook.svg
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
