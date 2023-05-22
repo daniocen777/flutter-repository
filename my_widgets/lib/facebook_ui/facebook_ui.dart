@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_widgets/facebook_ui/widgets/avatar.dart';
 import 'package:my_widgets/facebook_ui/widgets/circle_button.dart';
 import 'package:my_widgets/icons/suctom_icons.dart';
 
@@ -45,6 +46,9 @@ class FacebookUi extends StatelessWidget {
           ),
           SizedBox(width: 15.0),
         ],
+      ),
+      body: ListView(
+        children: const [Avatar(size: 100.0, asset: 'assets/users/4.jpg')],
       ),
     );
   }
