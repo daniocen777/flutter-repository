@@ -8,18 +8,21 @@ class WhatIsOnYourMind extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Avatar(size: 50.0, asset: 'assets/users/4.jpg'),
-        SizedBox(width: 20.0),
-        // Flexible => Evitar overflow
-        Flexible(
-          child: Text(
-            '¿En qué estás pensando?',
-            style: TextStyle(color: Colors.grey),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        children: [
+          Avatar(size: 50.0, asset: 'assets/users/4.jpg'),
+          SizedBox(width: 20.0),
+          // Flexible => Evitar overflow
+          Flexible(
+            child: Text(
+              '¿En qué estás pensando?',
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

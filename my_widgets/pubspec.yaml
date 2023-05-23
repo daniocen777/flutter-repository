@@ -57,9 +57,7 @@ flutter:
     - assets/publications/flutter.jpeg
     - assets/logos/facebook.svg
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/icons/CustomIcons.ttf
