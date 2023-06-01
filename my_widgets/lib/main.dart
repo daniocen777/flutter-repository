@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_widgets/facebook_ui/facebook_ui.dart';
+/* import 'package:my_widgets/facebook_ui/facebook_ui.dart'; */
+import 'package:my_widgets/routes/app_routes.dart';
+import 'package:my_widgets/routes/route.dart';
 
 void main() => runApp(const MyApp());
 // https://github.com/darwin-morocho/flutter-desde-cero-2022
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       theme: ThemeData(fontFamily: 'Nunito'),
-      home: const FacebookUi(),
+      routes: appRoutes,
+      initialRoute: Routes.splash,
     );
   }
 }
