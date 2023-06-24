@@ -43,7 +43,7 @@ class _CustomDialog extends StatelessWidget {
                 size: 100.0,
               ),
               const Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   'Al contrario del pensamiento popular, el texto de Lorem Ipsum no es simplemente texto aleatorio. Tiene sus raices en una pieza cl´sica de la literatura del Latin, que data del año 45 antes de Cristo',
                   style: TextStyle(color: Colors.black, fontSize: 14.0),

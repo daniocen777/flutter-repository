@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_widgets/pages/color_picker.dart';
 import 'package:my_widgets/pages/dialogs_page.dart';
+import 'package:my_widgets/pages/inputs/calendar_page.dart';
+import 'package:my_widgets/pages/inputs/chexk_box_page.dart';
+import 'package:my_widgets/pages/inputs/cupertino_calendar_page.dart';
+import 'package:my_widgets/pages/inputs/radio_page.dart';
+import 'package:my_widgets/pages/inputs/slider_page.dart';
+import 'package:my_widgets/pages/inputs/text_field_page.dart';
+import 'package:my_widgets/pages/inputs/keyboard_types_page.dart';
 import 'package:my_widgets/pages/login_page.dart';
 import 'package:my_widgets/pages/menu_pages.dart';
 import 'package:my_widgets/pages/splash_page.dart';
@@ -25,6 +32,13 @@ Map<String, Widget Function(BuildContext)> get appRoutes {
         email: email,
       );
     },
-    Routes.colorPicker: (_) => const ColorPicker()
+    Routes.colorPicker: (_) => const ColorPicker(),
+    Routes.textField: (_) => const TextFieldPage(),
+    Routes.keyboardTypes: (_) => const KeyboardTypesPage(),
+    Routes.checkBox: (_) => const CheckBoxPage(),
+    Routes.radio: (_) => const RadioPage(),
+    Routes.slider: (_) => const SliderPage(),
+    Routes.calendar: (_) => const CalendarPage(),
+    Routes.cupertinoCalendar: (_) => const CupertinoCalendarPage()
   };
 }
