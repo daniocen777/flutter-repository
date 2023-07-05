@@ -16,4 +16,6 @@ class Routes {
   static const slider = '/slider';
   static const calendar = '/calendar';
   static const cupertinoCalendar = '/cupertinoCalendar';
+  static const formularios = '/formularios';
+  static const loginForm = '/loginForm';
 }

@@ -15,11 +15,12 @@ class MyApp extends StatelessWidget {
     // GestureDetector para minimizar texFields
     return GestureDetector(
       onTap: () {
-        final focus = FocusScope.of(context);
+        /* final focus = FocusScope.of(context);
         final focusedChild = focus.focusedChild;
         if (focusedChild != null && !focusedChild.hasPrimaryFocus) {
           focusedChild.unfocus();
-        }
+        } */
+        FocusManager.instance.primaryFocus?.unfocus();
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

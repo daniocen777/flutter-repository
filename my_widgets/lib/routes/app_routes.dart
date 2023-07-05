@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_widgets/pages/color_picker.dart';
 import 'package:my_widgets/pages/dialogs_page.dart';
+import 'package:my_widgets/pages/forms/forms_page.dart';
+import 'package:my_widgets/pages/forms/login_page.dart';
 import 'package:my_widgets/pages/inputs/calendar_page.dart';
 import 'package:my_widgets/pages/inputs/chexk_box_page.dart';
 import 'package:my_widgets/pages/inputs/cupertino_calendar_page.dart';
@@ -12,8 +14,6 @@ import 'package:my_widgets/pages/login_page.dart';
 import 'package:my_widgets/pages/menu_pages.dart';
 import 'package:my_widgets/pages/splash_page.dart';
 import 'package:my_widgets/routes/route.dart';
-
-// import 'package:my_widgets/routes/route.dart';
 
 T? getArguments<T>(BuildContext context) {
   return ModalRoute.of(context)!.settings.arguments as T;
@@ -39,6 +39,8 @@ Map<String, Widget Function(BuildContext)> get appRoutes {
     Routes.radio: (_) => const RadioPage(),
     Routes.slider: (_) => const SliderPage(),
     Routes.calendar: (_) => const CalendarPage(),
-    Routes.cupertinoCalendar: (_) => const CupertinoCalendarPage()
+    Routes.cupertinoCalendar: (_) => const CupertinoCalendarPage(),
+    Routes.formularios: (_) => const FormsPage(),
+    Routes.loginForm: (_) => const LoginFormPage()
   };
 }

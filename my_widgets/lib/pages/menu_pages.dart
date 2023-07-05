@@ -53,8 +53,9 @@ class _MenuPageState extends State<MenuPage> {
         },
       ),
       const PageData(name: Routes.dialogs, label: 'Go to Dialogs'),
-      const PageData(name: Routes.textField, label: ' INPUT TextField'),
-      const PageData(name: Routes.checkBox, label: ' INPUT CheckBox')
+      const PageData(name: Routes.textField, label: 'INPUT TextField'),
+      const PageData(name: Routes.checkBox, label: 'INPUT CheckBox'),
+      const PageData(name: Routes.formularios, label: 'Go to FORMS')
     ];
   }
 
