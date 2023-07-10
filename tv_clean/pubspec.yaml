@@ -15,6 +15,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   connectivity_plus: ^4.0.1
   http: ^0.13.5
+  # No usar shared_preference (no es seguro)
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Agregando:
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        Para usar paquete flutter_secure_storage y permisos de internet
+     -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="tv_clean"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true"
