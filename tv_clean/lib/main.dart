@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'app/data/repositories_impl/authentication_repository_impl.dart';
 import 'app/data/repositories_impl/connectivity_repository_impl.dart';
@@ -12,7 +13,8 @@ void main() {
   runApp(Injector(
       connectivityRepository:
           ConnectivityRepositoryImpl(Connectivity(), InternetChecker()),
-      authenticationRepository: AuthenticationRepositoryImpl(),
+      authenticationRepository:
+          AuthenticationRepositoryImpl(const FlutterSecureStorage()),
       child: const MyApp()));
 }
 
