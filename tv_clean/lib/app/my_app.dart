@@ -8,9 +8,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: Routes.splash,
-      routes: appRoutes,
+    return GestureDetector(
+      onTap: () {
+        // Para minimizar teclado en ios
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: Routes.splash,
+        routes: appRoutes,
+      ),
     );
   }
 }
