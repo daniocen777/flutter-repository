@@ -55,7 +55,7 @@ class _SigInViewState extends State<SigInView> {
                   },
                   decoration: const InputDecoration(hintText: 'Password'),
                   validator: (text) {
-                    text = text?.replaceAll(' ', '').toLowerCase() ?? '';
+                    text = text?.replaceAll(' ', '') ?? '';
                     if (text.length < 4) {
                       return 'Invalid password';
                     }
@@ -107,7 +107,8 @@ class _SigInViewState extends State<SigInView> {
       final message = {
         SignInFailure.notFound: 'Not Fpund',
         SignInFailure.unauthorized: 'Invalid Password',
-        SignInFailure.unknown: 'Error'
+        SignInFailure.unknown: 'Error',
+        SignInFailure.network: 'Network error'
       }[failute];
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message!)));

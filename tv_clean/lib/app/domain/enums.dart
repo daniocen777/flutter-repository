@@ -1,1 +1,1 @@
-enum SignInFailure { notFound, unauthorized, unknown }
+enum SignInFailure { notFound, unauthorized, unknown, network }

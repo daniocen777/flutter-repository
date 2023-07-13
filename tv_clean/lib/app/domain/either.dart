@@ -7,8 +7,8 @@ class Either<Left, Right> {
   Either._(this._left, this._right, this.isLeft);
 
   // Factory papra crear las instancias según sea el caso
-  factory Either.left(Left failute) {
-    return Either._(failute, null, true);
+  factory Either.left(Left failure) {
+    return Either._(failure, null, true);
   }
 
   factory Either.right(Right value) {
