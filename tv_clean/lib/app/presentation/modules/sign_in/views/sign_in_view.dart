@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../../main.dart';
 import '../../../../domain/enums.dart';
+import '../../../../domain/repositories/authentication_repository.dart';
 import '../../../routes/routes.dart';
 
 class SigInView extends StatefulWidget {
@@ -91,9 +92,9 @@ class _SigInViewState extends State<SigInView> {
     setState(() {
       _fetching = true;
     });
-    final result = await Injector.of(context)
-        .authenticationRepository
-        .signIn(_username, _password);
+    final result =
+        await Provider.of<AuthenticationRepository>(context, listen: false)
+            .signIn(_username, _password);
 
     // Como se va a volver a usar 'context' en el Navigator, asegurar que vista sigue rendereizada
     if (!mounted) {
