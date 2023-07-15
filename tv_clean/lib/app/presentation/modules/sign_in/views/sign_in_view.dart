@@ -105,7 +105,7 @@ class _SigInViewState extends State<SigInView> {
         _fetching = false;
       });
       final message = {
-        SignInFailure.notFound: 'Not Fpund',
+        SignInFailure.notFound: 'Not Found',
         SignInFailure.unauthorized: 'Invalid Password',
         SignInFailure.unknown: 'Error',
         SignInFailure.network: 'Network error'
