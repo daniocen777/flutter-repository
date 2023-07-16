@@ -92,9 +92,9 @@ class _SigInViewState extends State<SigInView> {
     setState(() {
       _fetching = true;
     });
-    final result =
-        await Provider.of<AuthenticationRepository>(context, listen: false)
-            .signIn(_username, _password);
+    final result = await context
+        .read<AuthenticationRepository>()
+        .signIn(_username, _password);
 
     // Como se va a volver a usar 'context' en el Navigator, asegurar que vista sigue rendereizada
     if (!mounted) {

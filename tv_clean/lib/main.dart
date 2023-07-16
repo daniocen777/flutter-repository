@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -43,21 +44,23 @@ import 'app/my_app.dart';
 } */
 
 void main() {
-  MultiProvider(
-    providers: [
-      Provider<ConnectivityRepository>(
-        create: (_) =>
-            ConnectivityRepositoryImpl(Connectivity(), InternetChecker()),
-      ),
-      Provider<AuthenticationRepository>(
-          create: (_) => AuthenticationRepositoryImpl(
-              const FlutterSecureStorage(),
-              AuthenticationApi(Http(
-                  client: http.Client(),
-                  baseUrl: 'https://api.themoviedb.org/3',
-                  apiKey: '41dbef11a24e94c01add05a23078ab28')))),
-    ],
-    child: const MyApp(),
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<ConnectivityRepository>(
+          create: (_) =>
+              ConnectivityRepositoryImpl(Connectivity(), InternetChecker()),
+        ),
+        Provider<AuthenticationRepository>(
+            create: (_) => AuthenticationRepositoryImpl(
+                const FlutterSecureStorage(),
+                AuthenticationApi(Http(
+                    client: http.Client(),
+                    baseUrl: 'https://api.themoviedb.org/3',
+                    apiKey: '41dbef11a24e94c01add05a23078ab28')))),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 
