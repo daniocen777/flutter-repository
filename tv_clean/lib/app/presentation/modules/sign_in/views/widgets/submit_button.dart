@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/enums.dart';
-import '../../../../../domain/repositories/authentication_repository.dart';
 import '../../../../routes/routes.dart';
 import '../../controller/sign_in_controller.dart';
 
@@ -12,7 +11,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SignInController controller = Provider.of(context); // listen = true
-    if (controller.fetching) {
+    if (controller.state.fetching) {
       const CircularProgressIndicator();
     }
 
@@ -31,11 +30,7 @@ class SubmitButton extends StatelessWidget {
   // _submit(context) => para el snackbar
   Future<void> _submit(BuildContext context) async {
     final SignInController controller = context.read();
-    controller.onFetchingChanged(true);
-
-    final result = await context
-        .read<AuthenticationRepository>()
-        .signIn(controller.username, controller.password);
+    final result = await controller.submit();
 
     // Como se va a volver a usar 'context' en el Navigator, asegurar que vista sigue rendereizada
     /* if (!mounted) {
@@ -48,7 +43,6 @@ class SubmitButton extends StatelessWidget {
     }
 
     result.when((failute) {
-      controller.onFetchingChanged(false);
       final message = {
         SignInFailure.notFound: 'Not Found',
         SignInFailure.unauthorized: 'Invalid Password',
