@@ -43,7 +43,7 @@ class Http {
       if (queryParameters.isNotEmpty) {
         url = url.replace(
             queryParameters:
-                queryParameters); // copia de urlm agregando parámetros
+                queryParameters); // copia de url agregando parámetros
       }
       headers = {'Content-Type': 'application/json', ...headers};
       late final Response response;
