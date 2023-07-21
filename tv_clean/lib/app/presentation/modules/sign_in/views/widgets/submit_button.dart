@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../domain/enums.dart';
+import '../../../../global/controllers/session_controller.dart';
 import '../../../../routes/routes.dart';
 import '../../controller/sign_in_controller.dart';
 
@@ -52,6 +53,9 @@ class SubmitButton extends StatelessWidget {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message!)));
     }, (user) {
+      // Establecer el estado global
+      final SessionController sessionController = context.read();
+      sessionController.setUser(user);
       Navigator.pushReplacementNamed(context, Routes.home);
     });
   }

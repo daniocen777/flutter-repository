@@ -16,6 +16,7 @@ import 'app/domain/repositories/account_repository.dart';
 import 'app/domain/repositories/authentication_repository.dart';
 import 'app/domain/repositories/connectivity_repository.dart';
 import 'app/my_app.dart';
+import 'app/presentation/global/controllers/session_controller.dart';
 
 /* void main() {
   runApp(
@@ -56,17 +57,26 @@ void main() {
 
   final accountAPI = AccountApi(http);
   runApp(
+    // ES IMPORTANTE EL ORDEN
     MultiProvider(
       providers: [
+        // Para la conexión a internet
         Provider<ConnectivityRepository>(
           create: (_) =>
               ConnectivityRepositoryImpl(Connectivity(), InternetChecker()),
         ),
+        // Para la autenticación
         Provider<AuthenticationRepository>(
             create: (_) => AuthenticationRepositoryImpl(
                 AuthenticationApi(http), accountAPI, sessionService)),
+        // Para obtener datos de la cuenta
         Provider<AccountRepository>(
-            create: (_) => AccountRepositoryImpl(accountAPI, sessionService))
+            create: (_) => AccountRepositoryImpl(accountAPI, sessionService)),
+        // Para los estados globales - pueden modificarse, se debe notofocar cuando cambien (Usuario)
+        // ES IMPORTANTE EL ORDEN => SessionController usa AuthenticationRepository
+        ChangeNotifierProvider<SessionController>(
+            create: (context) =>
+                SessionController(authenticationRepository: context.read()))
       ],
       child: const MyApp(),
     ),
