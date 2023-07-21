@@ -41,10 +41,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
               await _authenticationApi.createSession(newRequestToken);
           return sessionResult.when((failure) async => Either.left(failure),
               (sessionId) async {
-            print('SessionId => $sessionId');
             await _sessionService.saveSessionId(sessionId);
             final user = await _accountApi.getAccount(sessionId);
-            print('User => $user');
             if (user == null) {
               return Either.left(SignInFailure.unknown);
             }

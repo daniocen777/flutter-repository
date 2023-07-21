@@ -11,10 +11,10 @@ class AccountApi {
       '/account',
       queryParameters: {'session_id': sessionId},
       onSuccess: (json) {
-        return User(id: json['id'], username: json['username']);
+        return User.fromJson(json);
       },
     );
-    
+
     return result.when((_) => null, (user) => user);
   }
 }
