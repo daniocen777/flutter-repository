@@ -1,6 +1,6 @@
 import '../either.dart';
-import '../enums.dart';
-import '../models/user.dart';
+import '../failures/sign_in/sign_in_failure.dart';
+import '../models/user/user.dart';
 
 abstract class AuthenticationRepository {
   Future<bool> get isSignedIn;

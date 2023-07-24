@@ -1,4 +1,4 @@
-import '../../../domain/models/user.dart';
+import '../../../domain/models/user/user.dart';
 import '../../http/http.dart';
 
 class AccountApi {
@@ -15,6 +15,6 @@ class AccountApi {
       },
     );
 
-    return result.when((_) => null, (user) => user);
+    return result.when(left: (_) => null, right: (user) => user);
   }
 }
