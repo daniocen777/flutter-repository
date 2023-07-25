@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../typedefs.dart';
+
 /* Generar el archivo user.g.dart en la linea de comandos
   $> flutter pub run build_runner build
   => Crear archivo build.yaml y colocar esa configuración que
@@ -36,10 +38,11 @@ class User with _$User {
 
   // No es neceario toJson, freezed lo hace, solo necesita el fromJson
   // Map<String, dynamic> toJson() => _$UserToJson(this);
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  // Usando typedefs de nombre Json
+  factory User.fromJson(Json json) => _$UserFromJson(json);
 }
 
 // Función global
-String? avatarPathFromJson(Map<String, dynamic> json) {
+String? avatarPathFromJson(Json json) {
   return json['tmdb']?['avatar_path'] as String?;
 }

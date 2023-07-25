@@ -45,11 +45,11 @@ class SubmitButton extends StatelessWidget {
     result.when(left: (failure) {
       // Función anónima que se llame asímismo
       final message = failure.when(
-        network: () => 'Network error',
-        notFound: () => 'Not Found',
-        unauthorized: () => 'Invalid Password',
-        unknown: () => 'Error',
-      );
+          network: () => 'Network error',
+          notFound: () => 'Not Found',
+          unauthorized: () => 'Invalid Password',
+          unknown: () => 'Error',
+          notVerified: () => 'Email not verified');
 
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message)));
