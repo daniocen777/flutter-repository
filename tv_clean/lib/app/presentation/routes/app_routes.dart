@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../modules/home/viewa/home_view.dart';
+import '../modules/home/views/home_view.dart';
 import '../modules/offline/offline_view.dart';
 import '../modules/sign_in/views/sign_in_view.dart';
 import '../modules/splash/views/splash_view.dart';

@@ -1,3 +1,5 @@
+// shortcut => frf
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../typedefs.dart';

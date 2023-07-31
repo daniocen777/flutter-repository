@@ -8,13 +8,16 @@ import 'app/data/http/http.dart';
 import 'app/data/repositories_impl/account_repository_impl.dart';
 import 'app/data/repositories_impl/authentication_repository_impl.dart';
 import 'app/data/repositories_impl/connectivity_repository_impl.dart';
+import 'app/data/repositories_impl/trending_repository_impl.dart';
 import 'app/data/services/local/session_service.dart';
 import 'app/data/services/remote/account_api.dart';
 import 'app/data/services/remote/authentication_api.dart';
 import 'app/data/services/remote/internet_checker.dart';
+import 'app/data/services/remote/trending_api.dart';
 import 'app/domain/repositories/account_repository.dart';
 import 'app/domain/repositories/authentication_repository.dart';
 import 'app/domain/repositories/connectivity_repository.dart';
+import 'app/domain/repositories/trending_repository.dart';
 import 'app/my_app.dart';
 import 'app/presentation/global/controllers/session_controller.dart';
 
@@ -72,6 +75,9 @@ void main() {
         // Para obtener datos de la cuenta
         Provider<AccountRepository>(
             create: (_) => AccountRepositoryImpl(accountAPI, sessionService)),
+        // Para consumir el api (Trending)
+        Provider<TrendingRepository>(
+            create: (_) => TrendingRepositoryImpl(TrendingAPI(http))),
         // Para los estados globales - pueden modificarse, se debe notofocar cuando cambien (Usuario)
         // ES IMPORTANTE EL ORDEN => SessionController usa AuthenticationRepository
         ChangeNotifierProvider<SessionController>(

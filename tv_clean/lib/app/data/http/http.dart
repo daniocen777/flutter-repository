@@ -86,7 +86,7 @@ class Http {
     } catch (e, s) {
       stackTrace = s;
       // stackTrace => linea donde se ubica el error
-      logs = {...logs, 'exception': e.runtimeType};
+      logs = {...logs, 'exception': e.toString()};
       // Error de conexión en web y movil
       if (e is SocketException || e is ClientException) {
         return Either.left(HttpFailure(exception: NetworkException()));
