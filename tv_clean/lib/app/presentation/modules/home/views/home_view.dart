@@ -18,8 +18,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) {
-        final controller = HomeController(HomeState(loading: true),
-            trendingRepository: context.read());
+        final controller =
+            HomeController(Homestate(), trendingRepository: context.read());
 
         controller.init();
         return controller;
@@ -27,13 +27,16 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
         body: SafeArea(
             child: LayoutBuilder(
-          builder: (_, BoxConstraints constraints) => RefreshIndicator(
-            onRefresh: () async {},
+          builder: (context, BoxConstraints constraints) => RefreshIndicator(
+            onRefresh: () async {
+              // Llamar función init del controller
+              await context.read<HomeController>().init();
+            },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: SizedBox(
                 height: constraints.maxHeight,
-                child:  const Column(
+                child: const Column(
                   children: [
                     SizedBox(height: 10.0),
                     TrendingList(),
