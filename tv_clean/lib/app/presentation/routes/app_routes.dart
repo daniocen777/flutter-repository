@@ -11,6 +11,7 @@ Map<String, Widget Function(BuildContext)> get appRoutes {
     Routes.splash: (context) => const SplashView(),
     Routes.signIn: (context) => const SigInView(),
     Routes.home: (context) => const HomeView(),
-    Routes.offline: (context) => const OfflineView()
+    Routes.offline: (context) => const OfflineView(),
+    // Página necesita del ID => en my_app (onGenerateRoute)
   };
 }

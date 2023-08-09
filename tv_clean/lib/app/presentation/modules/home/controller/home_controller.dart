@@ -33,13 +33,12 @@ class HomeController extends StateNotifier<Homestate> {
 
     final result = await trendingRepository
         .getMoviesAndSeries(state.moviesAndSeries.timeWindow);
-    result.when(
-        left: (_) {
-          state = state.copyWith(
-              moviesAndSeries: MoviesAndSeriesState.failed(
-                  state.moviesAndSeries.timeWindow));
-        },
-        right: (list) => state = state.copyWith(
+    // Nuevo estado con el resultado o con error
+    state = result.when(
+        left: (_) => state.copyWith(
+            moviesAndSeries:
+                MoviesAndSeriesState.failed(state.moviesAndSeries.timeWindow)),
+        right: (list) => state.copyWith(
             moviesAndSeries: MoviesAndSeriesState.loaded(
                 timeWindow: state.moviesAndSeries.timeWindow, list: list)));
   }
@@ -48,13 +47,11 @@ class HomeController extends StateNotifier<Homestate> {
     if (performers != null) {
       state = state.copyWith(performers: performers);
     }
-    final performerResutlt = await trendingRepository.getPerformers();
-    performerResutlt.when(
-      left: (_) {
-        state = state.copyWith(performers: const PerformersState.failed());
-      },
-      right: (list) =>
-          state = state.copyWith(performers: PerformersState.loaded(list)),
-    );
+    final resutlt = await trendingRepository.getPerformers();
+    // Nuevo estado con el resultado o con error
+    state = resutlt.when(
+        left: (_) => state.copyWith(performers: const PerformersState.failed()),
+        right: (list) =>
+            state.copyWith(performers: PerformersState.loaded(list)));
   }
 }
