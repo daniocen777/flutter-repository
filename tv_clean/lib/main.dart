@@ -23,6 +23,8 @@ import 'app/domain/repositories/connectivity_repository.dart';
 import 'app/domain/repositories/movie_repository.dart';
 import 'app/domain/repositories/trending_repository.dart';
 import 'app/my_app.dart';
+import 'app/presentation/global/controllers/favorites/favorites_controller.dart';
+import 'app/presentation/global/controllers/favorites/state/favorites_state.dart';
 import 'app/presentation/global/controllers/session_controller.dart';
 
 /* void main() {
@@ -63,7 +65,7 @@ void main() {
       baseUrl: 'https://api.themoviedb.org/3',
       apiKey: '41dbef11a24e94c01add05a23078ab28');
 
-  final accountAPI = AccountApi(http);
+  final accountAPI = AccountApi(http, sessionService);
   runApp(
     // ES IMPORTANTE EL ORDEN
     MultiProvider(
@@ -86,11 +88,14 @@ void main() {
         // Para obtener una pelicula
         Provider<MovieRepository>(
             create: (_) => MovieRepositoryImpl(MoviesApi(http))),
-        // Para los estados globales - pueden modificarse, se debe notofocar cuando cambien (Usuario)
+        // Para los estados globales - pueden modificarse, se debe notifocar cuando cambien (Usuario, lista de favoritos)
         // ES IMPORTANTE EL ORDEN => SessionController usa AuthenticationRepository
         ChangeNotifierProvider<SessionController>(
             create: (context) =>
-                SessionController(authenticationRepository: context.read()))
+                SessionController(authenticationRepository: context.read())),
+        ChangeNotifierProvider<FavoritesController>(
+            create: (context) => FavoritesController(FavoritesState.loading(),
+                accountRepository: context.read())),
       ],
       child: const MyApp(),
     ),

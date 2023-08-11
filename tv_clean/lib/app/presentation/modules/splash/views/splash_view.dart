@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../domain/repositories/account_repository.dart';
 import '../../../../domain/repositories/authentication_repository.dart';
 import '../../../../domain/repositories/connectivity_repository.dart';
+import '../../../global/controllers/favorites/favorites_controller.dart';
 import '../../../global/controllers/session_controller.dart';
 import '../../../routes/routes.dart';
 
@@ -37,6 +38,7 @@ class _SplashViewState extends State<SplashView> {
       final AccountRepository accountRepository = context.read();
       // Para los estados globales
       final SessionController sessionController = context.read();
+      final FavoritesController favoritesController = context.read();
 
       final hasInternet = await connectivityRepository.hasInternet;
       if (!hasInternet) {
@@ -51,6 +53,7 @@ class _SplashViewState extends State<SplashView> {
       // Guardar el estado global con sessionController
       if (user != null) {
         sessionController.setUser(user);
+        favoritesController.init(); // recuperar movies y series favoritos
         return Routes.home;
       }
       return Routes.signIn;
