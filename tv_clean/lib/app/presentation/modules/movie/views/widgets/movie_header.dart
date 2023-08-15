@@ -15,13 +15,17 @@ class MovieHeader extends StatelessWidget {
       children: [
         AspectRatio(
             aspectRatio: 16 / 13,
-            child: CachedNetworkImage(
-              imageUrl: getImageUrl(movie.backdropPath,
-                  imageQuality: ImageQuality.original),
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            )),
+            child: movie.backdropPath != null
+                ? CachedNetworkImage(
+                    imageUrl: getImageUrl(movie.backdropPath!,
+                        imageQuality: ImageQuality.original),
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                : Container(
+                    color: Colors.black54,
+                  )),
         Positioned(
             left: 0,
             bottom: 0,

@@ -24,13 +24,16 @@ class Http {
   final String _apiKey;
   final Client _client;
 
-  Future<Either<HttpFailure, T>> request<T>(String path,
-      {required T Function(dynamic responseBody) onSuccess,
-      HttpMethod method = HttpMethod.get,
-      Map<String, String> headers = const {},
-      Map<String, String> queryParameters = const {},
-      Map<String, dynamic> body = const {},
-      bool useApiKey = true}) async {
+  Future<Either<HttpFailure, T>> request<T>(
+    String path, {
+    required T Function(dynamic responseBody) onSuccess,
+    HttpMethod method = HttpMethod.get,
+    Map<String, String> headers = const {},
+    Map<String, String> queryParameters = const {},
+    Map<String, dynamic> body = const {},
+    bool useApiKey = true,
+    Duration timeOut = const Duration(seconds: 10),
+  }) async {
     Map<String, dynamic> logs = {};
     StackTrace? stackTrace;
 
@@ -51,22 +54,27 @@ class Http {
       logs = {'url': url.toString(), 'method': method.name, 'body': body};
       switch (method) {
         case HttpMethod.get:
-          response = await _client.get(url);
+          response = await _client.get(url).timeout(timeOut);
           break;
         case HttpMethod.post:
-          response =
-              await _client.post(url, headers: headers, body: bodyString);
+          response = await _client
+              .post(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
           break;
         case HttpMethod.patch:
-          response =
-              await _client.patch(url, headers: headers, body: bodyString);
+          response = await _client
+              .patch(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
           break;
         case HttpMethod.put:
-          response = await _client.put(url, headers: headers, body: bodyString);
+          response = await _client
+              .put(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
           break;
         case HttpMethod.delete:
-          response =
-              await _client.delete(url, headers: headers, body: bodyString);
+          response = await _client
+              .delete(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
           break;
       }
 

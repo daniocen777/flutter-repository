@@ -15,6 +15,8 @@ class SigInView extends StatelessWidget {
     una clase que extienda de ChangeNotifier) */
     return ChangeNotifierProvider<SignInController>(
       create: (_) => SignInController(SignInState(),
+          sessionController: context.read(),
+          favoritesController: context.read(),
           authenticationRepository: context.read<AuthenticationRepository>()),
       child: Scaffold(
           body: SafeArea(
