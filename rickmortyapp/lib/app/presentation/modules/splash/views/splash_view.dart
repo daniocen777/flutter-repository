@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rickmortyapp/app/presentation/routes/routes.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../domain/repositories/connectivity_repository.dart';
+import '../../../routes/routes.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -18,8 +21,14 @@ class _SplashViewState extends State<SplashView> {
 
   Future<void> _init() async {
     final routeName = await () async {
-      Future.delayed(const Duration(seconds: 3));
-      return Routes.home;
+      final ConnectivityRepository connectivityRepository = context.read();
+
+      final hasInternet = await connectivityRepository.hasInternet;
+      if (!hasInternet) {
+        return Routes.offline;
+      } else {
+        return Routes.home;
+      }
     }();
 
     _goTo(routeName);

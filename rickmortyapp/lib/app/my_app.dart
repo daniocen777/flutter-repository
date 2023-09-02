@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rickmortyapp/app/presentation/routes/app_routes.dart';
-import 'package:rickmortyapp/app/presentation/routes/routes.dart';
+
+import 'presentation/routes/app_routes.dart';
+import 'presentation/routes/routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
