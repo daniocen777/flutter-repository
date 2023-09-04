@@ -33,4 +33,11 @@ const appMenuItems = <MenuItem>[
     link: '/progress',
     icon: Icons.refresh_rounded,
   ),
+  MenuItem(
+    title: 'Snackbars y diálogos',
+    subTitle: 'Indicadores',
+    link: '/snackbar',
+    icon: Icons.info_outline,
+  ),
+  
 ];
