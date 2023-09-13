@@ -8,6 +8,6 @@ import '../../../infrastructure/repositories/movie_repository_impl.dart';
   StateNotifierProvider => Para estados más elaborados (customizado)
  */
 
-// Provider riverpod de lectura
+// Provider riverpod de lectura (Solo para crear ina instancia)
 final movieRepositoryProvider =
     Provider((ref) => MovieRepositoryImpl(MovieDBDatasource()));
