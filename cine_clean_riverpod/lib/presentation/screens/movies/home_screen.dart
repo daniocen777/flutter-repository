@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/constants/environment.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -7,6 +9,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Text(Environment.movieDBKey),
+      ),
+    );
   }
 }
