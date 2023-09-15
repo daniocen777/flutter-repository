@@ -6,6 +6,7 @@ import 'config/router/app_router.dart';
 import 'config/theme/app_theme.dart';
 
 // Para usar el .env, modificar el main como se muestra
+// https://github.com/Klerith/flutter-cinemapedia/tree/fin-seccion-13
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
   // Riverpod

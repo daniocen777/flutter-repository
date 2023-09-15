@@ -15,8 +15,9 @@ class MovieMapper {
         originalTitle: movieDB.originalTitle,
         overview: movieDB.overview,
         popularity: movieDB.popularity,
-        posterPath:
-            (movieDB.posterPath != '') ? movieDB.posterPath : 'no-poster',
+        posterPath: (movieDB.posterPath != '')
+            ? 'https://image.tmdb.org/t/p/w500${movieDB.posterPath}'
+            : 'no-poster',
         releaseDate: movieDB.releaseDate,
         title: movieDB.title,
         video: movieDB.video,
