@@ -8,35 +8,36 @@ import 'movies_repository_provider.dart';
   StateProvider => Para mantener un estado (pendiente del cambio)
   StateNotifierProvider => Para estados más elaborados (customizado)
  */
-
-/* Provider para películas en cartelera */
+/* Providers */
+// Provider para películas en cartelera
 final nowPlayingMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getNowPlaying;
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-/* Provider para películas populares  */
+// Provider para películas populares
 final popularMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular;
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-/* Provider para películas mejor ranking  */
+// Provider para películas mejor ranking
 final topRatedMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-/* Provider para películas que vienen proximamente  */
+// Provider para películas que vienen proximamente
 final upcomingMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
   final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
+/* Tipos y clases para los providers */
 typedef MovieCallBack = Future<List<Movie>> Function({int page});
 
 class MoviesNotifier extends StateNotifier<List<Movie>> {
