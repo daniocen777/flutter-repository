@@ -1,4 +1,4 @@
-part of 'http.dart';
+/* part of 'http.dart';
 
 dynamic _parseResponseBody(String responseBody) {
   try {
@@ -8,4 +8,4 @@ dynamic _parseResponseBody(String responseBody) {
     // print('ERROR => ${e.toString()}');
     return responseBody;
   }
-}
+} */
