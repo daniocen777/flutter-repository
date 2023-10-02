@@ -19,7 +19,7 @@ class NewsAPIDatasource extends NewsDatasource {
     ),
   );
 
- /*  final Http _http;
+  /*  final Http _http;
 
   NewsAPIDatasource(this._http); */
 
@@ -40,9 +40,10 @@ class NewsAPIDatasource extends NewsDatasource {
         (r) => Right(r)); */
 
     ArticleResponse articleResponse =
-        ArticleResponse(status: '400', totalResults: -1, articles: []);
+        ArticleResponse(status: '500', totalResults: -1, articles: []);
     try {
       final response = await dio.get('/top-headlines');
+      // print('STATUS =====> ${response.statusCode}');
       if (response.statusCode == 200) {
         articleResponse = ArticleResponse.fromJson(response.data);
 
@@ -57,7 +58,7 @@ class NewsAPIDatasource extends NewsDatasource {
             HttpFailure(statusCode: response.statusCode, data: response.data));
       }
     } catch (e) {
-      return Left(HttpFailure(data: e.toString()));
+      return Left(HttpFailure(data: e.toString(), exception: e));
     }
   }
 }

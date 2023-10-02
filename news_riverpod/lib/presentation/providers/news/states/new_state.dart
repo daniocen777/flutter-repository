@@ -23,10 +23,11 @@ class LoadedNewState extends NewState {
 }
 
 class ErrorNewsState extends NewState {
-  const ErrorNewsState({required this.message});
+  const ErrorNewsState({required this.message, required this.status});
 
   final String message;
+  final String status;
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message, status];
 }

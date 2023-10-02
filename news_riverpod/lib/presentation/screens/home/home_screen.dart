@@ -40,7 +40,7 @@ class __HomeViewState extends ConsumerState<_HomeView> {
     String message = 'cargnado...';
 
     if (news is ErrorNewsState) {
-      message = news.message;
+      message = 'Error: ${news.message}';
     }
 
     if (news is LoadedNewState) {

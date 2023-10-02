@@ -18,7 +18,6 @@ final newsProvider = StateNotifierProvider<NewsNotifier, NewState>((ref) {
 });
 
 /* Controladores */
-
 typedef GetNewsCallback = Future<Either<HttpFailure, List<ArticleEntity>>>
     Function();
 
@@ -31,7 +30,8 @@ class NewsNotifier extends StateNotifier<NewState> {
     final failureOrNews = await getNews();
     failureOrNews.fold(
       (l) {
-        state = ErrorNewsState(message: l.data.toString());
+        state = ErrorNewsState(
+            message: l.data.toString(), status: l.statusCode.toString());
       },
       (r) => state = LoadedNewState(articles: r),
     );

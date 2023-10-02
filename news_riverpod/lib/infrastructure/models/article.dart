@@ -1,9 +1,9 @@
 class Article {
   final Source source;
   final String? author;
-  final String title;
-  final String description;
-  final String url;
+  final String? title;
+  final String? description;
+  final String? url;
   final String? urlToImage;
   final DateTime? publishedAt;
   final String? content;
@@ -45,7 +45,7 @@ class Article {
 
 class Source {
   final String? id;
-  final String name;
+  final String? name;
 
   Source({
     required this.id,

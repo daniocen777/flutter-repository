@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 part 'failure.dart';
-part 'parse_response_body.dart';
+// part 'parse_response_body.dart';
 
 enum HttpMethod { get, post, patch, put, delete }
 
@@ -30,7 +30,7 @@ class Http {
     Duration timeOut = const Duration(seconds: 10),
   }) async {
     // Map<String, dynamic> logs = {};
-    StackTrace? stackTrace;
+    // StackTrace? stackTrace;
 
     try {
       if (useApiKey) {
@@ -46,8 +46,8 @@ class Http {
                 queryParameters); // copia de url agregando parámetros
       }
       headers = {'Content-Type': 'application/json', ...headers};
-      print(
-          '************** url.toString() => ${url.toString()} **************');
+      /* print(
+          '************** url.toString() => ${url.toString()} **************'); */
       late final Response response;
       final bodyString = jsonEncode(body);
       switch (method) {
@@ -79,25 +79,28 @@ class Http {
               .timeout(timeOut);
           break;
       }
-      final statusCode = response.statusCode;
-      final responseBody = _parseResponseBody(response.data);
-      if (statusCode != null && statusCode >= 200 && statusCode < 300) {
-        print('OKOKOKOKOKOKOKOKOKOKOOKOKOKOKOKOKOKOKOKOKO');
-        return Right(onSuccess(responseBody));
+      final statusCode = response.statusCode ?? -1;
+      // print('********* STATUS \n $statusCode \n *********');
+      // print('********* RESPONSE => ${response.data} \n *********');
+      //  final responseBody = _parseResponseBody(response.data);
+      if (statusCode >= 200 && statusCode < 300) {
+        // print('OKOKOKOKOKOKOKOKOKOKOOKOKOKOKOKOKOKOKOKOKO');
+        return Right(onSuccess(response.data));
       }
-      print('ERRORERRORERRORERRORERRORERRORERRORERRORERROR');
-      return Left(HttpFailure(statusCode: statusCode, data: responseBody));
-    } catch (e, s) {
-      print('ERRORERRORERRORERRORERRORERRORERRORERRORERROR');
-      stackTrace = s;
+      // print('ERRORERRORERRORERRORERRORERRORERRORERRORERROR 1');
+      return Left(HttpFailure(statusCode: statusCode, data: response.data));
+    } catch (e) {
+      // print('ERRORERRORERRORERRORERRORERRORERRORERRORERROR 2');
+      // stackTrace = s;
       // stackTrace => linea donde se ubica el error
       // Error de conexión en web y movil
       if (e is SocketException) {
-        return Left(HttpFailure(exception: NetworkException()));
+        return Left(
+            HttpFailure(exception: NetworkException(), data: e.toString()));
       }
       return Left(HttpFailure(exception: e));
     } finally {
-      print(stackTrace);
+      // print(stackTrace);
     }
   }
 }
