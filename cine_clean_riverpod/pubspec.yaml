@@ -21,12 +21,18 @@ dependencies:
   animate_do: ^3.1.2
   # Para el formato de fechas y otrso objetos
   intl: ^0.18.1
+  # Para BD local
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  # Para BD local
+  isar_generator: ^3.1.0+1
+  build_runner: ^2.4.6
 
 flutter:
   uses-material-design: true
