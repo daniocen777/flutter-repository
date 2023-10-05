@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
-import '../../config/constants/environment.dart';
-import '../../domain/datasources/actors_datasource.dart';
-import '../../domain/entities/actor.dart';
-import '../mappers/acrtor_mapper.dart';
-import '../models/moviedb/credits_response.dart';
+import '../../../config/constants/environment.dart';
+import '../../../domain/datasources/remote/actors_datasource.dart';
+import '../../../domain/entities/actor.dart';
+import '../../mappers/acrtor_mapper.dart';
+import '../../models/moviedb/credits_response.dart';
 
 class ActorMovieDbDatasource extends ActorsDatasource {
   final dio = Dio(

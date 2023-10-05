@@ -6,3 +6,4 @@ export 'movies/movies_provider.dart';
 export 'movies/movies_repository_provider.dart';
 export 'movies/movies_slideshow_provider.dart';
 export 'searchs/seacrh_movies_provider.dart';
+export 'storage/local_storage_provider.dart';

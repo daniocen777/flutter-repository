@@ -1,6 +1,6 @@
-import '../../domain/datasources/actors_datasource.dart';
-import '../../domain/entities/actor.dart';
-import '../../domain/repositories/actors_repository.dart';
+import '../../../domain/datasources/remote/actors_datasource.dart';
+import '../../../domain/entities/actor.dart';
+import '../../../domain/repositories/remote/actors_repository.dart';
 
 class ActorRepositoryImpl extends ActorsRepository {
   final ActorsDatasource actorDatasource;

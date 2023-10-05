@@ -1,6 +1,6 @@
-import '../../domain/datasources/movies_datasource.dart';
-import '../../domain/entities/movie.dart';
-import '../../domain/repositories/movie_repository.dart';
+import '../../../domain/datasources/remote/movies_datasource.dart';
+import '../../../domain/entities/movie.dart';
+import '../../../domain/repositories/remote/movie_repository.dart';
 
 class MovieRepositoryImpl extends MoviesRepository {
   MovieRepositoryImpl(this.datasource);
