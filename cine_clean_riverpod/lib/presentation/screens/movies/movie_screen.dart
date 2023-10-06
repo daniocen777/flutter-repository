@@ -132,7 +132,8 @@ class _MovieDetail extends StatelessWidget {
 /* FutureProvider => asincrono 
   => .family => para mandar argumentos en el provider
 */
-final isFavoriteProvider = FutureProvider.family.autoDispose((ref, int movieId) {
+final isFavoriteProvider =
+    FutureProvider.family.autoDispose((ref, int movieId) {
   final localStorageRepository = ref.watch(localStorageRepositoryProvider);
   return localStorageRepository.isMovieFavorite(movieId);
 });
@@ -153,8 +154,10 @@ class _CustomSliverAppBar extends ConsumerWidget {
       foregroundColor: Colors.white,
       actions: [
         IconButton(
-          onPressed: () {
-            ref.watch(localStorageRepositoryProvider).toggleFavorites(movie);
+          onPressed: () async {
+            await ref
+                .read(favoritesMoviesProvider.notifier)
+                .toggleFavorite(movie);
             // Volver hacer la peticion (para confirmar y que cambie el icono al hacer el toggle)
             ref.invalidate(isFavoriteProvider(movie.id));
           },

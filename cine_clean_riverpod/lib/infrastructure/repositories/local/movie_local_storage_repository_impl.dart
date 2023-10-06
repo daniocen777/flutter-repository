@@ -3,7 +3,7 @@ import '../../../domain/entities/movie.dart';
 import '../../../domain/repositories/local/movies_local_repository.dart';
 
 class MovieLocalStorageRepositoryImpl extends MoviesLocalRepository {
-  MovieLocalStorageRepositoryImpl({required this.datasource});
+  MovieLocalStorageRepositoryImpl(this.datasource);
 
   final MoviesLocalDatasource datasource;
 
