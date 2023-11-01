@@ -1,0 +1,107 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
+
+part 'failure.dart';
+part 'logs.dart';
+part 'parse_response_body.dart';
+
+enum HttpMethod { get, post, patch, put, delete }
+
+class Http {
+  Http(
+      {required Client client, required String baseUrl, required String apiKey})
+      : _client = client,
+        _baseUrl = baseUrl,
+        _apiKey = apiKey;
+
+  final String _baseUrl;
+  final String _apiKey;
+  final Client _client;
+
+  Future<Either<HttpFailure, T>> request<T>(
+    String path, {
+    required T Function(dynamic responseBody) onSuccess,
+    HttpMethod method = HttpMethod.get,
+    Map<String, String> headers = const {},
+    Map<String, String> queryParameters = const {},
+    Map<String, dynamic> body = const {},
+    bool useApiKey = true,
+    Duration timeOut = const Duration(seconds: 10),
+  }) async {
+    Map<String, dynamic> logs = {};
+    StackTrace? stackTrace;
+
+    try {
+      if (useApiKey) {
+        queryParameters = {...queryParameters, 'apiKey': _apiKey};
+      }
+      // url para cualquir api
+      Uri url = Uri.parse(path.startsWith('http') ? path : '$_baseUrl$path');
+      if (queryParameters.isNotEmpty) {
+        url = url.replace(
+            queryParameters:
+                queryParameters); // copia de url agregando parámetros
+      }
+      headers = {'Content-Type': 'application/json', ...headers};
+      late final Response response;
+      final bodyString = jsonEncode(body);
+      logs = {'url': url.toString(), 'method': method.name, 'body': body};
+      switch (method) {
+        case HttpMethod.get:
+          response = await _client.get(url).timeout(timeOut);
+          break;
+        case HttpMethod.post:
+          response = await _client
+              .post(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
+          break;
+        case HttpMethod.patch:
+          response = await _client
+              .patch(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
+          break;
+        case HttpMethod.put:
+          response = await _client
+              .put(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
+          break;
+        case HttpMethod.delete:
+          response = await _client
+              .delete(url, headers: headers, body: bodyString)
+              .timeout(timeOut);
+          break;
+      }
+
+      final statusCode = response.statusCode;
+      final responseBody = _parseResponseBody(response.body);
+      logs = {
+        ...logs,
+        'startTime': DateTime.now().toString(),
+        'statusCode': statusCode,
+        'responseBody': responseBody
+      };
+      if (statusCode >= 200 && statusCode < 300) {
+        return Right(onSuccess(responseBody));
+      }
+      return Left(HttpFailure(statusCode: statusCode, data: responseBody));
+    } catch (e, s) {
+      stackTrace = s;
+      // stackTrace => linea donde se ubica el error
+      logs = {...logs, 'exception': e.toString()};
+      // Error de conexión en web y movil
+      if (e is SocketException || e is ClientException) {
+        return Left(HttpFailure(exception: NetworkException()));
+      }
+
+      return Left(HttpFailure(exception: e));
+    } finally {
+      logs = {...logs, 'endTime': DateTime.now().toString()};
+      _printLogs(logs, stackTrace);
+    }
+  }
+}
