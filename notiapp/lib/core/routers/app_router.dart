@@ -11,7 +11,7 @@ final appRouter = GoRouter(
       name: 'home',
       builder: (context, state) {
         final pageIndex = int.parse(state.pathParameters['page'] ?? '0');
-        print('******** $pageIndex ***********');
+        // print('******** $pageIndex ***********');
         return HomeScreen(pageIndex: pageIndex);
       },
     ),

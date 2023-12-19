@@ -8,12 +8,16 @@ import 'domain/datasource/news_datasource.dart';
 import 'domain/repositories/news_repository.dart';
 import 'domain/usecases/news/get_articles_use_case.dart';
 import 'presentation/blocs/article/article_bloc.dart';
+import 'presentation/blocs/counter/counter_bloc.dart';
+import 'presentation/blocs/employee/employee_bloc.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> init() async {
   // Blocs
   getIt.registerFactory(() => ArticleBloc(getArticlesUseCase: getIt()));
+  getIt.registerFactory(() => CounterBloc());
+  getIt.registerFactory(() => EmployeeBloc());
   // Casos de uso
   getIt.registerLazySingleton(() => GetArticlesUseCase(getIt()));
   // Repos

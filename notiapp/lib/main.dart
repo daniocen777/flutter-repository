@@ -5,6 +5,8 @@ import 'core/routers/app_router.dart';
 import 'core/themes/app_theme.dart';
 import 'injection_container.dart' as di;
 import 'presentation/blocs/article/article_bloc.dart';
+import 'presentation/blocs/counter/counter_bloc.dart';
+import 'presentation/blocs/employee/employee_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +22,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (_) => di.getIt<ArticleBloc>()..add(GetAllArticleEvent()))
+            create: (_) => di.getIt<ArticleBloc>()..add(GetAllArticleEvent())),
+        BlocProvider(create: (_) => di.getIt<CounterBloc>()),
+        BlocProvider(
+            create: (_) => di.getIt<EmployeeBloc>()..add(GetEmployeesEvent()))
       ],
       child: MaterialApp.router(
         title: 'Material App',
