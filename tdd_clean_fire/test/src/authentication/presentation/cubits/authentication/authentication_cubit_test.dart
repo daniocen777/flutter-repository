@@ -6,7 +6,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:tdd_clean_fire/core/errors/failure.dart';
 import 'package:tdd_clean_fire/src/authentication/domain/usecases/create_user.dart';
 import 'package:tdd_clean_fire/src/authentication/domain/usecases/get_users.dart';
-import 'package:tdd_clean_fire/src/presentation/cubits/authentication/authentication_cubit.dart';
+import 'package:tdd_clean_fire/src/authentication/presentation/cubits/authentication/authentication_cubit.dart';
 
 class MockGetUsers extends Mock implements GetUsers {}
 

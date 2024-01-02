@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../authentication/domain/entities/user.dart';
-import '../../../authentication/domain/usecases/create_user.dart';
-import '../../../authentication/domain/usecases/get_users.dart';
+import '../../../domain/entities/user.dart';
+import '../../../domain/usecases/create_user.dart';
+import '../../../domain/usecases/get_users.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
