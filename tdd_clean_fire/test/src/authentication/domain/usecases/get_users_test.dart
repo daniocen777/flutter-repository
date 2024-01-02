@@ -13,7 +13,7 @@ void main() {
 
   setUp(() async {
     repository = MockAuthRepo();
-    usecase = GetUsers(repository: repository);
+    usecase = GetUsers(repository);
   });
 
   const testResponse = [User.empty()];

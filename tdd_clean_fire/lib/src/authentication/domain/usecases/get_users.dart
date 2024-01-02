@@ -4,8 +4,7 @@ import '../entities/user.dart';
 import '../repositories/authentication_repository.dart';
 
 class GetUsers extends UsecaseWithoutParams<List<User>> {
-  GetUsers({required AuthenticationRepository repository})
-      : _repository = repository;
+  GetUsers(this._repository);
 
   final AuthenticationRepository _repository;
 
