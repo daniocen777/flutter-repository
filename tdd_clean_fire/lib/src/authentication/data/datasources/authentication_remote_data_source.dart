@@ -32,13 +32,18 @@ class AuthenticationRemoteDataSourceImpl
       required String name,
       required String avatar}) async {
     try {
-      final response =
-          await _client.post(Uri.parse('$kBaseUrl$createUserEndpoint'),
-              body: jsonEncode({
-                'createdAt': createdAt,
-                'name': name,
-                'avatar': avatar,
-              }));
+      final response = await _client.post(
+        Uri.https(kBaseUrl, createUserEndpoint),
+        body: jsonEncode(
+          {
+            'createdAt': createdAt,
+            'name': name,
+          },
+        ),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      );
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw APIException(
             message: response.body, statusCode: response.statusCode);
