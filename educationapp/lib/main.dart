@@ -1,9 +1,14 @@
 import 'package:educationapp/core/resources/colours.dart';
 import 'package:educationapp/core/resources/fonts.dart';
+import 'package:educationapp/core/services/injection_container.dart';
 import 'package:educationapp/core/services/router.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
