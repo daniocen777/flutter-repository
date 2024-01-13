@@ -69,4 +69,67 @@ void main() {
       },
     );
   });
+
+  group('checkIfUserIsFirstTimer', () {
+    test(
+      'debe retornar true cuando el usuario ingresa por primera vez',
+      () async {
+        // Arrange
+        when(() => localDataSource.checkIfUserIsFirstTimer())
+            .thenAnswer((_) async => Future.value(true));
+        // Act
+        final result = await repositoryImpl.checkIfUserIsFirstTimer();
+        // Assert
+        expect(result, equals(const Right<dynamic, bool>(true)));
+        verify(() => localDataSource.checkIfUserIsFirstTimer()).called(1);
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'debe retornar false cuando el usuario no ingresa por primera vez',
+      () async {
+        // Arrange
+        when(() => localDataSource.checkIfUserIsFirstTimer())
+            .thenAnswer((_) async => Future.value(false));
+        // Act
+        final result = await repositoryImpl.checkIfUserIsFirstTimer();
+        // Assert
+        expect(result, equals(const Right<dynamic, bool>(false)));
+        verify(() => localDataSource.checkIfUserIsFirstTimer()).called(1);
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+
+    test(
+      'debe retornar un [CacheFailure] cuando la llamada '
+      'del datasource sea errónea',
+      () async {
+        // Arrange
+        when(() => localDataSource.checkIfUserIsFirstTimer()).thenThrow(
+          const CacheException(
+            message: 'Insufficient permissions',
+            statusCode: 403,
+          ),
+        );
+        // Act
+        final result = await repositoryImpl.checkIfUserIsFirstTimer();
+        // Assert
+        expect(
+          result,
+          equals(
+            Left<CacheFailure, bool>(
+              CacheFailure(
+                message: 'Insufficient permissions',
+                statusCode: 403,
+              ),
+            ),
+          ),
+        );
+
+        verify(() => localDataSource.checkIfUserIsFirstTimer()).called(1);
+        verifyNoMoreInteractions(localDataSource);
+      },
+    );
+  });
 }

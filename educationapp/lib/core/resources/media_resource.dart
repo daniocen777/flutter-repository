@@ -9,7 +9,7 @@ class MediaResource {
   static const atom = '$_baseImages/atom.png';
 
   // Images
-  static const onBoardingBackground = '$_baseImages/on_boarding_background.png';
+  static const onBoardingBackground = '$_baseImages/on_boarding_background_2.jpg';
   static const underConstructionBackground =
       '$_baseImages/under_construction.png';
 
