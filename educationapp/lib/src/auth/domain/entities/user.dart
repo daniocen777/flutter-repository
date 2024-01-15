@@ -4,14 +4,14 @@ class LocalUser extends Equatable {
   const LocalUser({
     required this.uid,
     required this.email,
-    required this.profilePic,
-    required this.bio,
     required this.points,
     required this.fullname,
-    required this.groupId,
-    required this.enrolledCourseIds,
-    required this.following,
-    required this.followers,
+    this.profilePic,
+    this.bio,
+    this.groupId = const [],
+    this.enrolledCourseIds = const [],
+    this.following = const [],
+    this.followers = const [],
   });
 
   const LocalUser.empty()
@@ -34,10 +34,10 @@ class LocalUser extends Equatable {
   final String? bio;
   final int points;
   final String fullname;
-  final List<String> groupId;
-  final List<String> enrolledCourseIds;
-  final List<String> following;
-  final List<String> followers;
+  final List<String>? groupId;
+  final List<String>? enrolledCourseIds;
+  final List<String>? following;
+  final List<String>? followers;
 
   // Es suficiente con el uid para diferenciar los objetos (firebase)
   @override
