@@ -159,7 +159,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           await _firebaseAuth.currentUser?.reauthenticateWithCredential(
             EmailAuthProvider.credential(
               email: _firebaseAuth.currentUser!.email!,
-              password: newData['oldPassword'] as String,
+              password: newData['oldPassword']! as String,
             ),
           );
 
