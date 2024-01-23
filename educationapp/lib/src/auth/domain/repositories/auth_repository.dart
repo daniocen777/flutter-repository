@@ -24,35 +24,3 @@ abstract class AuthRepository {
     required dynamic userData,
   });
 }
-
-class AuthRepositoryImpl implements AuthRepository {
-  @override
-  ResultFuture<void> forgotPassword(String email) {
-    throw UnimplementedError();
-  }
-
-  @override
-  ResultFuture<LocalUser> signIn({
-    required String email,
-    required String password,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
-  ResultFuture<void> signUp({
-    required String email,
-    required String fullname,
-    required String password,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
-  ResultFuture<void> updateUser({
-    required UpdateUserAction action,
-    required dynamic userData,
-  }) {
-    throw UnimplementedError();
-  }
-}
