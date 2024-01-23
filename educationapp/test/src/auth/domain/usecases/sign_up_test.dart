@@ -32,7 +32,7 @@ void main() {
     final result = await usecase(
       const SignUpParams(
         email: testEmail,
-        fullname: testFullname,
+        fullName: testFullname,
         password: testPassword,
       ),
     );
