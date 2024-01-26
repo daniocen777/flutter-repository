@@ -39,7 +39,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             if (state is OnBoardingStatus && !state.isFirstTimer) {
               Navigator.pushReplacementNamed(context, '/home');
             } else if (state is UserCachedState) {
-              // TODO(User-Cached-Handler): Push Screen
+              Navigator.pushReplacementNamed(context, '/');
             }
           },
           builder: (BuildContext context, OnBoardingState state) {

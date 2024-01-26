@@ -193,7 +193,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
             profilePic: user.photoURL ?? '',
             bio: user.displayName ?? '',
             points: 0,
-            fullname: user.displayName ?? '',
+            fullName: user.displayName ?? '',
           ).toMap(),
         );
   }

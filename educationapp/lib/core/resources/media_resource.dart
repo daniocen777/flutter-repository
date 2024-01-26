@@ -10,6 +10,7 @@ class MediaResource {
 
   // Images
   static const onBoardingBackground = '$_baseImages/on_boarding_background_2.jpg';
+  static const background = '$_baseImages/background.png';
   static const underConstructionBackground =
       '$_baseImages/under_construction.png';
 
