@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'core/routes/app_router.dart';
 import 'core/theme/main_theme.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  await dotenv.load(fileName: ".env"); // usar environment
+  runApp(const MyApp());
+}
 
 ThemeData theme(ColorScheme colorScheme) => ThemeData(
       useMaterial3: true,
