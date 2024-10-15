@@ -2,20 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'core/routes/app_router.dart';
-import 'core/theme/main_theme.dart';
+import 'core/theme/theme.dart';
+
+// Para crear el splash, ejecutar el comando:
+// flutter pub run flutter_native_splash:create --path=splash.yaml
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env"); // usar environment
   runApp(const MyApp());
 }
-
-ThemeData theme(ColorScheme colorScheme) => ThemeData(
-      useMaterial3: true,
-      brightness: colorScheme.brightness,
-      colorScheme: colorScheme,
-      scaffoldBackgroundColor: colorScheme.background,
-      canvasColor: colorScheme.surface,
-    );
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -24,8 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
         debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
         title: 'Marvel API',
-        theme: theme(MainTheme.lightScheme()),
+        theme: TAppTheme.lightTheme,
+        darkTheme: TAppTheme.darkTheme,
         routerConfig: appRouter);
   }
 }

@@ -1,8 +1,13 @@
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/screen/home/home_screen.dart';
+import '../../presentation/screen/on_boarding/on_boarding_screen.dart';
 
-final appRouter = GoRouter(initialLocation: '/home/0', routes: [
+final appRouter = GoRouter(initialLocation: '/onboarding', routes: [
+  GoRoute(
+    path: '/onboarding',
+    builder: (_, __) => const OnBoardingScreen(),
+  ),
   GoRoute(
       path: '/home/:page',
       builder: (context, state) {
@@ -11,6 +16,6 @@ final appRouter = GoRouter(initialLocation: '/home/0', routes: [
       }),
   GoRoute(
     path: '/',
-    redirect: (_, __) => '/home/0',
+    redirect: (_, __) => '/onboarding',
   )
 ]);
